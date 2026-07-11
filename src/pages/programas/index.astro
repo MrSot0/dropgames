@@ -1,0 +1,51 @@
+---
+import '../../styles/global.css';
+import Layout from '../../layouts/Layout.astro';
+
+const emuladores = [
+  { nombre: 'RPCS3', desc: 'Emulador de PlayStation 3 de código abierto.' },
+  { nombre: 'Yuzu / Ryujinx', desc: 'Emuladores de Nintendo Switch.' },
+  { nombre: 'PCSX2', desc: 'El emulador de PlayStation 2 más estable.' },
+  { nombre: 'Dolphin', desc: 'Emulador de GameCube y Wii.' },
+];
+
+const software = [
+  { nombre: 'WinRAR', desc: 'Para extraer archivos .rar y .zip descargados.' },
+  { nombre: '7-Zip', desc: 'Alternativa gratuita y de código abierto para descomprimir.' },
+  { nombre: 'Daemon Tools Lite', desc: 'Monta archivos .iso como una unidad virtual.' },
+  { nombre: 'DirectX / Visual C++', desc: 'Librerías necesarias para que la mayoría de juegos funcionen.' },
+];
+---
+
+<Layout title="Programas Necesarios | yizugames" description="Emuladores y software necesario para instalar y ejecutar tus juegos descargados.">
+  <div class="contenido-articulo">
+    <h1>Programas Necesarios</h1>
+    <p class="intro">Todo lo que necesitas para instalar, descomprimir y ejecutar tus descargas sin problemas.</p>
+
+    <section id="emuladores">
+      <h2>Emuladores</h2>
+      <div class="lista-programas">
+        {emuladores.map((p) => (
+          <div class="programa-item">
+            <h4>{p.nombre}</h4>
+            <p>{p.desc}</p>
+            <a href="#">Ver descarga →</a>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section id="software">
+      <h2>Software General</h2>
+      <div class="lista-programas">
+        {software.map((p) => (
+          <div class="programa-item">
+            <h4>{p.nombre}</h4>
+            <p>{p.desc}</p>
+            <a href="#">Ver descarga →</a>
+          </div>
+        ))}
+      </div>
+    </section>
+  </div>
+</Layout>

@@ -1,0 +1,95 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+// Como el sitio es 100% estático (sin base de datos), el catálogo completo
+// se genera en build time y el filtrado ocurre en el navegador según ?q=
+const todos = await getCollection('juegos');
+const catalogo = todos.map((j) => ({
+  slug: j.slug,
+  title: j.data.title,
+  categoria: j.data.categoria,
+  plataforma: j.data.plataforma,
+  tamano: j.data.tamano,
+  imagen: j.data.imagen,
+}));
+
+const etiquetas: Record<string, string> = {
+  accion: 'Acción',
+  aventura: 'Aventura',
+  rpg: 'RPG',
+  deportes: 'Deportes',
+  multijugador: 'Multijugador',
+};
+---
+
+<Layout title="Buscar | DropGames">
+  <div class="encabezado-listado">
+    <h1>Buscar</h1>
+    <p>Escribe el nombre de un juego, categoría o plataforma.</p>
+  </div>
+
+  <form class="buscar-input-grande" id="form-buscar-resultados">
+    <input type="search" id="input-buscar" name="q" placeholder="Buscar videojuegos...">
+    <button type="submit">Buscar</button>
+  </form>
+
+  <div class="grid-listado" id="resultados-busqueda"></div>
+  <p class="sin-resultados" id="mensaje-vacio" style="display:none;">No se encontraron resultados para tu búsqueda.</p>
+
+  <script define:vars={{ catalogo, etiquetas }}>
+    const params = new URLSearchParams(window.location.search);
+    const input = document.getElementById('input-buscar');
+    const contenedor = document.getElementById('resultados-busqueda');
+    const mensajeVacio = document.getElementById('mensaje-vacio');
+    const form = document.getElementById('form-buscar-resultados');
+
+    function renderizar(query) {
+      const q = query.trim().toLowerCase();
+      const resultados = !q
+        ? catalogo
+        : catalogo.filter((j) =>
+            j.title.toLowerCase().includes(q) ||
+            j.categoria.toLowerCase().includes(q) ||
+            j.plataforma.toLowerCase().includes(q)
+          );
+
+      contenedor.innerHTML = resultados
+        .map(
+          (j) => `
+        <article class="tarjeta-juego">
+          <a href="/juegos/${j.slug}">
+            <div class="tarjeta-imagen">
+              <img src="${j.imagen}" alt="${j.title}" loading="lazy">
+              <span class="tag-categoria tag-categoria--${j.categoria}">${etiquetas[j.categoria] ?? j.categoria}</span>
+              <div class="tarjeta-fade"></div>
+            </div>
+            <div class="tarjeta-info">
+              <h3>${j.title}</h3>
+              <div class="tarjeta-specs">
+                <span class="tag-plataforma">${j.plataforma}</span>
+                <span class="tag-tamano">${j.tamano}</span>
+              </div>
+            </div>
+          </a>
+        </article>`
+        )
+        .join('');
+
+      mensajeVacio.style.display = resultados.length === 0 ? 'block' : 'none';
+    }
+
+    const qInicial = params.get('q') ?? '';
+    input.value = qInicial;
+    renderizar(qInicial);
+
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const q = input.value;
+      const url = new URL(window.location.href);
+      url.searchParams.set('q', q);
+      window.history.replaceState({}, '', url);
+      renderizar(q);
+    });
+  </script>
+</Layout>

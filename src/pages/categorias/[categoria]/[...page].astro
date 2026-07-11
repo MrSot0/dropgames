@@ -1,0 +1,79 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+import GameCard from '../../../components/GameCard.astro';
+import '../../../styles/global.css';
+
+export async function getStaticPaths({ paginate }) {
+  const allGames = await getCollection('juegos');
+  const categorias = [...new Set(allGames.map(j => j.data.categoria))];
+
+  return categorias.flatMap((categoria) => {
+    const juegosFiltrados = allGames.filter(j => j.data.categoria === categoria);
+    return paginate(juegosFiltrados, { 
+      params: { categoria }, 
+      pageSize: 9 
+    });
+  });
+}
+
+const { categoria } = Astro.params;
+const { page } = Astro.props;
+---
+
+<Layout title={`Juegos de ${categoria} | DropGames`}>
+  <main class="contenedor-principal">
+    <section class="seccion-recientes">
+      <h2 class="titulo-seccion">Categoría: {categoria}</h2>
+      
+      <div class="grid-videojuegos">
+        {page.data.map((juego) => <GameCard juego={juego} />)}
+      </div>
+
+      <!-- Navegación que respeta el filtro -->
+      <nav class="pagination-ui">
+        {page.url.prev && <a href={page.url.prev} class="nav-btn">« Anterior</a>}
+        <span class="page-numbers">Pág {page.currentPage}</span>
+        {page.url.next && <a href={page.url.next} class="nav-btn">Siguiente »</a>}
+      </nav>
+    </section>
+
+    <!-- Sidebar (Mismo contenido, igual que en tu [page].astro) -->
+    <aside class="sidebar-top">
+      div class="sidebar-ads">
+      
+      <!-- 🎯 ANUNCIO NATIVO 1 (Superior) -->
+      <div class="ad-slot ad-sidebar-small" data-ad-label="" style="text-align: center; margin-bottom: 1rem; overflow: hidden;">
+        <iframe srcdoc="
+          <body style='margin:0; padding:0; text-align:center;'>
+            <div id='container-decd1f4598bf4831bd5806c2f6da54ca'></div>
+            <script async='async' data-cfasync='false' src='https://pl30310791.effectivecpmnetwork.com/decd1f4598bf4831bd5806c2f6da54ca/invoke.js'></script>
+          </body>"
+          style="width: 100%; height: 100px; border: none; scrolling: no; overflow: hidden;">
+        </iframe>
+      </div>
+
+      <!-- 🎯 ANUNCIO NATIVO 2 (Medio) -->
+      <div class="ad-slot ad-sidebar-rect" data-ad-label="" style="text-align: center; margin-bottom: 1rem; overflow: hidden;">
+        <iframe srcdoc="
+          <body style='margin:0; padding:0; text-align:center;'>
+            <div id='container-decd1f4598bf4831bd5806c2f6da54ca'></div>
+            <script async='async' data-cfasync='false' src='https://pl30310791.effectivecpmnetwork.com/decd1f4598bf4831bd5806c2f6da54ca/invoke.js'></script>
+          </body>"
+          style="width: 100%; height: 390px; border: none; scrolling: no; overflow: hidden;">
+        </iframe>
+      </div>
+      
+      <!-- 🎯 ANUNCIO NATIVO 3 (Inferior Largo) -->
+      <div class="ad-slot ad-sidebar-tall" data-ad-label="" style="text-align: center; overflow: hidden;">
+        <iframe srcdoc="
+          <body style='margin:0; padding:0; text-align:center;'>
+            <div id='container-decd1f4598bf4831bd5806c2f6da54ca'></div>
+            <script async='async' data-cfasync='false' src='https://pl30310791.effectivecpmnetwork.com/decd1f4598bf4831bd5806c2f6da54ca/invoke.js'></script>
+          </body>"
+          style="width: 100%; height: 390px; border: none; scrolling: no; overflow: hidden;">
+        </iframe>
+      </div>
+    </aside>
+  </main>
+</Layout>

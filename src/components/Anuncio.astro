@@ -1,0 +1,60 @@
+---
+// src/components/Anuncio.astro
+interface Props {
+  type?: 'banner-728' | 'banner-300' | 'nativo';
+}
+
+const { type = 'banner-728' } = Astro.props;
+---
+
+<div class={`contenedor-publicidad ad-${type}`}>
+  <span class="ad-label"></span>
+
+  {type === 'banner-300' && (
+    <>
+      <script is:inline type="text/javascript">
+        var atOptions = {
+          'key' : 'f835d66e7509ed0d888e0c9c03f9e4a3',
+          'format' : 'iframe',
+          'height' : 250,
+          'width' : 300,
+          'params' : {}
+        };
+      </script>
+      <script is:inline type="text/javascript" src="https://www.highperformanceformat.com/f835d66e7509ed0d888e0c9c03f9e4a3/invoke.js"></script>
+    </>
+  )}
+
+  {type === 'banner-728' && (
+    <>
+      <script is:inline type="text/javascript">
+        var atOptions = {
+          'key' : '4be2192e6f8a94fece1b255824c14583',
+          'format' : 'iframe',
+          'height' : 90,
+          'width' : 728,
+          'params' : {}
+        };
+      </script>
+      <script is:inline type="text/javascript" src="https://www.highperformanceformat.com/4be2192e6f8a94fece1b255824c14583/invoke.js"></script>
+    </>
+  )}
+
+  {type === 'nativo' && (
+    <>
+      {/* 🌟 CÓDIGO NATIVO DE ADSTERRA */}
+      <div id="container-tu-id-nativo"></div>
+      <script is:inline async="async" data-cfasync="false" src="https://pl30310791.effectivecpmnetwork.com/decd1f4598bf4831bd5806c2f6da54ca/invoke.js"></script>
+      <div id="container-decd1f4598bf4831bd5806c2f6da54ca"></div>
+    </>
+  )}
+</div>
+
+<style>
+  /* Mantenemos tus estilos limpios */
+  .contenedor-publicidad { margin: 2rem auto; text-align: center; padding: 5px; clear: both; }
+  .ad-label { display: block; font-size: 0.7rem; color: #666; text-transform: uppercase; margin-bottom: 6px; letter-spacing: 0.05em; }
+  .ad-banner-728 { min-height: 115px; max-width: 728px; }
+  .ad-banner-300 { min-height: 275px; max-width: 300px; }
+  .ad-nativo { min-height: 150px; width: 100%; }
+</style>

@@ -1,0 +1,112 @@
+---
+const dropdowns = [
+  { label: 'Categorías', href: '/categorias', items: [{ label: 'Acción', href: '/categorias/accion' }, { label: 'Aventura', href: '/categorias/aventura' }, { label: 'RPG', href: '/categorias/rpg' }, { label: 'Deportes', href: '/categorias/deportes' }, { label: 'Multijugador', href: '/categorias/multijugador' }] },
+  { label: 'Requisitos', href: '/requisitos', items: [{ label: 'Requisitos Altos', href: '/requisitos/altos' }, { label: 'Requisitos Medios', href: '/requisitos/medios' }, { label: 'Requisitos Mínimos', href: '/requisitos/minimos' }] },
+  { label: 'Programas', href: '/programas', items: [{ label: 'Emuladores', href: '/programas#emuladores' }, { label: 'Software General', href: '/programas#software' }] },
+  { label: 'Ayuda / Tutoriales', href: '/ayuda', items: [{ label: 'Programas Necesarios', href: '/ayuda#programas-necesarios' }, { label: 'Cómo Saltar la Publicidad', href: '/ayuda#saltar-publicidad' }, { label: 'Preguntas Frecuentes', href: '/ayuda#preguntas-frecuentes' }] },
+];
+---
+
+<nav class="navbar">
+  <!-- ... (Todo tu HTML anterior sigue igual) ... -->
+  <div class="nav-logo">
+    <a href="/"><img src="/logo.webp" alt="Logo de DropGames" class="logo" width="260" height="90"></a>
+  </div>
+
+  <button class="nav-menu-toggle" id="menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-links">
+    <span></span><span></span><span></span>
+  </button>
+
+  <ul class="nav-links" id="nav-links">
+    <li><a href="/">Inicio</a></li>
+    {dropdowns.map((grupo) => (
+      <li class="nav-item-dropdown">
+        <a href={grupo.href}>{grupo.label}</a>
+        <button class="submenu-toggle" aria-expanded="false" aria-label={`Mostrar ${grupo.label.toLowerCase()}`}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <ul class="submenu">{grupo.items.map((item) => <li><a href={item.href}>{item.label}</a></li>)}</ul>
+      </li>
+    ))}
+    <li><a href="/pedidos">Pedidos</a></li>
+  </ul>
+
+  <div class="nav-acciones">
+    <button class="btn-tema" id="btn-tema" aria-label="Cambiar tema">
+  <!-- Ícono Luna (visible en modo claro) -->
+    <span class="icono-luna">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
+    </span>
+    <!-- Ícono Sol (visible en modo oscuro) -->
+    <span class="icono-sol">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </svg>
+    </span>
+  </button>
+    <button class="btn-buscar" id="btn-buscar" aria-label="Buscar" aria-expanded="false" aria-controls="barra-busqueda"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
+  </div>
+</nav>
+
+<div class="barra-busqueda-wrapper" id="barra-busqueda">
+  <form class="barra-busqueda-form" role="search" action="/buscar" method="get">
+    <input type="search" name="q" class="barra-busqueda-input" placeholder="Buscar videojuegos, emuladores, programas...">
+    <button type="submit" class="barra-busqueda-submit">Buscar</button>
+  </form>
+</div>
+
+<script>
+  const initNavbar = () => {
+    // 1. Menú móvil
+    document.getElementById('menu-toggle')?.addEventListener('click', (e) => {
+      const navLinks = document.getElementById('nav-links');
+      const expanded = (e.currentTarget as HTMLElement).getAttribute('aria-expanded') === 'true';
+      (e.currentTarget as HTMLElement).setAttribute('aria-expanded', (!expanded).toString());
+      navLinks?.classList.toggle('abierto');
+    });
+
+        // 2. Búsqueda mejorada
+    document.addEventListener('click', (e) => {
+        // Buscamos si el elemento clickeado (o su padre) es el botón de buscar
+        const btnBuscar = (e.target as HTMLElement).closest('#btn-buscar');
+        
+        if (btnBuscar) {
+            e.preventDefault(); // Evitamos comportamientos por defecto
+            const barra = document.getElementById('barra-busqueda');
+            const abierta = barra?.classList.toggle('abierta');
+            btnBuscar.setAttribute('aria-expanded', abierta ? 'true' : 'false');
+            if (abierta) barra?.querySelector('input')?.focus();
+        }
+    });
+
+    // 3. Tema
+    document.getElementById('btn-tema')?.addEventListener('click', () => {
+      const actual = document.documentElement.getAttribute('data-tema') === 'oscuro' ? 'claro' : 'oscuro';
+      document.documentElement.setAttribute('data-tema', actual);
+      try { localStorage.setItem('dropgames-tema', actual); } catch (e) {}
+    });
+
+    // 4. Submenús (clic para móvil/táctil)
+    document.querySelectorAll('.submenu-toggle').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const item = (e.currentTarget as HTMLElement).closest('.nav-item-dropdown');
+        item?.classList.toggle('abierto');
+      });
+    });
+  };
+
+  // Ejecutar inicialización al cargar
+  initNavbar();
+  // Reinicializar al navegar entre rutas con ViewTransitions
+  document.addEventListener('astro:page-load', initNavbar);
+</script>

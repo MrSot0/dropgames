@@ -1,0 +1,36 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  juego: CollectionEntry<'juegos'>;
+}
+
+const { juego } = Astro.props;
+const { title, categoria, plataforma, tamano, imagen } = juego.data;
+
+const etiquetas: Record<string, string> = {
+  accion: 'Acción',
+  aventura: 'Aventura',
+  rpg: 'RPG',
+  deportes: 'Deportes',
+  multijugador: 'Multijugador',
+};
+---
+
+<article class="tarjeta-juego">
+  {/* Cambiado juego.slug por juego.id */}
+  <a href={`/juegos/${juego.id}`}>
+    <div class="tarjeta-imagen">
+      <img src={imagen} alt={title} loading="lazy">
+      <span class={`tag-categoria tag-categoria--${categoria}`}>{etiquetas[categoria]}</span>
+      <div class="tarjeta-fade"></div>
+    </div>
+    <div class="tarjeta-info">
+      <h3>{title}</h3>
+      <div class="tarjeta-specs">
+        <span class="tag-plataforma">{plataforma}</span>
+        <span class="tag-tamano">{tamano}</span>
+      </div>
+    </div>
+  </a>
+</article>
