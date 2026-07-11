@@ -7,29 +7,27 @@ import '../../../styles/global.css';
 export async function getStaticPaths({ paginate }) {
   const allGames = await getCollection('juegos');
   
-  // 1. EXTRAE EL STRING CORRECTO: 
-  // Si 'requisitos' es un objeto, accede a la propiedad que guarda el texto (ej: j.data.requisitos.tipo o nivel)
-  // Si 'requisitos' es un string en algunos juegos pero objeto en otros, asegúrate de unificarlo aquí.
+  // 1. Extraemos los niveles únicos directamente desde 'nivelRequisitos'
   const requisitosLista = [
     ...new Set(
-      allGames.map(j => {
-        // Modifica esto según la estructura real de tu objeto 'requisitos'
-        // Si tu objeto tiene una propiedad llamada 'nivel' (ej: j.data.requisitos.nivel), úsala aquí:
-        return typeof j.data.requisitos === 'object' ? j.data.requisitos?.nivel : j.data.requisitos;
-      }).filter(Boolean)
+      allGames.map(j => j.data.nivelRequisitos).filter(Boolean)
     )
   ];
 
-  return requisitosLista.flatMap((requisitos) => {
-    // 2. Filtramos comparando contra el mismo string extraído
+  // 2. Generamos los paths y paginamos
+  return requisitosLista.flatMap((req) => {
+    const reqString = String(req).toLowerCase().trim();
+
+    // Filtramos los juegos comparando contra su nivelRequisitos
     const juegosFiltrados = allGames.filter(j => {
-      const nivelJuego = typeof j.data.requisitos === 'object' ? j.data.requisitos?.nivel : j.data.requisitos;
-      return nivelJuego === requisitos;
+      if (!j.data.nivelRequisitos) return false;
+      return String(j.data.nivelRequisitos).toLowerCase().trim() === reqString;
     });
-    
-    // 3. Paginamos pasando el string limpio en los params
+
+    if (juegosFiltrados.length === 0) return [];
+
     return paginate(juegosFiltrados, { 
-      params: { requisitos: String(requisitos) }, // Nos aseguramos de que sea string
+      params: { requisitos: reqString }, 
       pageSize: 9 
     });
   });
@@ -58,7 +56,7 @@ const deCapitalize = (str) => str ? str.charAt(0).toUpperCase() + str.slice(1) :
       </nav>
     </section>
 
-    <!-- Sidebar con corrección de etiqueta de apertura -->
+    <!-- Sidebar -->
     <aside class="sidebar-top">
       <div class="sidebar-ads">
         <!-- 🎯 ANUNCIO NATIVO 1 (Superior) -->
@@ -93,47 +91,7 @@ const deCapitalize = (str) => str ? str.charAt(0).toUpperCase() + str.slice(1) :
             style="width: 100%; height: 390px; border: none; scrolling: no; overflow: hidden;">
           </iframe>
         </div>
-      </div> <!-- Cierre correcto de sidebar-ads -->
+      </div>
     </aside>
   </main>
 </Layout>
-
-export async function getStaticPaths({ paginate }) {
-  const allGames = await getCollection('juegos');
-  
-  // 1. Forzamos la extracción limpia del texto. 
-  // Modifica 'requisitos' por la propiedad de texto exacta de tu markdown si está anidada (ej: j.data.requisitos.nivel)
-  const requisitosLista = [
-    ...new Set(
-      allGames.map(j => {
-        if (!j.data.requisitos) return null;
-        return typeof j.data.requisitos === 'object' 
-          ? j.data.requisitos.nivel || j.data.requisitos.tipo 
-          : j.data.requisitos;
-      }).filter(Boolean)
-    )
-  ];
-
-  // Generamos los paths mapeando cada uno
-  return requisitosLista.flatMap((req) => {
-    // Convertimos a string por seguridad y pasamos a minúsculas para evitar problemas de URL
-    const reqString = String(req).toLowerCase().trim();
-
-    const juegosFiltrados = allGames.filter(j => {
-      if (!j.data.requisitos) return false;
-      const nivelJuego = typeof j.data.requisitos === 'object'
-        ? j.data.requisitos.nivel || j.data.requisitos.tipo
-        : j.data.requisitos;
-      
-      return String(nivelJuego).toLowerCase().trim() === reqString;
-    });
-
-    // Validamos que realmente existan juegos para este requisito antes de paginar
-    if (juegosFiltrados.length === 0) return [];
-
-    return paginate(juegosFiltrados, { 
-      params: { requisitos: reqString }, 
-      pageSize: 9 
-    });
-  });
-}
