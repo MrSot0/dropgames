@@ -2,8 +2,7 @@
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 
-// Como el sitio es 100% estático (sin base de datos), el catálogo completo
-// se genera en build time y el filtrado ocurre en el navegador según ?q=
+// El catálogo se genera en build time y el filtrado ocurre en el navegador según ?q=
 const todos = await getCollection('juegos');
 const catalogo = todos.map((j) => ({
   slug: j.slug,
@@ -58,7 +57,8 @@ const etiquetas: Record<string, string> = {
         .map(
           (j) => `
         <article class="tarjeta-juego">
-          <a href="/juegos/${j.slug}">
+          <!-- 🎯 Apunta directamente al slug limpio generado por [...slug].astro -->
+          <a href="/${j.slug}/">
             <div class="tarjeta-imagen">
               <img src="${j.imagen}" alt="${j.title}" loading="lazy">
               <span class="tag-categoria tag-categoria--${j.categoria}">${etiquetas[j.categoria] ?? j.categoria}</span>
