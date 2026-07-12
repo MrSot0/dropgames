@@ -702,7 +702,7 @@ html {
     background-color: var(--footer-bg);
     border-top: 3px solid transparent;
     border-image: linear-gradient(90deg, var(--footer-acento), var(--footer-azul)) 1;
-    margin: 24px 0 0 0;
+    margin: 0 0 0 0;
     padding: 0;
     position: relative;
     left: 0;
