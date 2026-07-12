@@ -1859,6 +1859,17 @@ html {
 }
 
 @media (max-width: 720px) {
+
+   /* 1. Permitimos que crezca dinámicamente en móvil para que quepan los elementos si se apilan o ensanchan */
+    .barra-busqueda-wrapper.abierta { 
+        max-height: 200px; /* Aumentamos el límite para que no se corte al bajar */
+    }
+
+    /* 2. Ajustamos los espacios internos del formulario en pantallas pequeñas */
+    .barra-busqueda-form {
+        padding: 12px 16px; /* Reducimos el padding lateral para ganar espacio */
+        gap: 8px;           /* Juntamos un pelín más los elementos */
+    }
     /* Buscamos el contenedor donde metes los banners horizontales */
     .ad-slot, 
     .ad-banner-horizontal,
