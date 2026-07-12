@@ -379,7 +379,6 @@ html {
     max-height: 0;
     overflow: hidden;
     background-color: var(--footer-bg);
-    border-bottom: 1px solid var(--footer-acento);
     transition: max-height 0.25s ease-in-out;
 }
 
