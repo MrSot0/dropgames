@@ -8,21 +8,32 @@ interface Props {
 const { juego } = Astro.props;
 const { title, categoria, plataforma, tamano, imagen } = juego.data;
 
+// Diccionario extendido de categorías comunes de videojuegos
 const etiquetas: Record<string, string> = {
   accion: 'Acción',
   aventura: 'Aventura',
   rpg: 'RPG',
   deportes: 'Deportes',
   multijugador: 'Multijugador',
+  estrategia: 'Estrategia',
+  simulacion: 'Simulación',
+  carreras: 'Carreras',
+  terror: 'Terror',
+  indie: 'Indie',
+  peleas: 'Peleas',
+  plataformas: 'Plataformas',
+  shooter: 'Shooter'
 };
+
+const categoriaFormateada = etiquetas[categoria] || (categoria.charAt(0).toUpperCase() + categoria.slice(1));
 ---
 
 <article class="tarjeta-juego">
-  {/* Cambiado juego.slug por juego.id */}
   <a href={`/juegos/${juego.id}`}>
     <div class="tarjeta-imagen">
       <img src={imagen} alt={title} loading="lazy">
-      <span class={`tag-categoria tag-categoria--${categoria}`}>{etiquetas[categoria]}</span>
+      {/* Usamos la categoría formateada dinámicamente */}
+      <span class={`tag-categoria tag-categoria--${categoria}`}>{categoriaFormateada}</span>
       <div class="tarjeta-fade"></div>
     </div>
     <div class="tarjeta-info">
