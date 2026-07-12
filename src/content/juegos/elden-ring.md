@@ -3,11 +3,11 @@ title: "Elden Ring"
 categoria: "rpg"
 plataforma: "PC"
 tamano: "50 GB"
-imagen: "https://i.ibb.co/Xyz123/elden-ring.webp" 
-imagenes:
-  - "https://i.ibb.co/Abc456/elden-ring1.jpg"
-  - "https://i.ibb.co/Def789/elden-ring2.jpg"
-  - "https://i.ibb.co/Ghi012/elden-ring3.jpg"
+imagen: "https://i.ibb.co/DHYX6kQq/elden-ring.webp"
+imagenes:-
+  - "https://i.ibb.co/XxdB10MP/elden-ring1.jpg"
+  - "https://i.ibb.co/gB3XD0t/elden-ring2.jpg"
+  - "https://i.ibb.co/W4XszQbR/elden-ring3.jpg"
 descripcionCorta: "Levántate, Sinluz, y déjate guiar por la gracia para esgrimir el poder del Círculo de Elden en las Tierras Intermedias."
 fecha: 2026-06-25
 nivelRequisitos: "altos"
