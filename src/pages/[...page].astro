@@ -30,11 +30,11 @@ const { page } = Astro.props;
 
       <!-- Navegación automática -->
       <nav class="pagination-ui">
-        {page.url.prev && <a href={page.url.prev} class="nav-btn">« Anterior</a>}
+        {page.url.prev && <a href={page.url.prev} class="nav-btn">« </a>}
         
-        <span class="page-numbers">Página {page.currentPage} de {page.lastPage}</span>
+        <span class="page-numbers">{page.currentPage} de {page.lastPage}</span>
         
-        {page.url.next && <a href={page.url.next} class="nav-btn">Siguiente »</a>}
+        {page.url.next && <a href={page.url.next} class="nav-btn">»</a>}
       </nav>
     </section>
 
