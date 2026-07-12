@@ -1977,32 +1977,34 @@ html {
 
 
 
-
-
 @media (max-width: 720px) {
-    /* 1. Pasamos el formulario a columna y centramos su contenido */
+    /* 1. Pasamos el formulario a columna ocupando todo el ancho */
     .buscar-input-grande {
-        display: flex;
         flex-direction: column;
-        align-items: center; /* Centra los elementos hijos horizontalmente */
-        gap: 12px;           /* Espaciado orgánico entre el input y el botón */
+        align-items: stretch; /* 👈 Cambiado a 'stretch' para que los hijos hereden el ancho completo */
+        gap: 12px;
+        margin: 18px 0 0;     /* Quitamos los márgenes laterales para evitar desbordamientos */
         width: 100%;
     }
 
-    /* 2. Hacemos que el input se expanda limpiamente */
-    .buscar-input-grande input[type="search"] {
+    /* 2. Hacemos que el input se expanda limpiamente usando el selector base */
+    .buscar-input-grande input {
         width: 100%;
         box-sizing: border-box;
     }
 
-    /* 3. Centramos y expandimos el botón */
-    .buscar-input-grande button[type="submit"] {
-        width: 100%;             /* Fuerza a que abarque todo el ancho disponible */
-        max-width: 300px;        /* Opcional: Pon un límite si no quieres que sea gigante en pantallas intermedias */
-        padding: 12px 20px;      /* Espaciado interno cómodo para el dedo */
-        display: inline-flex;
-        justify-content: center; /* Centra el texto 'Buscar' dentro del propio botón */
+    /* 3. Centramos y expandimos el botón solucionando el bug del texto */
+    .buscar-input-grande button {
+        width: 100%;
+        box-sizing: border-box;
+        
+        /* Forzamos flexbox puro para alinear el texto exactamente al medio */
+        display: flex; 
+        justify-content: center;
         align-items: center;
-        box-sizing: border-box;
+        
+        /* Aseguramos que la altura de línea no empuje el texto de forma asimétrica */
+        line-height: 1; 
+        padding: 14px 20px; /* Un pelín más de padding vertical para el dedo en móvil */
     }
 }
