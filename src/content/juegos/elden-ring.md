@@ -3,10 +3,8 @@ title: "Elden Ring"
 categoria: "rpg"
 plataforma: "PC"
 tamano: "50 GB"
-# 1. Cambias la imagen principal por la URL externa directa
 imagen: "https://i.ibb.co/Xyz123/elden-ring.webp" 
 imagenes:
-  # 2. Haces lo mismo con el arreglo de capturas de pantalla
   - "https://i.ibb.co/Abc456/elden-ring1.jpg"
   - "https://i.ibb.co/Def789/elden-ring2.jpg"
   - "https://i.ibb.co/Ghi012/elden-ring3.jpg"
