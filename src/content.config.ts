@@ -1,6 +1,9 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders'; // ¡Importante usar glob en Astro v5!
 
+// Creamos un validador híbrido: acepta URL válida o una ruta de texto local
+const imagenHibrida = z.union([z.string().url(), z.string()]);
+
 const juegos = defineCollection({
   loader: glob({ pattern: '**/[^_]*.md', base: "./src/content/juegos" }),
   schema: z.object({
@@ -8,11 +11,16 @@ const juegos = defineCollection({
     categoria: z.string(),
     plataforma: z.string(),
     tamano: z.string(),
-    imagen: z.string(),
-    // 🌟 AGREGA ESTA LÍNEA AQUÍ ABAJO 🌟
-    imagenes: z.array(z.string()).optional(),
+    
+    // 🌟 Soportan tanto URLs externas como rutas locales (/img/...)
+    imagen: imagenHibrida,
+    imagenes: z.array(imagenHibrida).optional(),
+    
     descripcionCorta: z.string(),
-    fecha: z.date(),
+    
+    // Forzamos la conversión automática del string del Markdown a un objeto Date real
+    fecha: z.coerce.date(), 
+    
     nivelRequisitos: z.string(),
     requisitos: z.object({
       minimos: z.object({
