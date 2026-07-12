@@ -1,6 +1,24 @@
 ---
 const dropdowns = [
-  { label: 'Categorías', href: '/categorias', items: [{ label: 'Acción', href: '/categorias/accion' }, { label: 'Aventura', href: '/categorias/aventura' }, { label: 'RPG', href: '/categorias/rpg' }, { label: 'Deportes', href: '/categorias/deportes' }, { label: 'Multijugador', href: '/categorias/multijugador' }] },
+  { 
+    label: 'Categorías', 
+    href: '/categorias', 
+    items: [
+      { label: 'Acción', href: '/categorias/accion' }, 
+      { label: 'Aventura', href: '/categorias/aventura' }, 
+      { label: 'RPG', href: '/categorias/rpg' }, 
+      { label: 'Deportes', href: '/categorias/deportes' }, 
+      { label: 'Multijugador', href: '/categorias/multijugador' },
+      { label: 'Estrategia', href: '/categorias/estrategia' },
+      { label: 'Simulación', href: '/categorias/simulacion' },
+      { label: 'Carreras', href: '/categorias/carreras' },
+      { label: 'Terror', href: '/categorias/terror' },
+      { label: 'Indie', href: '/categorias/indie' },
+      { label: 'Peleas', href: '/categorias/peleas' },
+      { label: 'Plataformas', href: '/categorias/plataformas' },
+      { label: 'Shooter', href: '/categorias/shooter' }
+    ] 
+  },
   { label: 'Requisitos', href: '/requisitos', items: [{ label: 'Requisitos Altos', href: '/requisitos/altos' }, { label: 'Requisitos Medios', href: '/requisitos/medios' }, { label: 'Requisitos Mínimos', href: '/requisitos/minimos' }] },
   { label: 'Programas', href: '/programas', items: [{ label: 'Emuladores', href: '/programas#emuladores' }, { label: 'Software General', href: '/programas#software' }] },
   { label: 'Ayuda / Tutoriales', href: '/ayuda', items: [{ label: 'Programas Necesarios', href: '/ayuda#programas-necesarios' }, { label: 'Cómo Saltar la Publicidad', href: '/ayuda#saltar-publicidad' }, { label: 'Preguntas Frecuentes', href: '/ayuda#preguntas-frecuentes' }] },
@@ -8,7 +26,6 @@ const dropdowns = [
 ---
 
 <nav class="navbar">
-  <!-- ... (Todo tu HTML anterior sigue igual) ... -->
   <div class="nav-logo">
     <a href="/"><img src="/logo.webp" alt="Logo de DropGames" class="logo" width="260" height="90"></a>
   </div>
@@ -38,9 +55,8 @@ const dropdowns = [
       <a href="https://discord.gg/x3WyCx6yp" target="_blank" rel="noopener noreferrer" aria-label="Unirse al Discord de DropGames">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
           <path d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152a.0741.0741 0 0 0-.0785.0371a13.7196 13.7196 0 0 0-.6063 1.2462a18.724 18.724 0 0 0-5.4943 0a13.3857 13.3857 0 0 0-.6121-1.2462a.077.077 0 0 0-.0785-.0371a19.7271 19.7271 0 0 0-4.8851 1.5152a.0699.0699 0 0 0-.0321.0277C1.4428 8.01 0.48 11.558 0.9413 15.068a.078.078 0 0 0 .0299.0537a20.013 20.013 0 0 0 6.0028 3.0336a.077.077 0 0 0 .0834-.0277a14.28 14.28 0 0 0 1.2336-1.996a.076.076 0 0 0-.0415-.1072a13.111 13.111 0 0 1-1.8906-1.0221a.077.077 0 0 1-.0066-.1278a10.82 10.82 0 0 0 .3986-.3126a.0735.0735 0 0 1 .0767-.0104a14.1568 14.1568 0 0 0 11.0822 0a.0731.0731 0 0 1 .0767.0104a10.233 10.233 0 0 0 .3986.3126a.077.077 0 0 1-.0066.1278a12.87 12.87 0 0 1-1.8906 1.0221a.076.076 0 0 0-.0415.1072a14.28 14.28 0 0 0 1.2336 1.996a.077.077 0 0 0 .0834.0277a19.9822 19.9822 0 0 0 6.003-3.0336a.078.078 0 0 0 .0299-.0537c.547-4.076-.8433-7.587-2.9267-10.6705a.0699.0699 0 0 0-.0321-.0277ZM8.02 12.8712a2.0528 2.0528 0 0 1-1.9213-2.1466a2.0528 2.0528 0 0 1 1.9213-2.1466a2.0528 2.0528 0 0 1 1.9213 2.1466a2.0528 2.0528 0 0 1-1.9213 2.1466ZM15.98 12.8712a2.0528 2.0528 0 0 1-1.9213-2.1466a2.0528 2.0528 0 0 1 1.9213-2.1466a2.0528 2.0528 0 0 1 1.9213 2.1466a2.0528 2.0528 0 0 1-1.9213 2.1466Z"/>
-        </svg>
+          </svg>
       </a>
-
 
       <!-- Telegram -->
       <a href="https://t.me/dropgamesblog" target="_blank" rel="noopener noreferrer" aria-label="Unirse al Telegram de DropGames">
@@ -52,27 +68,27 @@ const dropdowns = [
     </div>
 
     <button class="btn-tema" id="btn-tema" aria-label="Cambiar tema">
-  <!-- Ícono Luna (visible en modo claro) -->
-    <span class="icono-luna">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-      </svg>
-    </span>
-    <!-- Ícono Sol (visible en modo oscuro) -->
-    <span class="icono-sol">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="5"></circle>
-        <line x1="12" y1="1" x2="12" y2="3"></line>
-        <line x1="12" y1="21" x2="12" y2="23"></line>
-        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-        <line x1="1" y1="12" x2="3" y2="12"></line>
-        <line x1="21" y1="12" x2="23" y2="12"></line>
-        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-      </svg>
-    </span>
-  </button>
+      <!-- Ícono Luna (visible en modo claro) -->
+      <span class="icono-luna">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </span>
+      <!-- Ícono Sol (visible en modo oscuro) -->
+      <span class="icono-sol">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+      </span>
+    </button>
     <button class="btn-buscar" id="btn-buscar" aria-label="Buscar" aria-expanded="false" aria-controls="barra-busqueda"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
   </div>
 </nav>
@@ -94,13 +110,12 @@ const dropdowns = [
       navLinks?.classList.toggle('abierto');
     });
 
-        // 2. Búsqueda mejorada
+    // 2. Búsqueda mejorada
     document.addEventListener('click', (e) => {
-        // Buscamos si el elemento clickeado (o su padre) es el botón de buscar
         const btnBuscar = (e.target as HTMLElement).closest('#btn-buscar');
         
         if (btnBuscar) {
-            e.preventDefault(); // Evitamos comportamientos por defecto
+            e.preventDefault();
             const barra = document.getElementById('barra-busqueda');
             const abierta = barra?.classList.toggle('abierta');
             btnBuscar.setAttribute('aria-expanded', abierta ? 'true' : 'false');
