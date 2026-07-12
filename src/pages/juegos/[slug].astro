@@ -10,7 +10,7 @@ import Anuncio from '../../components/Anuncio.astro'; // Importamos tu component
 export async function getStaticPaths() {
   const juegos = await getCollection('juegos');
   return juegos.map((juego) => ({
-    params: { slug: juego.id },
+    params: { slug: juego.id }, // 🎯 Mantiene la consistencia con rutas dinámicas basadas en ID
     props: { juego },
   }));
 }
@@ -23,13 +23,25 @@ const slides: string[] = imagenes && imagenes.length > 0
   ? [imagen, ...imagenes]
   : [imagen];
 
+// 🌟 Diccionario extendido y unificado de categorías
 const etiquetas: Record<string, string> = {
   accion: 'Acción',
   aventura: 'Aventura',
   rpg: 'RPG',
   deportes: 'Deportes',
   multijugador: 'Multijugador',
+  estrategia: 'Estrategia',
+  simulacion: 'Simulación',
+  carreras: 'Carreras',
+  terror: 'Terror',
+  indie: 'Indie',
+  peleas: 'Peleas',
+  plataformas: 'Plataformas',
+  shooter: 'Shooter'
 };
+
+// 🌟 Truco Dinámico: Si la categoría no está en la lista base, la capitaliza al vuelo
+const categoriaFormateada = etiquetas[categoria] || (categoria.charAt(0).toUpperCase() + categoria.slice(1));
 
 const todosLosJuegos = await getCollection('juegos');
 const relacionados = todosLosJuegos
@@ -69,7 +81,8 @@ if (relacionados.length < 3) {
 
       <!-- SPECS -->
       <div class="detalle-specs">
-        <span class={`tag-categoria tag-categoria--${categoria}`} style="position:static;">{etiquetas[categoria]}</span>
+        {/* 🌟 Ahora usa la categoría mapeada o autogenerada con soporte de estilos */}
+        <span class={`tag-categoria tag-categoria--${categoria}`} style="position:static;">{categoriaFormateada}</span>
         <span class="tag-plataforma">{plataforma}</span>
         <span class="tag-tamano">{tamano}</span>
       </div>
@@ -197,7 +210,6 @@ if (relacionados.length < 3) {
 
     <!-- ===== SIDEBAR OPTIMIZADO ===== -->
     <aside class="detalle-sidebar" style="display: flex; flex-direction: column; gap: 2rem;">
-      <!-- Usamos bloques cuadrados 300x250 espaciados orgánicamente -->
       <Anuncio type="banner-300" />
       <Anuncio type="banner-300" />
       <Anuncio type="banner-300" />
