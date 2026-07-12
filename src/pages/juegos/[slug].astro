@@ -80,6 +80,11 @@ if (relacionados.length < 3) {
         </button>
       </div>
 
+      <!-- 📱 AD SUPREMO PARA MÓVIL (Excelente CTR sin empujar el H1 principal) -->
+      <div class="ad-movil-superior">
+        <Anuncio type="responsive" />
+      </div>
+
       <!-- SPECS -->
       <div class="detalle-specs">
         {/* 🌟 Ahora usa la categoría mapeada o autogenerada con soporte de estilos */}
@@ -107,22 +112,26 @@ if (relacionados.length < 3) {
         <Content />
 
         <h2>Requisitos del sistema</h2>
-        <table class="tabla-requisitos">
-          <thead>
-            <tr><th></th><th>Mínimos</th><th>Recomendados</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Sistema operativo</td><td>{requisitos.minimos.so}</td><td>{requisitos.recomendados.so}</td></tr>
-            <tr><td>Procesador</td><td>{requisitos.minimos.cpu}</td><td>{requisitos.recomendados.cpu}</td></tr>
-            <tr><td>Memoria RAM</td><td>{requisitos.minimos.ram}</td><td>{requisitos.recomendados.ram}</td></tr>
-            <tr><td>Gráficos</td><td>{requisitos.minimos.gpu}</td><td>{requisitos.recomendados.gpu}</td></tr>
-            <tr><td>Almacenamiento</td><td>{requisitos.minimos.almacenamiento}</td><td>{requisitos.recomendados.almacenamiento}</td></tr>
-          </tbody>
-        </table>
+        <div class="tabla-requisitos-wrapper">
+          <table class="tabla-requisitos">
+            <thead>
+              <tr><th></th><th>Mínimos</th><th>Recomendados</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Sistema operativo</td><td>{requisitos.minimos.so}</td><td>{requisitos.recomendados.so}</td></tr>
+              <tr><td>Procesador</td><td>{requisitos.minimos.cpu}</td><td>{requisitos.recomendados.cpu}</td></tr>
+              <tr><td>Memoria RAM</td><td>{requisitos.minimos.ram}</td><td>{requisitos.recomendados.ram}</td></tr>
+              <tr><td>Gráficos</td><td>{requisitos.minimos.gpu}</td><td>{requisitos.recomendados.gpu}</td></tr>
+              <tr><td>Almacenamiento</td><td>{requisitos.minimos.almacenamiento}</td><td>{requisitos.recomendados.almacenamiento}</td></tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
-      <!-- AD 2: Banner real entre descripción y guía (728x90) -->
-      <Anuncio type="banner-728" />
+      <!-- AD 2: Espacio optimizado (Banner adaptable en móvil / Fijo 728 en PC) -->
+      <div class="contenedor-ad-adaptable">
+        <Anuncio type="responsive" />
+      </div>
 
       <!-- ===== GUÍA DE INSTALACIÓN ===== -->
       <div class="guia-instalacion">
@@ -185,8 +194,10 @@ if (relacionados.length < 3) {
         </div>
       </div>
 
-      <!-- 🌟 AD ADICIONAL EN CONTENIDO: Justo debajo de los enlaces de descarga (728x90) -->
-      <Anuncio type="banner-728" />
+      <!-- 🌟 AD DE ALTO RENDIMIENTO EN MÓVIL: Justo debajo de los botones de descarga (Separado con prudencia por CSS) -->
+      <div class="contenedor-ad-adaptable zona-descargas-ad">
+        <Anuncio type="responsive" />
+      </div>
 
       <!-- ===== TRÁILER DEL JUEGO ===== -->
       {trailer && (
@@ -204,23 +215,27 @@ if (relacionados.length < 3) {
         </div>
       )}
 
-      <!-- AD 3: Banner de cierre de contenido (728x90) -->
-      <Anuncio type="banner-728" />
+      <!-- AD 3: Cierre de post adaptable -->
+      <div class="contenedor-ad-adaptable">
+        <Anuncio type="responsive" />
+      </div>
 
     </div>
 
-    <!-- ===== SIDEBAR OPTIMIZADO ===== -->
-    <aside class="detalle-sidebar" style="display: flex; flex-direction: column; gap: 2rem;">
+    <!-- ===== SIDEBAR OPTIMIZADO: Filtramos el exceso en móviles ===== -->
+    <aside class="detalle-sidebar">
       <Anuncio type="banner-300" />
       <Anuncio type="banner-300" />
-      <Anuncio type="banner-300" />
-      <Anuncio type="banner-300" />
-      <Anuncio type="banner-300" />
-      <Anuncio type="banner-300" />
-      <Anuncio type="banner-300" />
-      <Anuncio type="banner-300" />
-      <Anuncio type="banner-300" />
-      <Anuncio type="banner-300" />
+      <div class="sidebar-ads-desktop-only">
+        <Anuncio type="banner-300" />
+        <Anuncio type="banner-300" />
+        <Anuncio type="banner-300" />
+        <Anuncio type="banner-300" />
+        <Anuncio type="banner-300" />
+        <Anuncio type="banner-300" />
+        <Anuncio type="banner-300" />
+        <Anuncio type="banner-300" />
+      </div>
     </aside>
   </div>
 
@@ -235,6 +250,61 @@ if (relacionados.length < 3) {
   )}
 
 </Layout>
+
+<!-- ===== ESTILOS DE CONTROL ADEMÁS DE GLOBAL.CSS ===== -->
+<style>
+  /* Contenedores globales de ads */
+  .contenedor-ad-adaptable {
+    margin: 2.5rem auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .ad-movil-superior {
+    display: none;
+    margin: 1rem auto 1.5rem auto;
+    width: 100%;
+  }
+
+  /* Control estricto del Sidebar en Desktop vs Móvil */
+  .detalle-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  /* Evita que las tablas se desborden en smartphone */
+  .tabla-requisitos-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* 🎯 CONFIGURACIÓN PARA VISTA MÓVIL */
+  @media (max-width: 768px) {
+    .ad-movil-superior {
+      display: flex;
+      justify-content: center;
+    }
+
+    /* Ocultamos los 8 anuncios pesados redundantes que se apilaban abajo */
+    .sidebar-ads-desktop-only {
+      display: none !important;
+    }
+    
+    .detalle-sidebar {
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    /* Distancia prudencial para evitar clics accidentales inválidos cerca de descargas */
+    .zona-descargas-ad {
+      margin-top: 3.5rem; 
+      margin-bottom: 2rem;
+    }
+  }
+</style>
 
 <script>
   const pista = document.querySelector('.carrusel-pista') as HTMLElement;
