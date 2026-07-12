@@ -15,12 +15,21 @@ const catalogo = todos.map((j) => ({
   imagen: j.data.imagen,
 }));
 
+// 🌟 Diccionario extendido y actualizado para el catálogo
 const etiquetas: Record<string, string> = {
   accion: 'Acción',
   aventura: 'Aventura',
   rpg: 'RPG',
   deportes: 'Deportes',
   multijugador: 'Multijugador',
+  estrategia: 'Estrategia',
+  simulacion: 'Simulación',
+  carreras: 'Carreras',
+  terror: 'Terror',
+  indie: 'Indie',
+  peleas: 'Peleas',
+  plataformas: 'Plataformas',
+  shooter: 'Shooter'
 };
 ---
 
@@ -69,24 +78,29 @@ const etiquetas: Record<string, string> = {
       if (contenedor) {
         contenedor.innerHTML = resultados
           .map(
-            (j: any) => `
-          <article class="tarjeta-juego">
-            <!-- 🎯 Al usar /${j.id}/ enlazamos directo al archivo sin fallas de rutas fijas -->
-            <a href="/juegos/${j.id}/">
-              <div class="tarjeta-imagen">
-                <img src="${j.imagen}" alt="${j.title}" loading="lazy">
-                <span class="tag-categoria tag-categoria--${j.categoria}">${etiquetas[j.categoria] ?? j.categoria}</span>
-                <div class="tarjeta-fade"></div>
-              </div>
-              <div class="tarjeta-info">
-                <h3>${j.title}</h3>
-                <div class="tarjeta-specs">
-                  <span class="tag-plataforma">${j.plataforma}</span>
-                  <span class="tag-tamano">${j.tamano}</span>
-                </div>
-              </div>
-            </a>
-          </article>`
+            (j: any) => {
+              // 🌟 Fallback dinámico en JS: Si la categoría no está en las etiquetas,
+              // capitaliza la primera letra automáticamente (ej: "survival-horror" -> "Survival-horror")
+              const textoCategoria = etiquetas[j.categoria] || (j.categoria.charAt(0).toUpperCase() + j.categoria.slice(1));
+
+              return `
+              <article class="tarjeta-juego">
+                <a href="/juegos/${j.id}/">
+                  <div class="tarjeta-imagen">
+                    <img src="${j.imagen}" alt="${j.title}" loading="lazy">
+                    <span class="tag-categoria tag-categoria--${j.categoria}">${textoCategoria}</span>
+                    <div class="tarjeta-fade"></div>
+                  </div>
+                  <div class="tarjeta-info">
+                    <h3>${j.title}</h3>
+                    <div class="tarjeta-specs">
+                      <span class="tag-plataforma">${j.plataforma}</span>
+                      <span class="tag-tamano">${j.tamano}</span>
+                    </div>
+                  </div>
+                </a>
+              </article>`;
+            }
           )
           .join('');
       }
