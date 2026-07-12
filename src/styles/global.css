@@ -1978,33 +1978,38 @@ html {
 
 
 @media (max-width: 720px) {
-    /* 1. Pasamos el formulario a columna ocupando todo el ancho */
+    /* 1. Pasamos el formulario a columna ocupando el ancho disponible con márgenes limpios */
     .buscar-input-grande {
         flex-direction: column;
-        align-items: stretch; /* 👈 Cambiado a 'stretch' para que los hijos hereden el ancho completo */
+        align-items: stretch; 
         gap: 12px;
-        margin: 18px;     /* Quitamos los márgenes laterales para evitar desbordamientos */
-        width: 100%;
+        
+        /* Dejamos un margen orgánico arriba, abajo y a los lados */
+        margin: 18px auto; 
+        
+        /* En vez de 100%, calculamos el ancho restándole el espacio de los lados (ej: 36px totales) */
+        width: calc(100% - 36px); 
+        
+        /* Opcional: si no quieres que en tablets o pantallas intermedias se vea gigante */
+        max-width: 480px; 
     }
 
-    /* 2. Hacemos que el input se expanda limpiamente usando el selector base */
+    /* 2. El input se adapta al ancho de su nuevo contenedor padre */
     .buscar-input-grande input {
         width: 100%;
         box-sizing: border-box;
     }
 
-    /* 3. Centramos y expandimos el botón solucionando el bug del texto */
+    /* 3. El botón se adapta y mantiene su texto perfectamente centrado */
     .buscar-input-grande button {
         width: 100%;
         box-sizing: border-box;
         
-        /* Forzamos flexbox puro para alinear el texto exactamente al medio */
         display: flex; 
         justify-content: center;
         align-items: center;
         
-        /* Aseguramos que la altura de línea no empuje el texto de forma asimétrica */
         line-height: 1; 
-        padding: 14px 20px; /* Un pelín más de padding vertical para el dedo en móvil */
+        padding: 14px 20px; 
     }
 }
