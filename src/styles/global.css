@@ -538,7 +538,7 @@ html {
     border-radius: 12px;
     overflow: hidden;
     transition: var(--transicion-suave);
-    border: 1px solid var(--borde-suave);
+    border: 2px solid var(--borde-suave);
     cursor: pointer;
     position: relative;
 }
@@ -586,7 +586,7 @@ html {
     right: 0;
     bottom: 0;
     height: 65%;
-    background: linear-gradient(to top, var(--panel) 8%, rgba(255, 255, 255, 0) 100%);
+    background: linear-gradient(to top, rgba(42, 42, 42, 0.4) 8%, rgba(255, 255, 255, 0) 100%);
     pointer-events: none;
 }
 
