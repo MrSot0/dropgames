@@ -1999,7 +1999,7 @@ html {
     .buscar-input-grande button[type="submit"] {
         width: 100%;             /* Fuerza a que abarque todo el ancho disponible */
         max-width: 300px;        /* Opcional: Pon un límite si no quieres que sea gigante en pantallas intermedias */
-        padding: 12px 24px;      /* Espaciado interno cómodo para el dedo */
+        padding: 24px 24px;      /* Espaciado interno cómodo para el dedo */
         display: inline-flex;
         justify-content: center; /* Centra el texto 'Buscar' dentro del propio botón */
         align-items: center;
