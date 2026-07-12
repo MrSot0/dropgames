@@ -705,10 +705,10 @@ html {
     margin: 24px 0 0 0;
     padding: 0;
     position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100vw;
-    max-width: 100vw;
+    left: 0;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
 }
 
 .footer-contenido {
