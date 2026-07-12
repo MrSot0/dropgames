@@ -4,7 +4,7 @@ categoria: "rpg"
 plataforma: "PC"
 tamano: "50 GB"
 imagen: "https://i.ibb.co/DHYX6kQq/elden-ring.webp"
-imagenes:-
+imagenes:
   - "https://i.ibb.co/XxdB10MP/elden-ring1.jpg"
   - "https://i.ibb.co/gB3XD0t/elden-ring2.jpg"
   - "https://i.ibb.co/W4XszQbR/elden-ring3.jpg"
