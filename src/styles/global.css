@@ -1946,7 +1946,7 @@ html {
 
 @media (max-width: 720px) {
     .barra-busqueda-wrapper {
-        position: absolute;
+        position: fixed;
         left: 0;
         right: 0;
         /* Pon aquí exactamente el mismo alto que tenga tu navbar en móvil (ej: 60px) */
