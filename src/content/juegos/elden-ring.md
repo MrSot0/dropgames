@@ -14,7 +14,7 @@ descripcionCorta: "Levántate, Sinluz, y déjate guiar por la gracia para esgrim
 fecha: 2026-06-25
 nivelRequisitos: "altos"
 requisitos:
-  minimost:
+  minimos:
     so: "Windows 10 64-bit"
     cpu: "Intel Core i5-8400 / AMD Ryzen 3 3300X"
     ram: "12 GB"
