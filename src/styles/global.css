@@ -1976,3 +1976,33 @@ html {
 }
 
 
+
+
+
+@media (max-width: 720px) {
+    /* 1. Pasamos el formulario a columna y centramos su contenido */
+    .buscar-input-grande {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Centra los elementos hijos horizontalmente */
+        gap: 12px;           /* Espaciado orgánico entre el input y el botón */
+        width: 100%;
+    }
+
+    /* 2. Hacemos que el input se expanda limpiamente */
+    .buscar-input-grande input[type="search"] {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* 3. Centramos y expandimos el botón */
+    .buscar-input-grande button[type="submit"] {
+        width: 100%;             /* Fuerza a que abarque todo el ancho disponible */
+        max-width: 300px;        /* Opcional: Pon un límite si no quieres que sea gigante en pantallas intermedias */
+        padding: 12px 24px;      /* Espaciado interno cómodo para el dedo */
+        display: inline-flex;
+        justify-content: center; /* Centra el texto 'Buscar' dentro del propio botón */
+        align-items: center;
+        box-sizing: border-box;
+    }
+}
