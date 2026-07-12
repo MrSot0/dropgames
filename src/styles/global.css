@@ -1639,15 +1639,25 @@ html {
         text-align: center;
     }
 
-    /* Cards en móvil: 1 columna centrada */
+    /* Nos aseguramos de que el contenedor principal limpie paddings laterales extra */
+    .contenedor-principal {
+        padding: 16px 12px;
+        flex-direction: column;
+        align-items: center; /* Centra el contenido secundario si lo hubiera */
+    }
+
+    /* Forzamos a la grid a ocupar todo el ancho disponible y centrar su única columna */
     .grid-videojuegos,
     .grid-listado,
     .grid-relacionados {
         grid-template-columns: minmax(0, 420px);
         justify-content: center;
+        width: 100%;
+        margin: 0 auto;
     }
 
-    .carrusel-slide img { height: 220px; }
+    .carrusel-slide img { fill: none; 
+    align-items: center;}
 }
 
 @media (max-width: 480px) {
