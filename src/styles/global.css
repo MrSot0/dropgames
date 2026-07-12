@@ -1365,7 +1365,6 @@ html {
 }
 .form-pedido textarea { resize: vertical; min-height: 100px; }
 .form-pedido button {
-    align-self: flex-start;
     font-family: var(--fuente-display);
     font-weight: 600;
     text-transform: uppercase;
