@@ -2013,3 +2013,87 @@ html {
         padding: 14px 20px; 
     }
 }
+
+
+
+
+/* ==========================================================================
+   Solución para el Submenú Desplegable de Categorías
+   ========================================================================== */
+
+/* 1. Contenedor del Submenú (Desktop) */
+.nav-item-dropdown .submenu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%); /* Centra el menú respecto al botón */
+  background-color: #1e1e1e;   /* Cambia por tu variable de fondo, ej: var(--fondo-tarjeta) */
+  border: 1px solid #333;       /* Cambia por tu variable de borde */
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  padding: 1.25rem;
+  margin: 0;
+  list-style: none;
+  z-index: 100;
+  
+  /* Configuración del Grid para múltiples columnas */
+  display: grid;
+  grid-template-columns: repeat(2, minmax(160px, 1fr)); /* Crea 2 columnas anchas */
+  gap: 0.25rem 1.5rem;                                 /* Espacio entre filas y columnas */
+  
+  /* Control de visibilidad inicial (ajústalo según tu lógica actual de hover/clases) */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+/* Muestra el menú al hacer hover o cuando tiene la clase de abierto */
+.nav-item-dropdown:hover .submenu,
+.nav-item-dropdown.abierto .submenu {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* 2. Estilos para los enlaces internos del submenú */
+.nav-item-dropdown .submenu li a {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  color: #e0e0e0;
+  text-decoration: none;
+  font-size: 0.95rem;
+  border-radius: 4px;
+  white-space: nowrap; /* Evita que géneros largos como "Supervivencia / Exploración" se partan en dos líneas */
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Efecto Hover en las opciones */
+.nav-item-dropdown .submenu li a:hover {
+  background-color: rgba(255, 255, 255, 0.08); /* Fondo sutil al pasar el mouse */
+  color: #00acc1;                              /* Cambia por tu color de acento principal */
+}
+
+/* ==========================================================================
+   Adaptación para Dispositivos Móviles (Media Query)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .nav-item-dropdown .submenu {
+    position: static;
+    transform: none;
+    box-shadow: none;
+    border: none;
+    background-color: transparent;
+    padding: 0 0 0 1.5rem; /* Margen interno izquierdo para escalonarlo */
+    
+    /* En móviles es mejor una sola columna vertical que use el scroll natural del menú */
+    display: none; 
+    grid-template-columns: 1fr; 
+    gap: 0;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Si tu JS añade la clase 'abierto' en móvil */
+  .nav-item-dropdown.abierto .submenu {
+    display: block;
+  }
+}
