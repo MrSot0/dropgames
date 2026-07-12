@@ -1573,6 +1573,15 @@ html {
 }
 
 @media (max-width: 720px) {
+   .btn-descargar-principal {
+       display: block; /* O inline-flex / flex, según lo tengas */
+       margin-left: auto;
+       margin-right: auto;
+       width: max-content; /* Evita que el botón ocupe todo el ancho de la pantalla */
+   }
+   
+
+   
     .nav-menu-toggle { display: flex; }
 
     .nav-links {
