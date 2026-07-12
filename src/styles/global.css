@@ -162,6 +162,13 @@ html {
     gap: 6px;
 }
 
+/* Forzar a que TODOS los elementos de la lista se alineen verticalmente igual */
+.nav-links > li {
+    display: flex;
+    align-items: center;
+    height: 100%; /* Si querés que cubran el alto de la barra */
+}
+
 .nav-acciones {
     order: 3;
     display: flex;
