@@ -1,24 +1,51 @@
 ---
+import { getCollection } from 'astro:content';
+
+// 1. Traemos todos los juegos de la colección para procesar las categorías reales
+const todosLosJuegos = await getCollection('juegos');
+
+// 2. Diccionario de nombres limpios para mapear los slugs de tus Markdowns
+const etiquetasCategorias: Record<string, string> = {
+  accion: 'Acción',
+  aventura: 'Aventura',
+  rpg: 'RPG',
+  deportes: 'Deportes',
+  multijugador: 'Multijugador',
+  estrategia: 'Estrategia',
+  simulacion: 'Simulación',
+  carreras: 'Carreras',
+  terror: 'Terror',
+  indie: 'Indie',
+  peleas: 'Peleas',
+  plataformas: 'Plataformas',
+  shooter: 'Shooter',
+  movil: 'Móvil',
+  'rpg-accion': 'RPG / Acción',
+  roguelike: 'Roguelike',
+  metroidvania: 'Metroidvania',
+  'aventura-exploracion': 'Aventura / Exploración',
+  'supervivencia-exploracion': 'Supervivencia / Exploración',
+  sandbox: 'Sandbox'
+};
+
+// 3. Extraemos los slugs únicos de los juegos que existen actualmente
+const slugsExistentes = [...new Set(todosLosJuegos.map(j => j.data.categoria))];
+
+// 4. Construimos la lista de ítems para el dropdown automáticamente
+const categoriasMenu = slugsExistentes.map((slug) => {
+  const nombreFormateado = etiquetasCategorias[slug] || (slug.charAt(0).toUpperCase() + slug.slice(1).replace('-', ' '));
+  return {
+    label: nombreFormateado,
+    href: `/categorias/${slug}`
+  };
+}).sort((a, b) => a.label.localeCompare(b.label)); // Las ordena alfabéticamente de la A a la Z
+
+// 5. Estructura final de los dropdowns
 const dropdowns = [
   { 
     label: 'Categorías', 
     href: '/categorias', 
-    items: [
-      { label: 'Acción', href: '/categorias/accion' }, 
-      { label: 'Aventura', href: '/categorias/aventura' }, 
-      { label: 'RPG', href: '/categorias/rpg' }, 
-      { label: 'Deportes', href: '/categorias/deportes' }, 
-      { label: 'Multijugador', href: '/categorias/multijugador' },
-      { label: 'Estrategia', href: '/categorias/estrategia' },
-      { label: 'Simulación', href: '/categorias/simulacion' },
-      { label: 'Carreras', href: '/categorias/carreras' },
-      { label: 'Terror', href: '/categorias/terror' },
-      { label: 'Indie', href: '/categorias/indie' },
-      { label: 'Peleas', href: '/categorias/peleas' },
-      { label: 'Plataformas', href: '/categorias/plataformas' },
-      { label: 'Shooter', href: '/categorias/shooter' },
-      { label: 'Movil', href: '/categorias/movil' }
-    ] 
+    items: categoriasMenu // 🌟 Ahora es completamente dinámico
   },
   { label: 'Requisitos', href: '/requisitos', items: [{ label: 'Requisitos Altos', href: '/requisitos/altos' }, { label: 'Requisitos Medios', href: '/requisitos/medios' }, { label: 'Requisitos Mínimos', href: '/requisitos/minimos' }] },
   { label: 'Programas', href: '/programas', items: [{ label: 'Emuladores', href: '/programas#emuladores' }, { label: 'Software General', href: '/programas#software' }] },
