@@ -1532,7 +1532,7 @@ html {
     .grid-videojuegos,
     .grid-listado,
     .grid-relacionados {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
