@@ -1822,3 +1822,51 @@ html {
         max-width: 100% !important;
     }
 }
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 720px) {
+    /* Forzamos a la tabla a no escupir contenido hacia afuera */
+    table, .tabla-requisitos {
+        display: block !important;
+        width: 100% !important;
+        overflow-x: auto !important; /* Si no cabe, el usuario desliza la tablita, no la página */
+        white-space: normal !important;
+        word-wrap: break-word !important;
+    }
+
+    /* Opcional: si quieres que las columnas se achiquen un poco para que quepan mejor */
+    th, td {
+        padding: 8px 6px !important;
+        font-size: 13px !important; /* Un pelín más pequeña la letra para optimizar espacio */
+    }
+}
+
+@media (max-width: 720px) {
+    /* Buscamos el contenedor donde metes los banners horizontales */
+    .ad-slot, 
+    .ad-banner-horizontal,
+    div[class*="ad-"] {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+        display: flex !important;
+        justify-content: center !important;
+    }
+
+    /* Obligamos al iframe o imagen de 728px a encogerse al ancho de la pantalla */
+    .ad-slot iframe,
+    .ad-slot img,
+    ins.adsbygoogle {
+        max-width: 100% !important;
+        height: auto !important; /* Evita que se estiren feo si se reduce el ancho */
+        object-fit: contain !important;
+    }
+}
