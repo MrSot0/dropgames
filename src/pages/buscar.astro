@@ -2,10 +2,12 @@
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 
-// El catálogo se genera en build time y el filtrado ocurre en el navegador según ?q=
+// Obtenemos todos los juegos de la colección
 const todos = await getCollection('juegos');
+
+// Formateamos el catálogo enviando explícitamente el .id como la propiedad que define la URL
 const catalogo = todos.map((j) => ({
-  slug: j.slug,
+  id: j.id, // 🎯 Esto coincide perfectamente con params: { slug: juego.id } de tu archivo dinámico
   title: j.data.title,
   categoria: j.data.categoria,
   plataforma: j.data.plataforma,
@@ -36,60 +38,81 @@ const etiquetas: Record<string, string> = {
   <div class="grid-listado" id="resultados-busqueda"></div>
   <p class="sin-resultados" id="mensaje-vacio" style="display:none;">No se encontraron resultados para tu búsqueda.</p>
 
-  <script define:vars={{ catalogo, etiquetas }}>
+  {/* Serialización segura de datos hacia el cliente */}
+  <div 
+    id="datos-busqueda" 
+    data-catalogo={JSON.stringify(catalogo)} 
+    data-etiquetas={JSON.stringify(etiquetas)}
+  ></div>
+
+  <script>
+    const contenedorDatos = document.getElementById('datos-busqueda');
+    const catalogo = JSON.parse(contenedorDatos?.dataset.catalogo || '[]');
+    const etiquetas = JSON.parse(contenedorDatos?.dataset.etiquetas || '{}');
+
     const params = new URLSearchParams(window.location.search);
-    const input = document.getElementById('input-buscar');
+    const input = document.getElementById('input-buscar') as HTMLInputElement;
     const contenedor = document.getElementById('resultados-busqueda');
     const mensajeVacio = document.getElementById('mensaje-vacio');
     const form = document.getElementById('form-buscar-resultados');
 
-    function renderizar(query) {
+    function renderizar(query: string) {
       const q = query.trim().toLowerCase();
       const resultados = !q
         ? catalogo
-        : catalogo.filter((j) =>
+        : catalogo.filter((j: any) =>
             j.title.toLowerCase().includes(q) ||
             j.categoria.toLowerCase().includes(q) ||
             j.plataforma.toLowerCase().includes(q)
           );
 
-      contenedor.innerHTML = resultados
-        .map(
-          (j) => `
-        <article class="tarjeta-juego">
-          <!-- 🎯 Apunta directamente al slug limpio generado por [...slug].astro -->
-          <a href="/${j.slug}/">
-            <div class="tarjeta-imagen">
-              <img src="${j.imagen}" alt="${j.title}" loading="lazy">
-              <span class="tag-categoria tag-categoria--${j.categoria}">${etiquetas[j.categoria] ?? j.categoria}</span>
-              <div class="tarjeta-fade"></div>
-            </div>
-            <div class="tarjeta-info">
-              <h3>${j.title}</h3>
-              <div class="tarjeta-specs">
-                <span class="tag-plataforma">${j.plataforma}</span>
-                <span class="tag-tamano">${j.tamano}</span>
+      if (contenedor) {
+        contenedor.innerHTML = resultados
+          .map(
+            (j: any) => `
+          <article class="tarjeta-juego">
+            <!-- 🎯 Al usar /${j.id}/ enlazamos directo al archivo sin fallas de rutas fijas -->
+            <a href="/${j.id}/">
+              <div class="tarjeta-imagen">
+                <img src="${j.imagen}" alt="${j.title}" loading="lazy">
+                <span class="tag-categoria tag-categoria--${j.categoria}">${etiquetas[j.categoria] ?? j.categoria}</span>
+                <div class="tarjeta-fade"></div>
               </div>
-            </div>
-          </a>
-        </article>`
-        )
-        .join('');
+              <div class="tarjeta-info">
+                <h3>${j.title}</h3>
+                <div class="tarjeta-specs">
+                  <span class="tag-plataforma">${j.plataforma}</span>
+                  <span class="tag-tamano">${j.tamano}</span>
+                </div>
+              </div>
+            </a>
+          </article>`
+          )
+          .join('');
+      }
 
-      mensajeVacio.style.display = resultados.length === 0 ? 'block' : 'none';
+      if (mensajeVacio) {
+        mensajeVacio.style.display = resultados.length === 0 ? 'block' : 'none';
+      }
     }
 
     const qInicial = params.get('q') ?? '';
-    input.value = qInicial;
+    if (input) input.value = qInicial;
     renderizar(qInicial);
 
     form?.addEventListener('submit', (e) => {
       e.preventDefault();
-      const q = input.value;
-      const url = new URL(window.location.href);
-      url.searchParams.set('q', q);
-      window.history.replaceState({}, '', url);
-      renderizar(q);
+      if (input) {
+        const q = input.value;
+        const url = new URL(window.location.href);
+        url.searchParams.set('q', q);
+        window.history.replaceState({}, '', url.toString());
+        renderizar(q);
+      }
+    });
+
+    input?.addEventListener('input', () => {
+      renderizar(input.value);
     });
   </script>
 </Layout>
