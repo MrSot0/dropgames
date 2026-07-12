@@ -5,26 +5,59 @@ import Layout from '../../layouts/Layout.astro';
 
 const todos = await getCollection('juegos');
 
-const categorias = [
+// 1. Definimos la lista base con todas las categorías principales ordenadas
+const categoriasBase = [
   { slug: 'accion', nombre: 'Acción' },
   { slug: 'aventura', nombre: 'Aventura' },
   { slug: 'rpg', nombre: 'RPG' },
   { slug: 'deportes', nombre: 'Deportes' },
   { slug: 'multijugador', nombre: 'Multijugador' },
-].map((c) => ({
+  { slug: 'estrategia', nombre: 'Estrategia' },
+  { slug: 'simulacion', nombre: 'Simulación' },
+  { slug: 'carreras', nombre: 'Carreras' },
+  { slug: 'terror', nombre: 'Terror' },
+  { slug: 'indie', nombre: 'Indie' },
+  { slug: 'peleas', nombre: 'Peleas' },
+  { slug: 'plataformas', nombre: 'Plataformas' },
+  { slug: 'shooter', nombre: 'Shooter' }
+];
+
+// 2. Mapeamos la lista base calculando los totales de juegos
+let categorias = categoriasBase.map((c) => ({
   ...c,
   total: todos.filter((j) => j.data.categoria === c.slug).length,
 }));
+
+// 3. 🌟 Magia Dinámica: Buscamos si hay categorías nuevas en los Markdowns 
+// que no hayamos metido manualmente en la lista base
+todos.forEach((juego) => {
+  const slugJuego = juego.data.categoria;
+  
+  // Si no existe en nuestra lista actual, la creamos al vuelo
+  if (!categorias.some((c) => c.slug === slugJuego)) {
+    const nombreFormateado = slugJuego.charAt(0).toUpperCase() + slugJuego.slice(1);
+    const totalJuegos = todos.filter((j) => j.data.categoria === slugJuego).length;
+    
+    categorias.push({
+      slug: slugJuego,
+      nombre: nombreFormateado,
+      total: totalJuegos
+    });
+  }
+});
+
+// 4. Opcional: Filtramos para no mostrar categorías que tengan 0 juegos si prefieres un diseño más limpio
+const categoriasActivas = categorias.filter(c => c.total > 0);
 ---
 
-<Layout title="Categorías de Videojuegos | yizugames">
+<Layout title="Categorías de Videojuegos | DropGames">
   <div class="encabezado-listado">
     <h1>Categorías</h1>
     <p>Explora los videojuegos disponibles organizados por género.</p>
   </div>
 
   <div class="grid-tiles">
-    {categorias.map((c) => (
+    {categoriasActivas.map((c) => (
       <a class="tile-enlace" href={`/categorias/${c.slug}`}>
         <h3>{c.nombre}</h3>
         <span>{c.total} juego{c.total === 1 ? '' : 's'} disponible{c.total === 1 ? '' : 's'}</span>
