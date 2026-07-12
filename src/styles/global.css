@@ -61,10 +61,10 @@
    1b. VARIABLES DE DISEÑO — Modo Oscuro
    ========================================================================== */
 [data-tema="oscuro"] {
-    --fondo: #0a0a0a;
-    --contenedor: #0d0d0d;
-    --panel: #2a2a2a;
-    --panel-alto: #16262b;
+    --fondo: #121212;          /* Menos oscuro que el negro puro (estilo Material Design) */
+    --contenedor: #1c1c1c;     /* Un gris oscuro suave para las secciones de fondo */
+    --panel: #2a2a2a;          /* El gris carbón exacto de tu imagen para las tarjetas */
+    --panel-alto: #383838;     /* Un gris más claro para destacar elementos o estados hover */
 
     --acento: #00e5ff;
     --acento-tenue: rgba(0, 229, 255, 0.12);
