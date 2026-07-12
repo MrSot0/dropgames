@@ -23,13 +23,14 @@ const etiquetas: Record<string, string> = {
   peleas: 'Peleas',
   plataformas: 'Plataformas',
   shooter: 'Shooter',
-  movil: 'Movil'
+  movil: 'Móvil' // Corregido el acento de paso 😉
 };
 
 const categoriaFormateada = etiquetas[categoria] || (categoria.charAt(0).toUpperCase() + categoria.slice(1));
 ---
 
 <article class="tarjeta-juego">
+  {/* 🎯 Sincronizado para usar el id como slug según tus getStaticPaths */}
   <a href={`/juegos/${juego.id}`}>
     <div class="tarjeta-imagen">
       <img src={imagen} alt={title} loading="lazy">
