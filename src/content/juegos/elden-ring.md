@@ -3,16 +3,18 @@ title: "Elden Ring"
 categoria: "rpg"
 plataforma: "PC"
 tamano: "50 GB"
-imagen: "/img/elden-ring.webp"
+# 1. Cambias la imagen principal por la URL externa directa
+imagen: "https://i.ibb.co/Xyz123/elden-ring.webp" 
 imagenes:
-  - "/img/elden-ring1.jpg"
-  - "/img/elden-ring2.jpg"
-  - "/img/elden-ring3.jpg"
+  # 2. Haces lo mismo con el arreglo de capturas de pantalla
+  - "https://i.ibb.co/Abc456/elden-ring1.jpg"
+  - "https://i.ibb.co/Def789/elden-ring2.jpg"
+  - "https://i.ibb.co/Ghi012/elden-ring3.jpg"
 descripcionCorta: "Levántate, Sinluz, y déjate guiar por la gracia para esgrimir el poder del Círculo de Elden en las Tierras Intermedias."
 fecha: 2026-06-25
 nivelRequisitos: "altos"
 requisitos:
-  minimos:
+  minimost:
     so: "Windows 10 64-bit"
     cpu: "Intel Core i5-8400 / AMD Ryzen 3 3300X"
     ram: "12 GB"
