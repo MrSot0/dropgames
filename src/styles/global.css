@@ -1084,7 +1084,6 @@ html {
 
 /* --- GUÍA DE INSTALACIÓN --- */
 .guia-instalacion {
-    margin-top: 28px;
     background-color: var(--panel);
     border: 1px solid var(--borde-suave);
     border-radius: 12px;
