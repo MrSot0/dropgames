@@ -159,7 +159,6 @@ html {
 .nav-links {
     order: 2;
     display: flex;
-    align-items: center;
     gap: 6px;
 }
 
@@ -1776,6 +1775,9 @@ html {
 
 
 
+
+
+
 @media (max-width: 720px) {
     /* Rompemos el encapsulado para que la web use el 100% real de la pantalla del teléfono */
     .sitio-encapsulado {
@@ -1826,12 +1828,6 @@ html {
 
 
 
-
-
-
-
-
-
 @media (max-width: 720px) {
     /* Forzamos a la tabla a no escupir contenido hacia afuera */
     table, .tabla-requisitos {
@@ -1873,50 +1869,6 @@ html {
 
 
 
-@media (max-width: 900px) {
-    /* --- FIX SPACE AT THE BOTTOM --- */
-    html, body {
-        margin: 0;
-        padding: 0;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-    }
-    
-    /* Si usas una etiqueta <footer> nativa o clase .footer */
-    footer, .footer {
-        margin-bottom: 0 !important;
-        padding-bottom: 20px !important; /* Ajusta el espacio interno inferior a tu gusto */
-        margin-top: auto; /* Empuja el footer hacia abajo si hay poco contenido */
-    }
 
-    /* --- ADS ALIGNMENT (2 small next to each other, 3rd below full width) --- */
-    .sidebar-ads {
-        display: grid !important;
-        grid-template-columns: repeat(2, 1fr) !important; /* Creamos 2 columnas iguales */
-        gap: 12px !important;
-        width: 100% !important;
-        margin-top: 20px !important;
-    }
 
-    /* Forzamos a que el TERCER anuncio ocupe las dos columnas de la cuadrícula */
-    .sidebar-ads > div:nth-child(3),
-    .sidebar-ads .ad-sidebar-tall:nth-child(3) {
-        grid-column: span 2 !important; /* Se estira a lo ancho ocupando toda la fila */
-        width: 100% !important;
-    }
 
-    /* Ajuste de alturas para que los 2 de arriba no se rompan */
-    .ad-sidebar-small,
-    .ad-sidebar-rect,
-    .ad-sidebar-tall {
-        width: 100% !important;
-        height: auto !important;
-        min-height: 140px !important; /* Altura ideal para los dos pequeños de arriba */
-    }
-
-    /* El tercero puede ser un poco más alto si es el formato nativo original */
-    .sidebar-ads > div:nth-child(3) {
-        min-height: 180px !important; 
-    }
-}
