@@ -72,7 +72,7 @@ const etiquetas: Record<string, string> = {
             (j: any) => `
           <article class="tarjeta-juego">
             <!-- 🎯 Al usar /${j.id}/ enlazamos directo al archivo sin fallas de rutas fijas -->
-            <a href="/${j.id}/">
+            <a href="/juegos/${j.id}/">
               <div class="tarjeta-imagen">
                 <img src="${j.imagen}" alt="${j.title}" loading="lazy">
                 <span class="tag-categoria tag-categoria--${j.categoria}">${etiquetas[j.categoria] ?? j.categoria}</span>
