@@ -5,12 +5,12 @@ import Layout from '../../layouts/Layout.astro';
 import GameCard from '../../components/GameCard.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
-import Anuncio from '../../components/Anuncio.astro'; // Importamos tu componente publicitario
+import Anuncio from '../../components/Anuncio.astro';
 
 export async function getStaticPaths() {
   const juegos = await getCollection('juegos');
   return juegos.map((juego) => ({
-    params: { slug: juego.id }, // 🎯 Mantiene la consistencia con rutas dinámicas basadas en ID
+    params: { slug: juego.id },
     props: { juego },
   }));
 }
@@ -23,7 +23,6 @@ const slides: string[] = imagenes && imagenes.length > 0
   ? [imagen, ...imagenes]
   : [imagen];
 
-// 🌟 Diccionario extendido y unificado de categorías
 const etiquetas: Record<string, string> = {
   accion: 'Acción',
   aventura: 'Aventura',
@@ -41,7 +40,6 @@ const etiquetas: Record<string, string> = {
   movil: 'Movil'
 };
 
-// 🌟 Truco Dinámico: Si la categoría no está en la lista base, la capitaliza al vuelo
 const categoriaFormateada = etiquetas[categoria] || (categoria.charAt(0).toUpperCase() + categoria.slice(1));
 
 const todosLosJuegos = await getCollection('juegos');
@@ -55,6 +53,9 @@ if (relacionados.length < 3) {
     .slice(0, 3 - relacionados.length);
   relacionados.push(...extras);
 }
+
+// 🌟 Reducimos la cantidad real de anuncios del sidebar (de 10 a 4)
+const anunciosSidebar = 4;
 ---
 
 <Layout title={`${title} | Descargar Gratis | DropGames`} description={juego.data.descripcionCorta}>
@@ -82,7 +83,6 @@ if (relacionados.length < 3) {
 
       <!-- SPECS -->
       <div class="detalle-specs">
-        {/* 🌟 Ahora usa la categoría mapeada o autogenerada con soporte de estilos */}
         <span class={`tag-categoria tag-categoria--${categoria}`} style="position:static;">{categoriaFormateada}</span>
         <span class="tag-plataforma">{plataforma}</span>
         <span class="tag-tamano">{tamano}</span>
@@ -91,7 +91,7 @@ if (relacionados.length < 3) {
       <!-- ===== TÍTULO + BOTÓN DESCARGAR ===== -->
       <div class="detalle-cabecera-titulo">
         <h1 class="detalle-titulo">{title}</h1>
-        <a
+        
           href="#bloque-descargas"
           id="btn-descargar-principal"
           class="btn-descargar-principal"
@@ -121,8 +121,10 @@ if (relacionados.length < 3) {
         </table>
       </div>
 
-      <!-- AD 2: Banner real entre descripción y guía (728x90) -->
-      <Anuncio type="banner-728" />
+      <!-- AD 1: Banner entre descripción y guía -->
+      <div class="anuncio-wrapper anuncio-728">
+        <Anuncio type="banner-728" />
+      </div>
 
       <!-- ===== GUÍA DE INSTALACIÓN ===== -->
       <div class="guia-instalacion">
@@ -185,8 +187,10 @@ if (relacionados.length < 3) {
         </div>
       </div>
 
-      <!-- 🌟 AD ADICIONAL EN CONTENIDO: Justo debajo de los enlaces de descarga (728x90) -->
-      <Anuncio type="banner-728" />
+      <!-- AD 2: Debajo de los enlaces de descarga (se oculta en móvil) -->
+      <div class="anuncio-wrapper anuncio-728 anuncio-oculto-movil">
+        <Anuncio type="banner-728" />
+      </div>
 
       <!-- ===== TRÁILER DEL JUEGO ===== -->
       {trailer && (
@@ -204,23 +208,20 @@ if (relacionados.length < 3) {
         </div>
       )}
 
-      <!-- AD 3: Banner de cierre de contenido (728x90) -->
-      <Anuncio type="banner-728" />
+      <!-- AD 3: Cierre de contenido -->
+      <div class="anuncio-wrapper anuncio-728">
+        <Anuncio type="banner-728" />
+      </div>
 
     </div>
 
     <!-- ===== SIDEBAR OPTIMIZADO ===== -->
-    <aside class="detalle-sidebar" style="display: flex; flex-direction: column; gap: 2rem;">
-      <Anuncio type="banner-300" />
-      <Anuncio type="banner-300" />
-      <Anuncio type="banner-300" />
-      <Anuncio type="banner-300" />
-      <Anuncio type="banner-300" />
-      <Anuncio type="banner-300" />
-      <Anuncio type="banner-300" />
-      <Anuncio type="banner-300" />
-      <Anuncio type="banner-300" />
-      <Anuncio type="banner-300" />
+    <aside class="detalle-sidebar">
+      {Array.from({ length: anunciosSidebar }).map((_, i) => (
+        <div class={`anuncio-wrapper anuncio-sidebar anuncio-sidebar-${i}`}>
+          <Anuncio type="banner-300" />
+        </div>
+      ))}
     </aside>
   </div>
 
@@ -235,6 +236,55 @@ if (relacionados.length < 3) {
   )}
 
 </Layout>
+
+<style>
+  .detalle-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .anuncio-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .anuncio-728 :global(iframe),
+  .anuncio-728 :global(img) {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* ===== RESPONSIVE: TABLET ===== */
+  @media (max-width: 900px) {
+    /* Solo 3 anuncios de sidebar visibles */
+    .anuncio-sidebar-3 {
+      display: none;
+    }
+  }
+
+  /* ===== RESPONSIVE: MÓVIL ===== */
+  @media (max-width: 640px) {
+    /* Sidebar: solo 1 anuncio visible en móvil */
+    .anuncio-sidebar-1,
+    .anuncio-sidebar-2,
+    .anuncio-sidebar-3 {
+      display: none;
+    }
+
+    /* Oculta el AD 2 intercalado en contenido para reducir saturación */
+    .anuncio-oculto-movil {
+      display: none;
+    }
+
+    /* Banners 728 se ven en formato compacto */
+    .anuncio-728 {
+      max-width: 100%;
+    }
+  }
+</style>
 
 <script>
   const pista = document.querySelector('.carrusel-pista') as HTMLElement;
