@@ -70,7 +70,19 @@ const { type = 'banner-728' } = Astro.props;
 }
 </style>
 
-
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const fixIframeHeight = () => {
+      document.querySelectorAll('.ad-banner-728 iframe').forEach(iframe => {
+        iframe.style.height = '90px';
+      });
+    };
+    fixIframeHeight();
+    // Por si el iframe se re-renderiza después de cargar el script
+    setTimeout(fixIframeHeight, 1000);
+    setTimeout(fixIframeHeight, 2000);
+  });
+</script>
 
 
 
