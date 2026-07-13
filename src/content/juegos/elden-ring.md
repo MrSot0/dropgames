@@ -2,7 +2,7 @@
 title: "Elden Ring"
 categoria: "rpg"
 plataforma: "PC"
-tamano: "50 GB"
+tamano: "60 GB"
 imagen: "https://i.ibb.co/DHYX6kQq/elden-ring.webp"
 imagenes:
   - "https://i.ibb.co/XxdB10MP/elden-ring1.jpg"
@@ -25,10 +25,10 @@ requisitos:
     gpu: "NVIDIA GeForce GTX 1070 8GB / AMD Radeon RX Vega 56 8GB"
     almacenamiento: "60 GB en unidad SSD"
 enlaces:
-  - servidor: "MEGA"
+  - servidor: "Anonfiles (en proceso)"
     url: "#"
   - servidor: "Torrent"
-    url: "#"
+    url: "https://anonfilesnew.com/s/3MN7cFzHWyk"
 trailer: "E3Huy2cdih0"
 destacado: true
 ---
@@ -37,7 +37,7 @@ destacado: true
 
 ## Características Principales
 
-- **Un Vasto Mundo Abierto:** Explora libremente praderas interminables, pantanos asfixiantes, montañas escarpadas y castillos lúgurbe interconectados de forma fluida sin pantallas de carga molestas.
+- **Un Vasto Mundo Abierto:** Explora libremente praderas interminables, pantanos asfixiantes, montañas escarpadas y castillos lúgubres interconectados de forma fluida sin pantallas de carga molestas.
 - **Personalización Completa del Personaje:** Define tu propio estilo de juego combinando una enorme variedad de armas, habilidades mágicas, milagros y armaduras pesadas o ligeras según tu estrategia de combate.
 - **Combate Desafiante y Estratégico:** Enfréntate a temibles jefes y criaturas mitológicas utilizando mecánicas pulidas de esquive, contraataques y el sigilo para superar las situaciones más adversas.
 - **Invocaciones de Espíritus:** Descubre y utiliza las cenizas de guerra dispersas por el mapa para invocar aliados fantasmales que te asistan durante los enfrentamientos más difíciles.
@@ -56,7 +56,3 @@ Esta edición digital ha sido empaquetada con todos los parches de optimización
 Para garantizar una experiencia fluida, lee detalladamente los requisitos de sistema presentados en la tabla interactiva de abajo. Se recomienda encarecidamente contar con al menos **65 GB de espacio libre** en el disco durante el proceso de instalación, ya que los archivos comprimidos requieren almacenamiento temporal para extraerse correctamente. 
 
 Si experimentas inconvenientes con las librerías DirectX o el sistema Easy Anti-Cheat al iniciar la aplicación en modo offline, por favor consulta nuestra sección especializada de **Ayuda / Tutoriales** para aplicar las soluciones comunes de compatibilidad.
-
-
-
-
