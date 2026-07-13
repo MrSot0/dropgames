@@ -1087,7 +1087,7 @@ html {
     background-color: var(--panel);
     border: 1px solid var(--borde-suave);
     border-radius: 12px;
-    padding: 24px;
+    padding: 22px;
 }
 
 .guia-instalacion h2 {
