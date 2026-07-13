@@ -879,7 +879,7 @@ html {
 .detalle-juego {
     display: flex;
     gap: 28px;
-    padding: 20px 24px 20px;
+    padding: 20px 24px 0px;
     align-items: flex-start;
 }
 .detalle-contenido { flex: 7.2; min-width: 0; }
