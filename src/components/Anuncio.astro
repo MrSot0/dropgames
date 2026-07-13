@@ -57,6 +57,17 @@ const { type = 'banner-728' } = Astro.props;
   .ad-banner-728 { min-height: 90px; max-width: 728px; }
   .ad-banner-300 { min-height: 250px; max-width: 300px; }
   .ad-nativo {width: 100%; }
+
+
+  .ad-banner-728 iframe {
+    height: 90px !important;
+    max-height: 90px;
+  }
+  
+  .ad-banner-300 iframe {
+    height: 250px !important;
+    max-height: 250px;
+}
 </style>
 
 
