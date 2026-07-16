@@ -1,7 +1,6 @@
 ---
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
-import Anuncio from '../components/Anuncio.astro';
 import '../styles/global.css';
 
 // 🎯 MEJORA SEO 1: Agregamos props opcionales para paginación y meta-tags dinámicos
@@ -67,8 +66,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://dropgame
   <div class="sitio-encapsulado">
     <Navbar />
 
-    <div class="ad-slot ad-leaderboard" data-ad-label="Publicidad" style="margin: 1rem auto; max-width: 728px;">
-      <Anuncio type="banner-728" />
+    <div class="ad-slot ad-native-container" data-ad-label="Publicidad Recomendada" style="margin: 1rem auto; max-width: 620px; min-height: 100px; max-height: 120px; padding: 0 1rem; text-align: center; overflow: hidden;">
+      
+      <div id="container-decd1f4598bf4831bd5806c2f6da54ca"></div>
+
     </div>
 
     <slot />
@@ -80,5 +81,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://dropgame
   </button>
 
   <Footer />
+
+  <script is:inline async="async" data-cfasync="false" src="https://pl30310791.effectivecpmnetwork.com/decd1f4598bf4831bd5806c2f6da54ca/invoke.js"></script>
 </body>
 </html>
