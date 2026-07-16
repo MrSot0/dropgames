@@ -2078,6 +2078,9 @@ html {
    .titulo-seccion{
       margin-top: 60px;
    }
+   .detalle-carrusel{
+      margin-top: 60px;
+   }
    
   .nav-item-dropdown .submenu {
     position: static;
