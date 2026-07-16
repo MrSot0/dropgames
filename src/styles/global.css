@@ -2075,6 +2075,10 @@ html {
    Adaptación para Dispositivos Móviles (Media Query)
    ========================================================================== */
 @media (max-width: 768px) {
+   .titulo-seccion{
+      margin-top: 20px;
+   }
+   
   .nav-item-dropdown .submenu {
     position: static;
     transform: none;
