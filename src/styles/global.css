@@ -1880,12 +1880,12 @@ html {
         justify-content: center !important;
     }
 
-    /* Obligamos al iframe o imagen de 728px a encogerse al ancho de la pantalla */
-    .ad-slot iframe,
+    /* Los banners de Anuncio.astro (iframe) se escalan proporcionalmente por JS,
+       aquí solo dejamos el ajuste para imágenes normales o adsbygoogle */
     .ad-slot img,
     ins.adsbygoogle {
         max-width: 100% !important;
-        height: auto !important; /* Evita que se estiren feo si se reduce el ancho */
+        height: auto !important;
         object-fit: contain !important;
     }
 }
@@ -2108,5 +2108,3 @@ html {
   white-space: nowrap;
   border-width: 0;
 }
-
-
