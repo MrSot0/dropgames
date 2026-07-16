@@ -1902,6 +1902,28 @@ html {
         flex-direction: column;
     }
 
+   
+  .nav-item-dropdown .submenu {
+    position: static;
+    transform: none;
+    box-shadow: none;
+    border: none;
+    background-color: transparent;
+    padding: 0 0 0 1.5rem; /* Margen interno izquierdo para escalonarlo */
+
+    /* En móviles es mejor una sola columna vertical que use el scroll natural del menú */
+    display: none; 
+    grid-template-columns: 1fr; 
+    gap: 0;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Si tu JS añade la clase 'abierto' en móvil */
+  .nav-item-dropdown.abierto .submenu {
+    display: block;
+  }
+
     /* Si usas una etiqueta <footer> nativa o clase .footer */
     footer, .footer {
         margin-bottom: 0 !important;
