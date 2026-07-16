@@ -39,28 +39,12 @@ const {
 <body>
   <div class="sitio-encapsulado">
     <Navbar />
-
-    <!-- 🎯 ANUNCIO 1: BLOQUE NATIVO (Contenedor visual) -->
-    <div class="ad-slot ad-native-container" data-ad-label="Publicidad Recomendada" style="margin: 1rem auto; max-width: 620px; max-height: 120px; padding: 0 1rem; text-align: center; overflow: hidden;">
-      
-      <!-- Contenedor requerido por Adsterra donde se inyectará el banner -->
-      <div id="container-decd1f4598bf4831bd5806c2f6da54ca"></div>
-
-    </div>
-
     <slot />
-
   </div>
-
   <!-- BOTÓN VOLVER ARRIBA -->
   <button class="btn-volver-arriba" id="btn-top" aria-label="Volver al inicio">
     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
   </button>
-
  <Footer />
-
-
-  <!-- 🎯 ADSTERRA SCRIPT: Al final de todo para que no rompa los eventos del DOM -->
-  <script is:inline async="async" data-cfasync="false" src="https://pl30310791.effectivecpmnetwork.com/decd1f4598bf4831bd5806c2f6da54ca/invoke.js"></script>
 </body>
 </html>
