@@ -879,6 +879,7 @@ html {
 .detalle-juego {
     display: flex;
     gap: 28px;
+    padding: 20px 24px 20px;
     padding: 20px 24px 0px;
     align-items: flex-start;
 }
@@ -1575,7 +1576,7 @@ html {
         justify-content: center; /* Centra el contenido (texto + icono) horizontalmente en su interior */
         box-sizing: border-box;  /* Asegura que el padding no rompa el ancho total del botón */
     }
- 
+
     .nav-menu-toggle { display: flex; }
 
     .nav-links {
@@ -1868,7 +1869,7 @@ html {
         gap: 8px;           /* Juntamos un pelín más los elementos */
     }
 
-   
+
     /* Buscamos el contenedor donde metes los banners horizontales */
     .ad-slot, 
     .ad-banner-horizontal,
@@ -1900,7 +1901,7 @@ html {
         display: flex;
         flex-direction: column;
     }
-    
+
     /* Si usas una etiqueta <footer> nativa o clase .footer */
     footer, .footer {
         margin-bottom: 0 !important;
@@ -1952,7 +1953,7 @@ html {
         z-index: 9999;
         background-color: var(--footer-bg);
     }
-    
+
     .barra-busqueda-wrapper.abierta { 
         max-height: 140px; /* Suficiente espacio para la fila o columna */
     }
@@ -1965,7 +1966,7 @@ html {
         padding: 12px;
         gap: 8px;
     }
-    
+
     .barra-busqueda-input,
     .barra-busqueda-submit {
         width: 100%;
@@ -1981,13 +1982,13 @@ html {
         flex-direction: column;
         align-items: stretch; 
         gap: 12px;
-        
+
         /* Dejamos un margen orgánico arriba, abajo y a los lados */
         margin: 18px auto; 
-        
+
         /* En vez de 100%, calculamos el ancho restándole el espacio de los lados (ej: 36px totales) */
         width: calc(100% - 36px); 
-        
+
         /* Opcional: si no quieres que en tablets o pantallas intermedias se vea gigante */
         max-width: 480px; 
     }
@@ -2002,11 +2003,11 @@ html {
     .buscar-input-grande button {
         width: 100%;
         box-sizing: border-box;
-        
+
         display: flex; 
         justify-content: center;
         align-items: center;
-        
+
         line-height: 1; 
         padding: 14px 20px; 
     }
@@ -2033,12 +2034,12 @@ html {
   margin: 0;
   list-style: none;
   z-index: 100;
-  
+
   /* Configuración del Grid para múltiples columnas */
   display: grid;
   grid-template-columns: repeat(2, minmax(160px, 1fr)); /* Crea 2 columnas anchas */
   gap: 0.25rem 1.5rem;                                 /* Espacio entre filas y columnas */
-  
+
   /* Control de visibilidad inicial (ajústalo según tu lógica actual de hover/clases) */
   opacity: 0;
   visibility: hidden;
@@ -2081,7 +2082,7 @@ html {
     border: none;
     background-color: transparent;
     padding: 0 0 0 1.5rem; /* Margen interno izquierdo para escalonarlo */
-    
+
     /* En móviles es mejor una sola columna vertical que use el scroll natural del menú */
     display: none; 
     grid-template-columns: 1fr; 
