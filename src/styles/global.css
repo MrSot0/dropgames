@@ -2100,6 +2100,10 @@ html {
    h1{
       margin-top: 60px;   
    }
+
+   .seccion-recientes{
+      margin-top: 60px; 
+   }
    
    .detalle-carrusel{
       margin-top: 60px;
