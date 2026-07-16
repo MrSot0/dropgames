@@ -22,7 +22,7 @@ const { page } = Astro.props;
   <main class="contenedor-principal">
     
     <section class="seccion-recientes">
-      <h2 class="titulo-seccion">Novedades Recientes</h2>
+      <h1 class="titulo-seccion">Novedades Recientes</h1>
       
       <div class="grid-videojuegos">
         {page.data.map((juego) => <GameCard juego={juego} />)}
