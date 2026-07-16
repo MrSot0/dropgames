@@ -3,15 +3,25 @@ import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
+// 🎯 MEJORA SEO 1: Agregamos props opcionales para paginación y meta-tags dinámicos
 interface Props {
   title: string;
   description?: string;
+  prevPage?: string;
+  nextPage?: string;
+  image?: string; // Para mostrar una bonita miniatura del juego al compartir por Twitter/WhatsApp
 }
 
 const {
   title,
   description = 'Descarga videojuegos para PC gratis: acción, aventura, RPG, deportes y multijugador. Emuladores, programas necesarios y tutoriales. DropGames.',
+  prevPage,
+  nextPage,
+  image = '/images/og-default.jpg', // Cambia esto por la ruta de tu logo o banner por defecto
 } = Astro.props;
+
+// 🎯 MEJORA SEO 2: Creamos la URL canónica absoluta de forma dinámica
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://dropgames.blog');
 ---
 
 <!DOCTYPE html>
@@ -21,10 +31,26 @@ const {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{title}</title>
   <meta name="description" content={description}>
+  
+  {prevPage && <link rel="prev" href={new URL(prevPage, Astro.site || Astro.url.origin)} />}
+  {nextPage && <link rel="next" href={new URL(nextPage, Astro.site || Astro.url.origin)} />}
+
+  <link rel="canonical" href={canonicalURL} />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={new URL(image, Astro.url.origin)} />
+
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content={canonicalURL} />
+  <meta property="twitter:title" content={title} />
+  <meta property="twitter:description" content={description} />
+  <meta property="twitter:image" content={new URL(image, Astro.url.origin)} />
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <!-- Script inline para aplicar el tema ANTES de pintar la página (evita flash) -->
   <script is:inline>
     (function () {
       try {
@@ -40,10 +66,8 @@ const {
   <div class="sitio-encapsulado">
     <Navbar />
 
-    <!-- 🎯 ANUNCIO 1: BLOQUE NATIVO (Contenedor visual) -->
-    <div class="ad-slot ad-native-container" data-ad-label="Publicidad Recomendada" style="margin: 1rem auto; max-width: 620px; max-height: 120px; padding: 0 1rem; text-align: center; overflow: hidden;">
+    <div class="ad-slot ad-native-container" data-ad-label="Publicidad Recomendada" style="margin: 1rem auto; max-width: 620px; min-height: 100px; max-height: 120px; padding: 0 1rem; text-align: center; overflow: hidden;">
       
-      <!-- Contenedor requerido por Adsterra donde se inyectará el banner -->
       <div id="container-decd1f4598bf4831bd5806c2f6da54ca"></div>
 
     </div>
@@ -52,15 +76,12 @@ const {
 
   </div>
 
-  <!-- BOTÓN VOLVER ARRIBA -->
   <button class="btn-volver-arriba" id="btn-top" aria-label="Volver al inicio">
     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
   </button>
 
- <Footer />
+  <Footer />
 
-
-  <!-- 🎯 ADSTERRA SCRIPT: Al final de todo para que no rompa los eventos del DOM -->
   <script is:inline async="async" data-cfasync="false" src="https://pl30310791.effectivecpmnetwork.com/decd1f4598bf4831bd5806c2f6da54ca/invoke.js"></script>
 </body>
 </html>
