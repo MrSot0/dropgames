@@ -66,11 +66,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://dropgame
   <div class="sitio-encapsulado">
     <Navbar />
 
-    <div class="ad-slot ad-native-container" data-ad-label="Publicidad Recomendada" style="margin: 1rem auto; max-width: 620px; min-height: 100px; max-height: 120px; padding: 0 1rem; text-align: center; overflow: hidden;">
-      
-      <div id="container-decd1f4598bf4831bd5806c2f6da54ca"></div>
-
-    </div>
+    <div class="anuncio-wrapper anuncio-728">
+        <Anuncio type="banner-728" />
+      </div>
 
     <slot />
 
