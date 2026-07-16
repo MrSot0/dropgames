@@ -7,6 +7,7 @@ import GameCard from '../components/GameCard.astro';
 export async function getStaticPaths({ paginate }) {
   const todos = await getCollection('juegos');
   
+  // Ordenamos por fecha descendente
   const juegosOrdenados = [...todos].sort((a, b) => 
     b.data.fecha.valueOf() - a.data.fecha.valueOf()
   );
@@ -16,45 +17,72 @@ export async function getStaticPaths({ paginate }) {
 
 const { page } = Astro.props;
 
-// 🎯 MEJORA SEO 1: Títulos dinámicos para evitar duplicados en Google
+// 🎯 MEJORA SEO 1: Títulos y Metadescripciones dinámicas y precisas
 const baseTitle = "DropGames | Descargar Juegos de PC y Android Gratis";
 const titleSEO = page.currentPage > 1 
   ? `${baseTitle} - Página ${page.currentPage}` 
   : baseTitle;
 
-// Supongamos que quieres mostrar tus mejores juegos en el Sidebar para pasarles "autoridad link equity"
+const descriptionSEO = page.currentPage > 1
+  ? `Explora nuestro catálogo de juegos gratuitos en DropGames. Descargas rápidas y seguras. Página ${page.currentPage} de ${page.lastPage}.`
+  : "Descarga los mejores videojuegos para PC y Android gratis. Entra, busca tu juego favorito y descárgalo de manera rápida, segura y directa en DropGames.";
+
+// 🎯 MEJORA SEO 2: Link Equity (Caché del fetch de colecciones para evitar lecturas duplicadas)
 const todosLosJuegos = await getCollection('juegos');
-const juegosTop = todosLosJuegos.slice(0, 5); // Obtiene los 5 primeros para el Top
+// Evitamos que salgan en el sidebar los mismos juegos que ya se listan en esta página actual para diversificar el enlazado interno (Link Juice)
+const juegosIdsEnPagina = new Set(page.data.map(juego => juego.id));
+const juegosTop = todosLosJuegos
+  .filter(juego => !juegosIdsEnPagina.has(juego.id))
+  .slice(0, 5); 
 ---
 
 <Layout 
-  title={titleSEO} 
+  title={titleSEO}
+  description={descriptionSEO}
   prevPage={page.url.prev} 
   nextPage={page.url.next}
 >
   <main class="contenedor-principal">
     
-    <section class="seccion-recientes">
+    <section class="seccion-recientes" aria-labelledby="seccion-titulo">
       {page.currentPage === 1 && (
         <h1 class="sr-only">DropGames - Tu rincón para descargar videojuegos de PC gratis</h1>
       )}
       
-      <h2 class="titulo-seccion">Novedades Recientes</h2>
+      {/* 🎯 MEJORA SEO 3: Ajuste de jerarquía de encabezado si no es la Home (Página 1) */}
+      {page.currentPage === 1 ? (
+        <h2 id="seccion-titulo" class="titulo-seccion">Novedades Recientes</h2>
+      ) : (
+        <h1 id="seccion-titulo" class="titulo-seccion">Novedades Recientes - Página {page.currentPage}</h1>
+      )}
       
       <div class="grid-videojuegos">
-        {page.data.map((juego) => <GameCard juego={juego} />)}
+        {page.data.map((juego) => (
+          <GameCard juego={juego} />
+        ))}
       </div>
 
-      <nav class="pagination-ui" aria-label="Paginación de juegos">
-        {page.url.prev && <a href={page.url.prev} class="nav-btn">« Anterior</a>}
+      {/* 🎯 MEJORA SEO 4: Paginación semántica mejorada con aria-labels */}
+      <nav class="pagination-ui" aria-label="Paginación de catálogo de juegos">
+        {page.url.prev ? (
+          <a href={page.url.prev} class="nav-btn" rel="prev" aria-label="Ir a la página anterior">« Anterior</a>
+        ) : (
+          <span class="nav-btn deshabilitado" aria-hidden="true">« Anterior</span>
+        )}
         
-        <span class="page-numbers" aria-current="page">Página {page.currentPage} de {page.lastPage}</span>
+        <span class="page-numbers" aria-current="page">
+          Página <strong>{page.currentPage}</strong> de {page.lastPage}
+        </span>
         
-        {page.url.next && <a href={page.url.next} class="nav-btn">Siguiente »</a>}
+        {page.url.next ? (
+          <a href={page.url.next} class="nav-btn" rel="next" aria-label="Ir a la página siguiente">Siguiente »</a>
+        ) : (
+          <span class="nav-btn deshabilitado" aria-hidden="true">Siguiente »</span>
+        )}
       </nav>
     </section>
 
-    <aside class="sidebar-top">
+    <aside class="sidebar-top" aria-label="Contenido destacado y anuncios">
       
       <div class="widget-top-juegos">
         <h3 class="titulo-widget">🔥 Juegos más buscados</h3>
@@ -69,41 +97,48 @@ const juegosTop = todosLosJuegos.slice(0, 5); // Obtiene los 5 primeros para el 
         </ul>
       </div>
 
+      {/* 🎯 MEJORA SEO 5: Optimización drástica de Cumulative Layout Shift (CLS) en publicidad */}
       <div class="sidebar-ads">
       
-        <div class="ad-slot ad-sidebar-small" style="text-align: center; margin-bottom: 1rem; overflow: hidden;">
+        {/* Ad 1: Small (Se definen las dimensiones explícitas directamente en el contenedor para reservar el espacio) */}
+        <div class="ad-slot ad-sidebar-small" style="width: 300px; height: 100px; margin: 0 auto 1rem auto; overflow: hidden; background: #12121220;">
           <iframe 
             loading="lazy"
+            title="Publicidad lateral chica"
             srcdoc="
               <body style='margin:0; padding:0; text-align:center;'>
                 <div id='container-decd1f4598bf4831bd5806c2f6da54ca'></div>
                 <script async='async' data-cfasync='false' src='https://pl30310791.effectivecpmnetwork.com/decd1f4598bf4831bd5806c2f6da54ca/invoke.js'></script>
               </body>"
-            style="width: 100%; height: 100px; border: none; scrolling: no; overflow: hidden;">
+            style="width: 300px; height: 100px; border: none; scrolling: no; overflow: hidden;">
           </iframe>
         </div>
 
-        <div class="ad-slot ad-sidebar-rect" style="text-align: center; margin-bottom: 1rem; overflow: hidden;">
+        {/* Ad 2: Rectangle */}
+        <div class="ad-slot ad-sidebar-rect" style="width: 300px; height: 390px; margin: 0 auto 1rem auto; overflow: hidden; background: #12121220;">
           <iframe 
             loading="lazy"
+            title="Publicidad lateral mediana"
             srcdoc="
               <body style='margin:0; padding:0; text-align:center;'>
                 <div id='container-decd1f4598bf4831bd5806c2f6da54ca'></div>
                 <script async='async' data-cfasync='false' src='https://pl30310791.effectivecpmnetwork.com/decd1f4598bf4831bd5806c2f6da54ca/invoke.js'></script>
               </body>"
-            style="width: 100%; height: 390px; border: none; scrolling: no; overflow: hidden;">
+            style="width: 300px; height: 390px; border: none; scrolling: no; overflow: hidden;">
           </iframe>
         </div>
         
-        <div class="ad-slot ad-sidebar-tall" style="text-align: center; overflow: hidden;">
+        {/* Ad 3: Tall */}
+        <div class="ad-slot ad-sidebar-tall" style="width: 300px; height: 390px; margin: 0 auto; overflow: hidden; background: #12121220;">
           <iframe 
             loading="lazy"
+            title="Publicidad lateral grande"
             srcdoc="
               <body style='margin:0; padding:0; text-align:center;'>
                 <div id='container-decd1f4598bf4831bd5806c2f6da54ca'></div>
                 <script async='async' data-cfasync='false' src='https://pl30310791.effectivecpmnetwork.com/decd1f4598bf4831bd5806c2f6da54ca/invoke.js'></script>
               </body>"
-            style="width: 100%; height: 390px; border: none; scrolling: no; overflow: hidden;">
+            style="width: 300px; height: 390px; border: none; scrolling: no; overflow: hidden;">
           </iframe>
         </div>
 
