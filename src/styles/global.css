@@ -2097,6 +2097,7 @@ html {
 }
 
 .sr-only {
+  font-family: var(--fuente-base);
   position: absolute;
   width: 1px;
   height: 1px;
