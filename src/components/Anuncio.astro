@@ -76,10 +76,14 @@ const { w: maxW, h: maxH } = limites[type];
   }
   .ad-label { display: block; font-size: 0.7rem; color: #666; text-transform: uppercase; letter-spacing: 0.05em; }
 
-  /* Contenedor real del anuncio: su tamaño lo fija el JS de escalado */
+  /* Contenedor real del anuncio: su tamaño lo fija el JS de escalado.
+     Centramos con flex para que si el recorte no es perfecto, se vea
+     centrado en vez de pegado arriba-izquierda. */
   .ad-inner-scale {
     position: relative;
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
     line-height: 0;
   }
@@ -91,12 +95,11 @@ const { w: maxW, h: maxH } = limites[type];
 
 <script is:inline>
   (function () {
-    function ajustarAnuncio(wrapper) {
+    function calcularYAplicar(wrapper, iframe) {
       const inner = wrapper.querySelector('.ad-inner-scale');
-      const iframe = inner && inner.querySelector('iframe');
       if (!inner || !iframe) return;
 
-      // Tamaño REAL que la red publicitaria le dio al iframe
+      // Tamaño REAL que la red publicitaria le está dando al iframe AHORA MISMO
       const nativeW = iframe.offsetWidth;
       const nativeH = iframe.offsetHeight;
       if (!nativeW || !nativeH) return;
@@ -111,28 +114,45 @@ const { w: maxW, h: maxH } = limites[type];
       const escala = Math.min(anchoDisponible / nativeW, maxH / nativeH, 1);
       if (!isFinite(escala) || escala <= 0) return;
 
-      iframe.style.transformOrigin = 'top left';
+      iframe.style.transformOrigin = 'center center';
       iframe.style.transform = `scale(${escala})`;
-      inner.style.width = `${nativeW * escala}px`;
-      inner.style.height = `${nativeH * escala}px`;
+      inner.style.width = `${Math.round(nativeW * escala)}px`;
+      inner.style.height = `${Math.round(nativeH * escala)}px`;
     }
 
-    function procesarTodos() {
-      document.querySelectorAll('.contenedor-publicidad').forEach(ajustarAnuncio);
+    function vigilarIframe(wrapper, iframe) {
+      if (iframe.dataset.roVigilado) return;
+      iframe.dataset.roVigilado = '1';
+
+      // ResizeObserver detecta CUALQUIER cambio de tamaño del iframe,
+      // incluso si la red de anuncios lo agranda después de cargar el
+      // anuncio real (algo muy común y lo que causaba el desborde).
+      const ro = new ResizeObserver(() => calcularYAplicar(wrapper, iframe));
+      ro.observe(iframe);
+
+      calcularYAplicar(wrapper, iframe);
+    }
+
+    function buscarIframes() {
+      document.querySelectorAll('.contenedor-publicidad').forEach((wrapper) => {
+        const inner = wrapper.querySelector('.ad-inner-scale');
+        const iframe = inner && inner.querySelector('iframe');
+        if (iframe) vigilarIframe(wrapper, iframe);
+      });
     }
 
     function iniciar() {
-      procesarTodos();
+      buscarIframes();
 
-      // Los scripts de Adsterra inyectan el iframe de forma asíncrona,
-      // así que observamos cambios en el DOM además de reintentar por tiempo.
+      // El iframe puede tardar en aparecer (el script del anuncio lo
+      // inyecta de forma asíncrona), así que vigilamos el DOM hasta
+      // encontrarlo y engancharle el ResizeObserver.
       document.querySelectorAll('.ad-inner-scale').forEach((inner) => {
-        const obs = new MutationObserver(procesarTodos);
-        obs.observe(inner, { childList: true, subtree: true });
+        const mo = new MutationObserver(buscarIframes);
+        mo.observe(inner, { childList: true, subtree: true });
       });
 
-      [300, 700, 1200, 2000, 3500].forEach((t) => setTimeout(procesarTodos, t));
-      window.addEventListener('resize', procesarTodos);
+      window.addEventListener('resize', buscarIframes);
     }
 
     if (document.readyState === 'loading') {
