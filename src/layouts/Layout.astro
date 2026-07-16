@@ -4,63 +4,63 @@ import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
 interface Props {
-  title: string;
-  description?: string;
+  title: string;
+  description?: string;
 }
 
 const {
-  title,
-  description = 'Descarga videojuegos para PC gratis: acción, aventura, RPG, deportes y multijugador. Emuladores, programas necesarios y tutoriales. DropGames.',
+  title,
+  description = 'Descarga videojuegos para PC gratis: acción, aventura, RPG, deportes y multijugador. Emuladores, programas necesarios y tutoriales. DropGames.',
 } = Astro.props;
 ---
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{title}</title>
-  <meta name="description" content={description}>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <!-- Script inline para aplicar el tema ANTES de pintar la página (evita flash) -->
-  <script is:inline>
-    (function () {
-      try {
-        const guardado = localStorage.getItem('dropgames-tema');
-        const prefiereOscuro = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const tema = guardado ? guardado : (prefiereOscuro ? 'oscuro' : 'claro');
-        document.documentElement.setAttribute('data-tema', tema);
-      } catch (e) {}
-    })();
-  </script>
+  <!-- Script inline para aplicar el tema ANTES de pintar la página (evita flash) -->
+  <script is:inline>
+    (function () {
+      try {
+        const guardado = localStorage.getItem('dropgames-tema');
+        const prefiereOscuro = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const tema = guardado ? guardado : (prefiereOscuro ? 'oscuro' : 'claro');
+        document.documentElement.setAttribute('data-tema', tema);
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body>
-  <div class="sitio-encapsulado">
-    <Navbar />
+  <div class="sitio-encapsulado">
+    <Navbar />
 
-    <!-- 🎯 ANUNCIO 1: BLOQUE NATIVO (Contenedor visual) -->
-    <div class="ad-slot ad-native-container" data-ad-label="Publicidad Recomendada" style="margin: 1rem auto; max-width: 620px; max-height: 120px; padding: 0 1rem; text-align: center; overflow: hidden;">
-      
-      <!-- Contenedor requerido por Adsterra donde se inyectará el banner -->
-      <div id="container-decd1f4598bf4831bd5806c2f6da54ca"></div>
+    <!-- 🎯 ANUNCIO 1: BLOQUE NATIVO (Contenedor visual) -->
+    <div class="ad-slot ad-native-container" data-ad-label="Publicidad Recomendada" style="margin: 1rem auto; max-width: 620px; max-height: 120px; padding: 0 1rem; text-align: center; overflow: hidden;">
+      
+      <!-- Contenedor requerido por Adsterra donde se inyectará el banner -->
+      <div id="container-decd1f4598bf4831bd5806c2f6da54ca"></div>
 
-    </div>
+    </div>
 
-    <slot />
+    <slot />
 
-  </div>
+  </div>
 
-  <!-- BOTÓN VOLVER ARRIBA -->
-  <button class="btn-volver-arriba" id="btn-top" aria-label="Volver al inicio">
-    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
-  </button>
+  <!-- BOTÓN VOLVER ARRIBA -->
+  <button class="btn-volver-arriba" id="btn-top" aria-label="Volver al inicio">
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+  </button>
 
- <Footer />
+ <Footer />
 
 
-  <!-- 🎯 ADSTERRA SCRIPT: Al final de todo para que no rompa los eventos del DOM -->
-  <script is:inline async="async" data-cfasync="false" src="https://pl30310791.effectivecpmnetwork.com/decd1f4598bf4831bd5806c2f6da54ca/invoke.js"></script>
+  <!-- 🎯 ADSTERRA SCRIPT: Al final de todo para que no rompa los eventos del DOM -->
+  <script is:inline async="async" data-cfasync="false" src="https://pl30310791.effectivecpmnetwork.com/decd1f4598bf4831bd5806c2f6da54ca/invoke.js"></script>
 </body>
 </html>
