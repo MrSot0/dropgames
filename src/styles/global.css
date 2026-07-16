@@ -2075,9 +2075,10 @@ html {
    Adaptación para Dispositivos Móviles (Media Query)
    ========================================================================== */
 @media (max-width: 768px) {
-   .titulo-seccion{
-      margin-top: 60px;
+   h1{
+      margin-top: 60px;   
    }
+   
    .detalle-carrusel{
       margin-top: 60px;
    }
