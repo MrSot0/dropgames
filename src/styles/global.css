@@ -1903,12 +1903,6 @@ html {
         flex-direction: column;
     }
 
-   .sidebar-ads > div:nth-child(2),
-    .sidebar-ads > div:nth-child(1) {
-        display: none !important;
-    }
-
-   
   .nav-item-dropdown .submenu {
     position: static;
     transform: none;
