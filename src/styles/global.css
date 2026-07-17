@@ -1902,6 +1902,10 @@ html {
         flex-direction: column;
     }
 
+   .sidebar-ads > div:nth-child(2),
+    .sidebar-ads > div:nth-child(3) {
+        display: none !important;
+
    
   .nav-item-dropdown .submenu {
     position: static;
@@ -2004,6 +2008,10 @@ html {
         flex-direction: column;
         align-items: stretch; 
         gap: 12px;
+
+       .sidebar-ads > div:nth-child(2),
+    .sidebar-ads > div:nth-child(3) {
+        display: none !important;
 
         /* Dejamos un margen orgánico arriba, abajo y a los lados */
         margin: 18px auto; 
@@ -2112,6 +2120,10 @@ html {
    .detalle-carrusel{
       margin-top: 60px;
    }
+
+   .sidebar-ads > div:nth-child(2),
+    .sidebar-ads > div:nth-child(3) {
+        display: none !important;
    
   .nav-item-dropdown .submenu {
     position: static;
@@ -2136,10 +2148,3 @@ html {
 }
 
 
-
-.contenedor-principal {
-    display: flex;
-    gap: 24px;
-    padding: 24px;
-    align-items: stretch; /* antes: flex-start */
-}
