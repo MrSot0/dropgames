@@ -2,12 +2,13 @@
 // src/components/Anuncio.astro
 interface Props {
   type?: 'banner-728' | 'banner-300' | 'nativo';
+  ocultarMovil?: boolean;
 }
 
-const { type = 'banner-728' } = Astro.props;
+const { type = 'banner-728', ocultarMovil = false } = Astro.props;
 ---
 
-<div class={`contenedor-publicidad ad-${type}`}>
+<div class={`contenedor-publicidad ad-${type} ${ocultarMovil ? 'ocultar-en-movil' : ''}`}>
   <span class="ad-label"></span>
 
   {type === 'banner-300' && (
@@ -68,6 +69,13 @@ const { type = 'banner-728' } = Astro.props;
     height: 250px !important;
     max-height: 250px;
 }
+
+  /* En desktop esta clase no cambia nada visualmente.
+     El display:none real vive en global.css dentro de un @media,
+     para que no compita con el scoping de estilos de Astro. */
+  .ocultar-en-movil {
+    display: contents;
+  }
 </style>
 
 <script is:inline>
@@ -83,5 +91,3 @@ const { type = 'banner-728' } = Astro.props;
     setTimeout(fixIframeHeight, 2000);
   });
 </script>
-
-
