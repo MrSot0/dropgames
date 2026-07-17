@@ -2134,3 +2134,12 @@ html {
     display: block;
   }
 }
+
+
+
+.contenedor-principal {
+    display: flex;
+    gap: 24px;
+    padding: 24px;
+    align-items: stretch; /* antes: flex-start */
+}
