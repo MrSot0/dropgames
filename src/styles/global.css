@@ -1894,9 +1894,6 @@ html {
 
 @media (max-width: 900px) {
 
-   .sidebar-ads > div.contenedor-publicidad:not(:first-of-type) {
-        display: none !important;
-   }
     /* --- FIX SPACE AT THE BOTTOM --- */
     html, body {
         margin: 0;
@@ -2013,11 +2010,6 @@ html {
         flex-direction: column;
         align-items: stretch; 
         gap: 12px;
-
-       .sidebar-ads > div:nth-child(2),
-    .sidebar-ads > div:nth-child(1) {
-        display: none !important;
-    }
 
         /* Dejamos un margen orgánico arriba, abajo y a los lados */
         margin: 18px auto; 
