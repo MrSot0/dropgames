@@ -1893,6 +1893,10 @@ html {
 
 
 @media (max-width: 900px) {
+
+   .sidebar-ads > div.contenedor-publicidad:not(:first-of-type) {
+        display: none !important;
+   }
     /* --- FIX SPACE AT THE BOTTOM --- */
     html, body {
         margin: 0;
@@ -2143,6 +2147,10 @@ html {
     opacity: 1;
     visibility: visible;
   }
+
+   .sidebar-ads > div.contenedor-publicidad:not(:first-of-type) {
+        display: none !important;
+   }
 
   /* Si tu JS añade la clase 'abierto' en móvil */
   .nav-item-dropdown.abierto .submenu {
