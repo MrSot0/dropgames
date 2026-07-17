@@ -1903,7 +1903,7 @@ html {
     }
 
    .sidebar-ads > div:nth-child(2),
-    .sidebar-ads > div:nth-child(3) {
+    .sidebar-ads > div:nth-child(1) {
         display: none !important;
     }
 
@@ -2011,7 +2011,7 @@ html {
         gap: 12px;
 
        .sidebar-ads > div:nth-child(2),
-    .sidebar-ads > div:nth-child(3) {
+    .sidebar-ads > div:nth-child(1) {
         display: none !important;
     }
 
@@ -2124,7 +2124,7 @@ html {
    }
 
    .sidebar-ads > div:nth-child(2),
-    .sidebar-ads > div:nth-child(3) {
+    .sidebar-ads > div:nth-child(1) {
         display: none !important;
     }
    
