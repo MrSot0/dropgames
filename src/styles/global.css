@@ -1905,6 +1905,7 @@ html {
    .sidebar-ads > div:nth-child(2),
     .sidebar-ads > div:nth-child(3) {
         display: none !important;
+    }
 
    
   .nav-item-dropdown .submenu {
@@ -2012,6 +2013,7 @@ html {
        .sidebar-ads > div:nth-child(2),
     .sidebar-ads > div:nth-child(3) {
         display: none !important;
+    }
 
         /* Dejamos un margen orgánico arriba, abajo y a los lados */
         margin: 18px auto; 
@@ -2124,6 +2126,7 @@ html {
    .sidebar-ads > div:nth-child(2),
     .sidebar-ads > div:nth-child(3) {
         display: none !important;
+    }
    
   .nav-item-dropdown .submenu {
     position: static;
