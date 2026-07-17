@@ -2127,10 +2127,6 @@ html {
       margin-top: 60px;
    }
 
-   .sidebar-ads > div:nth-child(2),
-    .sidebar-ads > div:nth-child(1) {
-        display: none !important;
-    }
    
   .nav-item-dropdown .submenu {
     position: static;
@@ -2148,9 +2144,6 @@ html {
     visibility: visible;
   }
 
-   .sidebar-ads > div.contenedor-publicidad:not(:first-of-type) {
-        display: none !important;
-   }
 
   /* Si tu JS añade la clase 'abierto' en móvil */
   .nav-item-dropdown.abierto .submenu {
@@ -2158,4 +2151,24 @@ html {
   }
 }
 
+@media (max-width: 900px) {
+    .ocultar-en-movil {
+        display: none !important;
+    }
+}
 
+
+@media (max-width: 768px) {
+    .ocultar-en-movil {
+        display: none !important;
+    }
+}
+
+
+
+
+@media (max-width: 720px) {
+    .ocultar-en-movil {
+        display: none !important;
+    }
+}
