@@ -1934,7 +1934,7 @@ html {
     /* --- ADS ALIGNMENT (2 small next to each other, 3rd below full width) --- */
     .sidebar-ads {
         display: grid !important;
-        grid-template-columns: repeat(2, 1fr) !important; /* Creamos 2 columnas iguales */
+        grid-template-columns: repeat(1, 1fr) !important; /* Creamos 2 columnas iguales */
         gap: 12px !important;
         width: 100% !important;
         margin-top: 20px !important;
@@ -2142,5 +2142,9 @@ html {
     .sidebar-ads .ocultar-en-movil {
         display: none !important;
     }
+}
+
+#atContainer-f835d66e7509ed0d888e0c9c03f9e4a3{
+   
 }
 
