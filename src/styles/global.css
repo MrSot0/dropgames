@@ -463,6 +463,7 @@ html {
 
 /* Anuncios del sidebar */
 .sidebar-ads {
+    margin: auto;
     display: flex;
     flex-direction: column;
     gap: 16px;
