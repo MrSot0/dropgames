@@ -1,7 +1,7 @@
 ---
 // src/components/Anuncio.astro
 interface Props {
-  type?: 'banner-728' | 'banner-300' | 'nativo';
+  type?: 'banner-728' | 'banner-300' | 'banner-160-600' | 'nativo';
   ocultarMovil?: boolean;
 }
 
@@ -41,6 +41,21 @@ const { type = 'banner-728', ocultarMovil = false } = Astro.props;
     </>
   )}
 
+  {type === 'banner-160-600' && (
+    <>
+      <script is:inline type="text/javascript">
+        var atOptions = {
+          'key' : '2836d78b7d3cb2d24537ea25dd49954b',
+          'format' : 'iframe',
+          'height' : 600,
+          'width' : 160,
+          'params' : {}
+        };
+      </script>
+      <script is:inline type="text/javascript" src="https://www.highperformanceformat.com/2836d78b7d3cb2d24537ea25dd49954b/invoke.js"></script>
+    </>
+  )}
+
   {type === 'nativo' && (
     <>
       {/* 🌟 CÓDIGO NATIVO DE ADSTERRA */}
@@ -57,6 +72,7 @@ const { type = 'banner-728', ocultarMovil = false } = Astro.props;
   .ad-label { display: block; font-size: 0.7rem; color: #666; text-transform: uppercase; letter-spacing: 0.05em; }
   .ad-banner-728 { min-height: 90px; max-width: 728px; }
   .ad-banner-300 { min-height: 250px; max-width: 300px; }
+  .ad-banner-160-600 { min-height: 600px; max-width: 160px; margin-left: auto; margin-right: auto; }
   .ad-nativo {width: 100%; }
 
 
@@ -68,7 +84,14 @@ const { type = 'banner-728', ocultarMovil = false } = Astro.props;
   .ad-banner-300 iframe {
     height: 250px !important;
     max-height: 250px;
-}
+  }
+
+  .ad-banner-160-600 iframe {
+    height: 600px !important;
+    max-height: 600px;
+    width: 160px !important;
+    max-width: 160px;
+  }
 
   /* En desktop esta clase no cambia nada visualmente.
      El display:none real vive en global.css dentro de un @media,
