@@ -2104,6 +2104,10 @@ html {
    .seccion-recientes{
       margin-top: 60px; 
    }
+
+   .encabezado-listado{
+      margin-top: 60px; 
+   }
    
    .detalle-carrusel{
       margin-top: 60px;
