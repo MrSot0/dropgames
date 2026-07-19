@@ -29,7 +29,7 @@ enlaces:
     url: "#"
   - servidor: "Mediafire"
     url: "https://playpaste.net/?v=jPJz"
-trailer: "3tZ6Xv6Tf9w"
+trailer: "3tDrxOASUog"
 destacado: true
 ---
 
