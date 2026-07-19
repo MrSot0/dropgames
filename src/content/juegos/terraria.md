@@ -6,7 +6,7 @@ tamano: "1 GB"
 imagen: "https://i.ibb.co/vywzxmq/terraria.webp"
 imagenes:
   - "https://i.ibb.co/MxGvn3cg/terraria1.webp"
-  - "https://i.ibb.co/MxGvn3cg/terraria1.webp"
+  - "https://i.ibb.co/fV2RKL3W/terraria2.avif"
   - "https://i.ibb.co/rKv1Cfr2/terraris3.jpg"
 descripcionCorta: "¡Excava, lucha, explora, construye! Nada es imposible en este juego de aventuras repleto de acción. El mundo es tu lienzo y la tierra misma es tu pintura."
 fecha: 2026-07-18
