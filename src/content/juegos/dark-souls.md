@@ -27,9 +27,9 @@ requisitos:
 enlaces:
   - servidor: "Anonfiles (en proceso)"
     url: "#"
-  - servidor: "Playpaste / External"
+  - servidor: "Mediafire"
     url: "https://playpaste.net/?v=jPJN"
-trailer: "M439t8Ev0_s"
+trailer: "o1780AqAa20"
 destacado: false
 ---
 
