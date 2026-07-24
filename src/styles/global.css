@@ -461,22 +461,6 @@ html {
     min-height: 90px;
 }
 
-/* Anuncios del sidebar */
-.sidebar-ads {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 16px;
-    height: 100%;
-    margin-top: 20px;
-    position: sticky;
-    top: calc(var(--navbar-height) + 20px);
-}
-
-.ad-sidebar-small { min-height: 100px; }
-.ad-sidebar-rect { min-height: 250px; }
-.ad-sidebar-tall { min-height: 250px; }
-
 /* Anuncio horizontal en página de juego */
 .ad-inline-horizontal {
     min-height: 90px;
@@ -654,7 +638,7 @@ html {
 /* ==========================================================================
    7. SIDEBAR — TOP 5
    ========================================================================== */
-.sidebar-top { flex: 2.8; min-width: 240px; }
+.sidebar-top { flex: 2.8; min-width: 240px; display: flex; flex-direction: column; }
 
 .lista-top {
     background-color: var(--panel);
@@ -1547,18 +1531,6 @@ html {
     .detalle-juego { flex-direction: column; }
     .detalle-sidebar { width: 100%; min-width: unset; }
     .sidebar-top { width: 100%; }
-    .sidebar-ads {
-        position: static;
-        flex-direction: row;
-        flex-wrap: wrap;
-        top: auto;
-    }
-    .ad-sidebar-small,
-    .ad-sidebar-rect,
-    .ad-sidebar-tall {
-        flex: 1 1 220px;
-        min-height: 160px;
-    }
     .footer-contenido {
         grid-template-columns: 1fr;
         gap: 28px;
@@ -1932,36 +1904,6 @@ html {
         padding-bottom: 20px !important; /* Ajusta el espacio interno inferior a tu gusto */
         margin-top: auto; /* Empuja el footer hacia abajo si hay poco contenido */
     }
-
-    /* --- ADS ALIGNMENT (2 small next to each other, 3rd below full width) --- */
-    .sidebar-ads {
-        display: grid !important;
-        grid-template-columns: repeat(1, 1fr) !important; /* Creamos 2 columnas iguales */
-        gap: 12px !important;
-        width: 100% !important;
-        margin-top: 20px !important;
-    }
-
-    /* Forzamos a que el TERCER anuncio ocupe las dos columnas de la cuadrícula */
-    .sidebar-ads > div:nth-child(3),
-    .sidebar-ads .ad-sidebar-tall:nth-child(3) {
-        grid-column: span 2 !important; /* Se estira a lo ancho ocupando toda la fila */
-        width: 100% !important;
-    }
-
-    /* Ajuste de alturas para que los 2 de arriba no se rompan */
-    .ad-sidebar-small,
-    .ad-sidebar-rect,
-    .ad-sidebar-tall {
-        width: 100% !important;
-        height: auto !important;
-        min-height: 140px !important; /* Altura ideal para los dos pequeños de arriba */
-    }
-
-    /* El tercero puede ser un poco más alto si es el formato nativo original */
-    .sidebar-ads > div:nth-child(3) {
-        min-height: 180px !important; 
-    }
 }
 
 
@@ -2137,16 +2079,4 @@ html {
   .nav-item-dropdown.abierto .submenu {
     display: block;
   }
-}
-
-
-   @media (max-width: 900px) {
-    .sidebar-ads .ocultar-en-movil {
-        display: none !important;
-    }
-}
-
-
-.sidebar-ads-fija{
-   margin: auto;
 }
