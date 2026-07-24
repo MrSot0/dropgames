@@ -463,10 +463,11 @@ html {
 
 /* Anuncios del sidebar */
 .sidebar-ads {
-    margin: auto;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     gap: 16px;
+    height: 100%;
     margin-top: 20px;
     position: sticky;
     top: calc(var(--navbar-height) + 20px);
@@ -502,7 +503,7 @@ html {
     display: flex;
     gap: 24px;
     padding: 24px;
-    align-items: flex-start;
+    align-items: stretch;
 }
 
 .titulo-seccion {
@@ -2149,4 +2150,3 @@ html {
 .sidebar-ads-fija{
    margin: auto;
 }
-
