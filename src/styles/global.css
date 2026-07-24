@@ -465,12 +465,31 @@ html {
 .sidebar-ads {
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: space-between;
     gap: 16px;
     height: 100%;
+    width: 100%;
     margin-top: 20px;
     position: sticky;
     top: calc(var(--navbar-height) + 20px);
+}
+
+/* Cada anuncio (sea iframe, imagen o div nativo de la red) se centra
+   dentro de su propio slot, sin importar qué formato devuelva Adsterra */
+.sidebar-ads > * {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar-ads iframe,
+.sidebar-ads img,
+.sidebar-ads a {
+    margin: 0 auto;
+    max-width: 100%;
 }
 
 .ad-sidebar-small { min-height: 100px; }
@@ -654,7 +673,7 @@ html {
 /* ==========================================================================
    7. SIDEBAR — TOP 5
    ========================================================================== */
-.sidebar-top { flex: 2.8; min-width: 240px; }
+.sidebar-top { flex: 2.8; min-width: 240px; display: flex; flex-direction: column; }
 
 .lista-top {
     background-color: var(--panel);
