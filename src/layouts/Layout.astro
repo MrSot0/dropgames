@@ -16,6 +16,19 @@ const {
   image = '/default-og-image.jpg', // Reemplaza esto con una imagen real en tu carpeta /public
   canonicalURL = new URL(Astro.url.pathname, Astro.site || Astro.url.origin)
 } = Astro.props;
+
+// Creamos el esquema dinámicamente usando la URL base de tu entorno
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "DropGames",
+  "url": Astro.url.origin,
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": `${Astro.url.origin}/buscar?q={search_term_string}`,
+    "query-input": "required name=search_term_string"
+  }
+};
 ---
 
 <!DOCTYPE html>
@@ -60,6 +73,9 @@ const {
       } catch (e) {}
     })();
   </script>
+
+  <!-- Datos Estructurados Dinámicos para Sitelinks y Buscador -->
+  <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
 </head>
 <body>
   <div class="sitio-encapsulado">
