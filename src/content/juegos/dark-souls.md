@@ -1,5 +1,5 @@
 ---
-title: "Dark Souls: Remastered"
+title: "Dark Souls: Pepare To Die Edition"
 categoria: "rpg"
 plataforma: "PC"
 tamano: "8 GB"
