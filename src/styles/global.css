@@ -1589,7 +1589,7 @@ html {
     }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
     .btn-descargar-principal {
         width: 100%;             /* Fuerza al botón a expandirse a todo el ancho */
         justify-content: center; /* Centra el contenido (texto + icono) horizontalmente en su interior */
@@ -2158,6 +2158,7 @@ html {
 
 
    @media (max-width: 900px) {
+   .nav-menu-toggle { display: flex; }
     .sidebar-ads .ocultar-en-movil {
         display: none !important;
     }
