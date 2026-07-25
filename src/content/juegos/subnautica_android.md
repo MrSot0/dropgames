@@ -27,7 +27,7 @@ requisitos:
 enlaces:
   - servidor: "Terabox"
     url: "https://playpaste.net/?v=jPdQ"
-trailer: "zz_V3vT7E8Y"
+trailer: "Rz2SNm8VguE"
 destacado: false
 ---
 
