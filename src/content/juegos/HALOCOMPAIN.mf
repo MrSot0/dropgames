@@ -27,7 +27,7 @@ requisitos:
 enlaces:
   - servidor: "mediafire"
     url: "https://playpaste.net/?v=jPdv"
-trailer: "W8e1W7z1QxM"
+trailer: "5KhzCSeZxAU"
 destacado: true
 ---
 
