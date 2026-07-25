@@ -49,5 +49,3 @@ destacado: true
 ## Requisitos y Notas de Instalación
 
 Debido al nivel de detalle gráfico y el uso de motores de nueva generación, se recomienda encarecidamente instalar el juego en una unidad de almacenamiento de estado sólido (**SSD**) para asegurar tiempos de carga óptimos y evitar interrupciones al recorrer los vastos escenarios del anillo.
-halo_campaign_evolved.md
-Mostrando halo_campaign_evolved.md.
