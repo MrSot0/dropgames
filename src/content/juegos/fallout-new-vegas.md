@@ -1,41 +1,48 @@
 ---
 title: "Fallout: New Vegas"
-categoria: "RPG / Acción"
+categoria: "rpg"
 plataforma: "PC"
-tamano: "15 GB"
-imagen: "/img/fnv.webp"
+tamano: "20 GB"
+imagen: "https://i.ibb.co/9HtKWPrj/falloutnew.jpg"
 imagenes:
-  - "/img/fnv1.jpg"
-  - "/img/fnv2.jpg"
-descripcionCorta: "Bienvenido a New Vegas, donde la esperanza se marchita y la ambición no tiene límites."
-fecha: 2026-07-08
+  - "https://i.ibb.co/7Dc9tVY/falloutnew1.jpg"
+  - "https://i.ibb.co/7dtMYst8/falloutnew2.jpg"
+  - "https://i.ibb.co/kgqjJnDR/falloutnew3.jpg"
+descripcionCorta: "Bienvenido a New Vegas. El juego donde te disparan en la cabeza, sobrevives y te embarcas en una búsqueda de venganza por el Yermo de Mojave."
+fecha: 2026-07-24
 nivelRequisitos: "bajos"
 requisitos:
   minimos:
-    so: "Windows 7 / 10 / 11"
-    cpu: "Dual Core 2.0GHz"
+    so: "Windows 7 / 10 64-bit"
+    cpu: "Intel Pentium Dual-Core 2.2 GHz / AMD Athlon 64 X2"
     ram: "2 GB"
-    gpu: "NVIDIA GeForce 6 series / ATI 1300XT"
-    almacenamiento: "10 GB"
+    gpu: "NVIDIA GeForce σειρά 6 / ATI Radeon X1300"
+    almacenamiento: "20 GB disponibles"
   recomendados:
-    so: "Windows 10 / 11 64-bit"
-    cpu: "Intel Core 2 Quad / AMD Phenom X4"
+    so: "Windows 10 64-bit"
+    cpu: "Intel Core 2 Duo 2.5 GHz / AMD equivalente"
     ram: "4 GB"
-    gpu: "NVIDIA GeForce GTX 260 / ATI Radeon HD 4890"
-    almacenamiento: "15 GB"
+    gpu: "NVIDIA GeForce 8800 / ATI Radeon HD 3850"
+    almacenamiento: "10 GB disponibles"
 enlaces:
-  - servidor: "MEGA"
-    url: "#"
-  - servidor: "Torrent"
-    url: "#"
-trailer: "oR_e9yH99-o"
-destacado: false
+  - servidor: "Terabox"
+    url: "https://playpaste.net/?v=jPdt"
+trailer: "Jn5-fUPos78"
+destacado: true
 ---
 
-**Fallout: New Vegas** te lleva al yermo de Mojave, un territorio marcado por la guerra entre facciones que luchan por el control de la presa Hoover y la joya de la corona: New Vegas. Con un sistema de combate táctico y una de las escrituras de guion más profundas de la franquicia, cada elección que tomes tendrá consecuencias directas en la suerte de los habitantes del desierto.
+**Fallout: New Vegas** es considerado por muchos la cúspide de la era moderna de la saga Fallout. Ambientado en un Yermo de Mojave post-apocalíptico controlado por facciones en disputa, encarnas a un mensajero dado por muerto tras un robo que decide reclamar su paquete y ajustar cuentas.
 
 ## Características Principales
 
-- **Sistema de Reputación:** Tus acciones definen cómo te ven las distintas facciones de Mojave.
-- **Personalización Profunda:** El sistema S.P.E.C.I.A.L. regresa con opciones de rasgos y habilidades que cambian drásticamente tu estilo de juego.
-- **Modo Hardcore:** ¿Buscas un reto extra? Activa el modo hardcore para gestionar el hambre, la sed y el sueño de tu personaje.
+- **El Yermo de Mojave:** ** Explora una recreación única del desierto de Nevada, desde las ruinas de la antigua ciudad hasta la deslumbrante franja de New Vegas.
+- **Facciones en Guerra:** ** Decide el destino de la región aliándote con la República de Nueva California (RNC), la Legión de César o el misterioso Señor House.
+- **Sistema RPG Profundo:** ** Elige tus rasgos, habilidades y reputación con total libertad para resolver misiones de múltiples formas.
+
+## Contenido Incluido en la Descarga
+
+Incluye el juego base junto con todas las expansiones oficiales (Dead Money, Honest Hearts, Old World Blues y Lonesome Road) y el paquete de armas clásicas.
+
+## Requisitos y Notas de Instalación
+
+Se recomienda instalar parches comunitarios de estabilidad (como YUP) para una experiencia sin interrupciones en sistemas operativos modernos.
