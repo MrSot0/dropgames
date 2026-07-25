@@ -1,0 +1,53 @@
+---
+title: "Halo: Campaign Evolved"
+categoria: "accion"
+plataforma: "PC"
+tamano: "42 GB"
+imagen: "https://i.ibb.co/G30NxSzV/halocompain.jpg"
+imagenes:
+  - "https://i.ibb.co/Xxg0jJyn/halocompain1.jpg"
+  - "https://i.ibb.co/Q2Nnrmb/halocompain2.jpg"
+  - "https://i.ibb.co/0jLLZD00/halocompain3.png"
+descripcionCorta: "El esperado remake completo de la campaña que dio origen a todo, reconstruido desde cero con gráficos de última generación, nuevas misiones y contenido expandido."
+fecha: 2026-07-28
+nivelRequisitos: "altos"
+requisitos:
+  minimos:
+    so: "Windows 10 64-bit"
+    cpu: "AMD Ryzen 3 3300X / Intel Core i5-8400"
+    ram: "12 GB"
+    gpu: "AMD Radeon RX 580 / NVIDIA GeForce GTX 1060 6 GB"
+    almacenamiento: "50 GB disponibles"
+  recomendados:
+    so: "Windows 10/11 64-bit"
+    cpu: "AMD Ryzen 5 3600X / Intel Core i7-8700K"
+    ram: "16 GB"
+    gpu: "AMD Radeon RX Vega 56 / NVIDIA GeForce GTX 1070"
+    almacenamiento: "50 GB disponibles (SSD recomendado)"
+enlaces:
+  - servidor: "mediafire"
+    url: "https://playpaste.net/?v=jPdv"
+trailer: "W8e1W7z1QxM"
+destacado: true
+---
+
+**Halo: Campaign Evolved** es la reinterpretación definitiva y reconstruida desde cero del título que revolucionó los shooters en primera persona [cite: 1.2.1, 1.2.3]. Desarrollado con tecnología de vanguardia, este remake ofrece la campaña original del Jefe Maestro complementada con misiones totalmente inéditas, cinemáticas fotorrealistas, un arsenal ampliado y opciones de personalización avanzadas a través de modificadores de juego [cite: 1.1.4, 1.2.1].
+
+## Características Principales
+
+- **Reconstrucción Total:** Disfruta de entornos icónicos rediseñados por completo con fidelidad visual absoluta, iluminación avanzada y rendimiento optimizado para PC [cite: 1.1.2, 1.1.4].
+- **Nuevas Misiones e Historia:** Sumérgete en Operation: METEORITE, un nuevo arco argumental de tres misiones ambientado antes de los eventos principales, acompañando al Jefe Maestro y al Sargento Johnson [cite: 1.1.1, 1.1.4].
+- **Arsenal y Vehículos Expandidos:** Wield armas clásicas junto a nuevas incorporaciones y experimenta por primera vez la capacidad de pilotar vehículos enemigos como el Wraith [cite: 1.1.4].
+- **Cooperativo Avanzado:** Juega en modo cooperativo en línea para hasta 4 jugadores con juego cruzado completo entre plataformas [cite: 1.1.2, 1.1.4].
+
+## Contenido Incluido en la Descarga
+
+- **Campaña Base Remasterizada:** Todos los niveles clásicos adaptados a los estándares modernos de jugabilidad y sonido [cite: 1.1.4].
+- **Expansión Operation: METEORITE:** Misiones adicionales con cinemáticas y actuaciones de voz totalmente nuevas [cite: 1.1.1, 1.1.4].
+- **Medicina Digital:** Archivos de instalación y pre-configuración listos para modo offline y ejecución directa.
+
+## Requisitos y Notas de Instalación
+
+Debido al nivel de detalle gráfico y el uso de motores de nueva generación, se recomienda encarecidamente instalar el juego en una unidad de almacenamiento de estado sólido (**SSD**) para asegurar tiempos de carga óptimos y evitar interrupciones al recorrer los vastos escenarios del anillo.
+halo_campaign_evolved.md
+Mostrando halo_campaign_evolved.md.
