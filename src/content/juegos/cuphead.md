@@ -1,51 +1,48 @@
 ---
 title: "Cuphead"
-categoria: "plataformas"
+categoria: "accion"
 plataforma: "PC"
 tamano: "4 GB"
-imagen: "/img/cuphead.webp"
+imagen: "https://i.ibb.co/93TtCR5r/cuphead.jpg"
 imagenes:
-  - "/img/cup-1.jpg"
-  - "/img/cup-2.jpg"
-  - "/img/cup-3.jpg"
-descripcionCorta: "Enfréntate a colosales jefes en este clásico juego de acción y plataformas inspirado en las caricaturas de los años 30."
-fecha: 2026-07-11
+  - "https://i.ibb.co/rRpTYgmN/cuphead1.jpg"
+  - "https://i.ibb.co/Wv6WFY8n/cuphead2.jpg"
+  - "https://i.ibb.co/Jj2qCwYg/cuphead3.jpg"
+descripcionCorta: "Un clásico juego de acción y carreras con una estética inspirada en los dibujos animados de los años 30."
+fecha: 2026-07-24
 nivelRequisitos: "bajos"
 requisitos:
   minimos:
-    so: "Windows 7 / 10 / 11 64-bit"
-    cpu: "Intel Core 2 Duo E8400 / AMD Athlon 64 X2 5600+"
+    so: "Windows 7 64-bit"
+    cpu: "Intel Core2 Duo E8400 3.0 GHz"
     ram: "4 GB"
-    gpu: "NVIDIA GeForce 9600 GT / AMD Radeon HD 3870"
+    gpu: "NVIDIA GeForce 9600 GT / AMD HD 3870"
     almacenamiento: "4 GB disponibles"
   recomendados:
-    so: "Windows 10 / 11 64-bit"
-    cpu: "Intel Core i3 / AMD Ryzen 3"
-    ram: "4 GB"
-    gpu: "NVIDIA GeForce GTX 550 Ti / AMD Radeon HD 5770"
-    almacenamiento: "4 GB en SSD"
+    so: "Windows 10 64-bit"
+    cpu: "Intel Core i3"
+    ram: "8 GB"
+    gpu: "NVIDIA GeForce GTX 660"
+    almacenamiento: "4 GB disponibles"
 enlaces:
-  - servidor: "MEGA"
-    url: "#"
-  - servidor: "Torrent"
-    url: "#"
-trailer: "NN-9sMYJA2M"
+  - servidor: "Terabox"
+    url: "https://playpaste.net/?v=jPdR"
+trailer: "NN-DncPdhu8"
 destacado: false
 ---
 
-**Cuphead** es un aclamado juego de acción clásico de tipo "dispara y corre" desarrollado por Studio MDHR. Inspirado directamente en los dibujos animados de la década de 1930, el juego cuida minuciosamente su apartado técnico empleando técnicas de animación tradicionales dibujadas a mano sobre celdas de acuarela, acompañadas de una banda sonora original de jazz grabado en vivo. Controlando a Cuphead o Mugman, deberás saldar una deuda con el mismísimo Diablo derrotando a letales jefes en batallas memorables.
+**Cuphead** es un frenético juego de disparos y plataformas clásico muy centrado en los combates contra jefes. Inspirado en los dibujos animados de la época de oro de los años 30, los gráficos y el audio se han creado con esmero utilizando las mismas técnicas de la época.
 
 ## Características Principales
 
-- **Batallas Contra Jefes Exigentes:** El juego se centra en peleas complejas divididas en múltiples fases mecánicas impredecibles que exigen aprender patrones exactos.
-- **Modo Cooperativo Local:** Juega la campaña completa junto a un amigo compartiendo la misma pantalla con una sincronización de movimientos ideal.
-- **Habilidades y Armas Equipables:** Adquiere nuevos tipos de disparos, superpoderes y amuletos defensivos en la tienda de la mantarraya para personalizar tu estrategia.
+- **Estética de Animación Tradicional:** ** Animaciones dibujadas a mano sobre celuloide con fondos de acuarela y auténtica música de jazz.
+- **Desafiantes Batallas de Jefes:** ** Enfréntate a una galería de jefes extravagantes e implacables en intensos combates.
+- **Modo Cooperativo Local:** ** Juega en solitario o invita a un amigo a unirse como Mugman en el modo cooperativo para dos jugadores.
 
 ## Contenido Incluido en la Descarga
 
-- **The Delicious Last Course Edition:** Incluye el juego base actualizado y la masiva expansión DLC que añade una nueva isla, armas, amuletos inéditos y al personaje jugable Ms. Chalice.
-- **Correcciones:** Crack pre-instalado autónomo sin dependencias externas.
+Incluye el juego base y la aclamada expansión 'The Delicious Last Course' con un nuevo personaje jugable, islas y jefes.
 
 ## Requisitos y Notas de Instalación
 
-Ocupa **5 GB de espacio en disco** para la instalación. Se recomienda jugar estrictamente con un mando. Para configurar controles adicionales en modo cooperativo, visita nuestra sección de **Ayuda / Tutoriales**.
+Se recomienda encarecidamente el uso de un mando (gamepad) para disfrutar de un control óptimo durante los combates.
