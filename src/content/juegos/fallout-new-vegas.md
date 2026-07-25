@@ -23,11 +23,11 @@ requisitos:
     cpu: "Intel Core 2 Duo 2.5 GHz / AMD equivalente"
     ram: "4 GB"
     gpu: "NVIDIA GeForce 8800 / ATI Radeon HD 3850"
-    almacenamiento: "10 GB disponibles"
+    almacenamiento: "20 GB disponibles"
 enlaces:
   - servidor: "Terabox"
     url: "https://playpaste.net/?v=jPdt"
-trailer: "Jn5-fUPos78"
+trailer: "cIzOttk6Dv4"
 destacado: true
 ---
 
