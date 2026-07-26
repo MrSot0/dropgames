@@ -13,7 +13,7 @@ interface Props {
 const {
   title,
   description = 'Descarga videojuegos para PC gratis: acción, aventura, RPG, deportes y multijugador. Emuladores, programas necesarios y tutoriales. DropGames.',
-  image = '/logo.webp',
+  image = '/logo_2.webp',
   canonicalURL = new URL(Astro.url.pathname, Astro.site || Astro.url.origin)
 } = Astro.props;
 
@@ -36,9 +36,11 @@ const websiteSchema = {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <!-- Favicons y Logo para Navegadores / Google -->
+  <!-- Favicons y Logo para Navegadores / Google Search Console -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/webp" sizes="16x16" href="/favicon-16x16.webp" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
   <!-- SEO Básico -->
   <title>{title}</title>
