@@ -2168,3 +2168,19 @@ html {
 .sidebar-ads-fija{
    margin: auto;
 }
+
+
+/* Selecciona la imagen del logo en el Navbar */
+.navbar .logo-img, 
+header img {
+  /* Aumenta el brillo y el contraste */
+  filter: brightness(1.8) contrast(1.2) drop-shadow(0px 0px 8px rgba(0, 217, 255, 0.6));
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+/* Efecto hover interactivo al pasar el mouse */
+.navbar .logo-img:hover,
+header img:hover {
+  filter: brightness(2.2) drop-shadow(0px 0px 12px rgba(0, 217, 255, 0.9));
+  transform: scale(1.03);
+}
