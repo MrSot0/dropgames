@@ -61,10 +61,10 @@
    1b. VARIABLES DE DISEÑO — Modo Oscuro
    ========================================================================== */
 [data-tema="oscuro"] {
-    --fondo: #121212;          /* Menos oscuro que el negro puro (estilo Material Design) */
-    --contenedor: #1c1c1c;     /* Un gris oscuro suave para las secciones de fondo */
-    --panel: #2a2a2a;          /* El gris carbón exacto de tu imagen para las tarjetas */
-    --panel-alto: #383838;     /* Un gris más claro para destacar elementos o estados hover */
+    --fondo: #121212;          
+    --contenedor: #1c1c1c;     
+    --panel: #2a2a2a;          
+    --panel-alto: #383838;     
 
     --acento: #00e5ff;
     --acento-tenue: rgba(0, 229, 255, 0.12);
@@ -118,7 +118,7 @@ html {
 }
 
 /* ==========================================================================
-   3. NAVBAR
+   3. NAVBAR Y LOGO
    ========================================================================== */
 .navbar {
     position: fixed;
@@ -149,11 +149,25 @@ html {
     height: 60px; 
     width: auto; 
     object-fit: contain;
-    transition: transform 0.2s ease;
 }
 
-.nav-logo:hover img {
-    transform: scale(1.04);
+/* Ajuste global de contraste y brillo para la clase .logo (Navbar y Footer) */
+.logo {
+    filter: brightness(2) contrast(1.2) drop-shadow(0 0 6px rgba(0, 229, 255, 0.75));
+    transition: filter 0.25s ease, transform 0.25s ease;
+}
+
+a:hover .logo {
+    filter: brightness(2.4) contrast(1.3) drop-shadow(0 0 10px rgba(0, 229, 255, 1));
+    transform: scale(1.03);
+}
+
+.logo-container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4px);
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 217, 255, 0.2);
 }
 
 .nav-links {
@@ -162,11 +176,10 @@ html {
     gap: 6px;
 }
 
-/* Forzar a que TODOS los elementos de la lista se alineen verticalmente igual */
 .nav-links > li {
     display: flex;
     align-items: center;
-    height: 100%; /* Si querés que cubran el alto de la barra */
+    height: 100%;
 }
 
 .nav-acciones {
@@ -263,38 +276,51 @@ html {
 .submenu-toggle svg { transition: transform 0.2s ease-in-out; }
 .submenu-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
 
-.submenu {
+/* Submenú desplegable Categorías (Desktop Grid) */
+.nav-item-dropdown .submenu {
     position: absolute;
     top: 100%;
-    left: 0;
-    margin-top: 10px;
-    min-width: 210px;
+    left: 50%;
+    transform: translateX(-50%);
     background-color: var(--panel);
     border: 1px solid var(--borde-suave);
     border-radius: var(--borde-radio);
     box-shadow: var(--sombra);
-    padding: 6px 0;
-    max-height: 0;
-    overflow: hidden;
+    padding: 1.25rem;
+    margin: 0;
+    list-style: none;
+    z-index: 100;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(160px, 1fr));
+    gap: 0.25rem 1.5rem;
     opacity: 0;
-    transform: translateY(-6px);
-    transition: max-height 0.2s ease-in-out, opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
-    z-index: 70;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
 }
 
+.nav-item-dropdown:hover .submenu,
 .nav-item-dropdown.abierto .submenu {
-    max-height: 320px;
     opacity: 1;
-    transform: translateY(0);
+    visibility: visible;
+}
+
+.nav-item-dropdown .submenu li a {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    color: var(--texto-principal);
+    text-decoration: none;
+    font-size: 0.85rem;
+    border-radius: 4px;
+    white-space: nowrap;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.nav-item-dropdown .submenu li a:hover {
+    background-color: var(--panel-alto);
+    color: var(--acento);
 }
 
 @media (min-width: 721px) {
-    .nav-item-dropdown:hover .submenu,
-    .nav-item-dropdown:focus-within .submenu {
-        max-height: 320px;
-        opacity: 1;
-        transform: translateY(0);
-    }
     .nav-item-dropdown:hover .submenu-toggle svg,
     .nav-item-dropdown:focus-within .submenu-toggle svg { transform: rotate(180deg); }
     .nav-item-dropdown:hover .submenu-toggle,
@@ -302,26 +328,33 @@ html {
     .submenu-toggle { pointer-events: none; }
 }
 
-.submenu li a {
-    display: block;
-    padding: 9px 18px;
-    font-family: var(--fuente-base);
-    font-weight: 500;
-    font-size: 0.85rem;
-    text-transform: none;
-    letter-spacing: normal;
-    color: var(--texto-principal);
-    white-space: nowrap;
-}
-
-.submenu li a:hover {
-    background-color: var(--panel-alto);
-    color: var(--acento);
-}
 .submenu li a::after { display: none; }
 
+/* Redes Sociales en Navbar */
+.nav-socials {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-right: 12px;
+    padding-right: 12px;
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.nav-socials a {
+    color: var(--footer-texto-tenue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.nav-socials a:hover {
+    color: var(--footer-acento);
+    transform: translateY(-1px);
+}
+
 /* ==========================================================================
-   BOTÓN DARK/LIGHT MODE
+   BOTÓN DARK/LIGHT MODE Y BÚSQUEDA
    ========================================================================== */
 .btn-tema {
     background: none;
@@ -343,15 +376,12 @@ html {
     transform: translateY(-1px);
 }
 
-/* Por defecto (modo claro): mostrar luna, ocultar sol */
 .btn-tema .icono-sol { display: none; }
 .btn-tema .icono-luna { display: block; }
 
-/* Modo oscuro: mostrar sol, ocultar luna */
 [data-tema="oscuro"] .btn-tema .icono-sol { display: block; }
 [data-tema="oscuro"] .btn-tema .icono-luna { display: none; }
 
-/* Botón de búsqueda */
 .btn-buscar {
     background: none;
     border: none;
@@ -461,7 +491,6 @@ html {
     min-height: 90px;
 }
 
-/* Anuncios del sidebar */
 .sidebar-ads {
     display: flex;
     flex-direction: column;
@@ -473,8 +502,8 @@ html {
     top: calc(var(--navbar-height) + 20px);
 }
 
-/* Cada anuncio (sea iframe, imagen o div nativo de la red) se centra
-   dentro de su propio slot, sin importar qué formato devuelva Adsterra */
+.sidebar-ads-fija { margin: auto; }
+
 .sidebar-ads > * {
     width: 100%;
     display: flex;
@@ -494,13 +523,11 @@ html {
 .ad-sidebar-rect { min-height: 250px; }
 .ad-sidebar-tall { min-height: 250px; }
 
-/* Anuncio horizontal en página de juego */
 .ad-inline-horizontal {
     min-height: 90px;
     margin: 28px 0;
 }
 
-/* Barra de anuncio fija inferior, solo en móvil */
 .ad-sticky-mobile {
     display: none;
     position: fixed;
@@ -511,6 +538,26 @@ html {
     background-color: var(--panel);
     border-top: 1px solid var(--borde-suave);
     z-index: 40;
+}
+
+.ad-native-compact {
+    margin: 1rem auto;
+    max-width: 600px;
+    max-height: 110px;
+    padding: 0 0.5rem;
+    overflow: hidden;
+    text-align: center;
+}
+
+.ad-native-compact #container-decd1f4598bf4831bd5806c2f6da54ca img {
+    max-height: 60px !important; 
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.ad-native-compact #container-decd1f4598bf4831bd5806c2f6da54ca text,
+.ad-native-compact #container-decd1f4598bf4831bd5806c2f6da54ca a {
+    font-size: 0.75rem !important;
 }
 
 /* ==========================================================================
@@ -540,7 +587,7 @@ html {
 }
 
 /* ==========================================================================
-   6. GRID DE VIDEOJUEGOS — 3 columnas fijas, cards grandes
+   6. GRID DE VIDEOJUEGOS
    ========================================================================== */
 .seccion-recientes { flex: 7.2; min-width: 0; }
 
@@ -550,7 +597,6 @@ html {
     gap: 20px;
 }
 
-/* Tarjetas de juego — más grandes */
 .tarjeta-juego {
     background-color: var(--panel);
     border-radius: 12px;
@@ -720,7 +766,7 @@ html {
     background-color: var(--footer-bg);
     border-top: 3px solid transparent;
     border-image: linear-gradient(90deg, var(--footer-acento), var(--footer-azul)) 1;
-    margin: 0 0 0 0;
+    margin: 0;
     padding: 0;
     position: relative;
     left: 0;
@@ -843,7 +889,7 @@ html {
 .bottom-dot { width: 6px; height: 6px; border-radius: 50%; background-color: var(--footer-azul); }
 
 /* ==========================================================================
-   9. BOTÓN VOLVER ARRIBA
+   9. COMPONENTES EXTRA (BREADCRUMBS, DETALLE, PAGINACIÓN, ETC.)
    ========================================================================== */
 .btn-volver-arriba {
     position: fixed;
@@ -874,9 +920,6 @@ html {
 }
 .btn-volver-arriba:hover { transform: scale(1.08); }
 
-/* ==========================================================================
-   9.1 BREADCRUMBS
-   ========================================================================== */
 .breadcrumbs {
     display: flex;
     flex-wrap: wrap;
@@ -892,20 +935,16 @@ html {
 .breadcrumbs a:hover { color: var(--acento); }
 .breadcrumbs span.actual { color: var(--acento); }
 
-/* ==========================================================================
-   9.2 PÁGINA DE DETALLE DE JUEGO
-   ========================================================================== */
+/* Detalle de Juego */
 .detalle-juego {
     display: flex;
     gap: 28px;
-    padding: 20px 24px 20px;
     padding: 20px 24px 0px;
     align-items: flex-start;
 }
 .detalle-contenido { flex: 7.2; min-width: 0; }
 .detalle-sidebar { flex: 2.8; min-width: 240px; }
 
-/* --- CARRUSEL DE IMÁGENES --- */
 .detalle-carrusel {
     position: relative;
     border-radius: 14px;
@@ -963,9 +1002,6 @@ html {
 .carrusel-btn--prev { left: 14px; }
 .carrusel-btn--next { right: 14px; }
 
-
-
-/* --- CABECERA DEL JUEGO: título + botón descargar --- */
 .detalle-cabecera-titulo {
     display: flex;
     align-items: flex-start;
@@ -1011,9 +1047,7 @@ html {
     box-shadow: 0 8px 20px rgba(0, 196, 154, 0.55);
 }
 
-.btn-descargar-principal svg {
-    flex-shrink: 0;
-}
+.btn-descargar-principal svg { flex-shrink: 0; }
 
 .detalle-specs {
     display: flex;
@@ -1041,7 +1075,6 @@ html {
 .detalle-descripcion ul { list-style: revert; padding-left: 20px; margin: 10px 0; }
 .detalle-descripcion li { list-style: revert; }
 
-/* --- TABLA REQUISITOS --- */
 .tabla-requisitos {
     width: 100%;
     border-collapse: collapse;
@@ -1068,7 +1101,6 @@ html {
 }
 .tabla-requisitos tr:last-child td { border-bottom: none; }
 
-/* --- BLOQUE DESCARGAS SIDEBAR --- */
 .bloque-descargas {
     background-color: var(--panel);
     border: 1px solid var(--borde-suave);
@@ -1102,7 +1134,6 @@ html {
 .btn-descarga:hover { background-color: var(--acento); }
 .btn-descarga span.servidor-nombre { display: flex; align-items: center; gap: 8px; }
 
-/* --- GUÍA DE INSTALACIÓN --- */
 .guia-instalacion {
     background-color: var(--panel);
     border: 1px solid var(--borde-suave);
@@ -1167,11 +1198,7 @@ html {
 }
 .paso-tutorial p { margin: 0; font-size: 0.85rem; color: var(--texto-principal); line-height: 1.55; }
 
-/* --- SECCIÓN "TE PODRÍA INTERESAR" --- */
-.te-podria-interesar {
-    margin-top: 10px;
-}
-
+.te-podria-interesar { padding: 20px 20px; }
 .te-podria-interesar h2 {
     font-family: var(--fuente-display);
     font-size: 1.15rem;
@@ -1190,26 +1217,18 @@ html {
 .grid-relacionados {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
+    gap: 30px;
+    width: 100%;
 }
 
-/* ==========================================================================
-   9.3 PÁGINAS DE LISTADO (categorías / requisitos)
-   ========================================================================== */
-.encabezado-listado {
-    padding: 28px 24px 8px;
-}
+.encabezado-listado { padding: 28px 24px 8px; }
 .encabezado-listado h1 {
     font-family: var(--fuente-display);
     font-size: 1.6rem;
     color: var(--texto-brillante);
     margin: 0 0 8px;
 }
-.encabezado-listado p {
-    color: var(--texto-tenue);
-    max-width: 640px;
-    margin: 0;
-}
+.encabezado-listado p { color: var(--texto-tenue); max-width: 640px; margin: 0; }
 
 .grid-listado {
     padding: 20px 24px 40px;
@@ -1225,7 +1244,6 @@ html {
     font-family: var(--fuente-mono);
 }
 
-/* Tarjetas tipo "tile" para /categorias y /requisitos (índice) */
 .grid-tiles {
     padding: 20px 24px 40px;
     display: grid;
@@ -1260,157 +1278,36 @@ html {
     color: var(--texto-tenue);
 }
 
-/* ==========================================================================
-   9.4 PROGRAMAS / AYUDA
-   ========================================================================== */
-.contenido-articulo {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 28px 24px 60px;
-}
-.contenido-articulo h1 {
-    font-family: var(--fuente-display);
-    font-size: 1.7rem;
-    color: var(--texto-brillante);
-    margin-bottom: 6px;
-}
-.contenido-articulo > p.intro {
-    color: var(--texto-tenue);
-    margin-bottom: 30px;
-}
-.contenido-articulo section { margin-bottom: 36px; }
-.contenido-articulo h2 {
-    font-family: var(--fuente-display);
-    font-size: 1.2rem;
-    color: var(--texto-brillante);
-    border-left: 4px solid var(--acento);
-    padding-left: 10px;
-    margin-bottom: 16px;
-}
-
-.lista-programas {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 14px;
-}
-.programa-item {
-    background-color: var(--panel);
-    border: 1px solid var(--borde-suave);
-    border-radius: var(--borde-radio);
-    padding: 16px;
-}
-.programa-item h4 {
-    font-family: var(--fuente-display);
-    font-size: 0.95rem;
-    color: var(--texto-brillante);
-    margin: 0 0 6px;
-}
-.programa-item p {
-    font-size: 0.82rem;
-    color: var(--texto-tenue);
-    margin: 0 0 10px;
-}
-.programa-item a {
-    font-family: var(--fuente-mono);
-    font-size: 0.75rem;
-    color: var(--acento);
-    text-transform: uppercase;
-    font-weight: 700;
-}
-
-/* FAQ / acordeón */
-.faq-item {
-    background-color: var(--panel);
-    border: 1px solid var(--borde-suave);
-    border-radius: var(--borde-radio);
-    margin-bottom: 10px;
-    overflow: hidden;
-}
-.faq-item summary {
-    padding: 14px 18px;
-    cursor: pointer;
-    font-family: var(--fuente-display);
-    font-weight: 600;
-    font-size: 0.9rem;
-    color: var(--texto-brillante);
-    list-style: none;
+.pagination-ui {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-}
-.faq-item summary::-webkit-details-marker { display: none; }
-.faq-item summary::after { content: "+"; font-size: 1.2rem; color: var(--acento); }
-.faq-item[open] summary::after { content: "–"; }
-.faq-item p {
-    padding: 0 18px 16px;
-    margin: 0;
-    color: var(--texto-principal);
-    font-size: 0.88rem;
-    line-height: 1.6;
+    gap: 12px;
+    margin-top: 40px;
 }
 
-/* ==========================================================================
-   9.5 PEDIDOS
-   ========================================================================== */
-.form-pedido {
-    background-color: var(--panel);
-    border: 1px solid var(--borde-suave);
-    border-radius: var(--borde-radio);
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-.form-pedido label {
-    font-family: var(--fuente-display);
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.4px;
-    color: var(--texto-brillante);
-    margin-bottom: 6px;
-    display: block;
-}
-.form-pedido input,
-.form-pedido textarea,
-.form-pedido select {
-    width: 100%;
-    border: 1px solid var(--borde-suave);
-    border-radius: var(--borde-radio-sm);
-    padding: 10px 12px;
-    font-family: var(--fuente-base);
-    font-size: 0.9rem;
-    background-color: var(--contenedor);
-    color: var(--texto-brillante);
-}
-.form-pedido textarea { resize: vertical; min-height: 100px; }
-.form-pedido button {
-    font-family: var(--fuente-display);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-size: 0.85rem;
-    padding: 12px 26px;
-    background-color: var(--footer-bg);
+.nav-btn, .page-number {
+    padding: 10px 18px;
+    background: #0e2731;
+    border: 1px solid #254852;
     color: #fff;
-    border: 2px solid var(--acento);
-    border-radius: var(--borde-radio-sm);
+    border-radius: 8px;
     cursor: pointer;
-    transition: var(--transicion-suave);
-}
-.form-pedido button:hover { background-color: var(--acento); }
-.aviso-pedido {
-    background-color: var(--acento-tenue);
-    border: 1px solid rgba(0, 196, 154, 0.3);
-    border-radius: var(--borde-radio);
-    padding: 14px 18px;
-    font-size: 0.85rem;
-    color: var(--texto-principal);
-    margin-bottom: 20px;
+    transition: all 0.3s ease;
 }
 
-/* ==========================================================================
-   9.6 BUSCADOR
-   ========================================================================== */
+.page-number.active {
+    background: #00e5ff;
+    color: #0e2731;
+    border-color: #00e5ff;
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+}
+
+.nav-btn:hover, .page-number:hover {
+    border-color: #00e5ff;
+    color: #00e5ff;
+}
+
 .buscar-input-grande {
     display: flex;
     gap: 10px;
@@ -1441,115 +1338,7 @@ html {
 .buscar-input-grande button:hover { background-color: var(--acento); }
 
 /* ==========================================================================
-   9.7 PÁGINAS LEGALES
-   ========================================================================== */
-.pagina-legal {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 36px 24px 72px;
-}
-.pagina-legal .legal-hero {
-    background: linear-gradient(135deg, var(--footer-bg) 0%, #2a1608 100%);
-    border-radius: 14px;
-    padding: 36px 32px;
-    margin-bottom: 40px;
-    border: 1px solid rgba(0, 196, 154, 0.2);
-    position: relative;
-    overflow: hidden;
-}
-.pagina-legal .legal-hero::before {
-    content: '';
-    position: absolute;
-    top: -40px;
-    right: -40px;
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(0, 229, 255, 0.1) 0%, transparent 70%);
-}
-.pagina-legal .legal-hero h1 {
-    font-family: var(--fuente-display);
-    font-size: 2rem;
-    color: var(--footer-texto);
-    margin: 0 0 10px;
-    font-weight: 700;
-}
-.pagina-legal .legal-hero p {
-    color: var(--footer-texto-tenue);
-    margin: 0;
-    font-size: 0.9rem;
-}
-.pagina-legal .legal-badge {
-    display: inline-block;
-    background-color: rgba(0, 229, 255, 0.15);
-    color: var(--footer-acento);
-    font-family: var(--fuente-mono);
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    padding: 4px 12px;
-    border-radius: 20px;
-    border: 1px solid rgba(0, 196, 154, 0.3);
-    margin-bottom: 16px;
-}
-.legal-seccion {
-    background-color: var(--panel);
-    border: 1px solid var(--borde-suave);
-    border-radius: 12px;
-    padding: 28px;
-    margin-bottom: 20px;
-    transition: var(--transicion-suave);
-}
-.legal-seccion:hover {
-    border-color: rgba(0, 196, 154, 0.3);
-}
-.legal-seccion h2 {
-    font-family: var(--fuente-display);
-    font-size: 1.1rem;
-    color: var(--texto-brillante);
-    text-transform: uppercase;
-    letter-spacing: 0.4px;
-    margin: 0 0 14px;
-    border-left: 4px solid var(--acento);
-    padding-left: 12px;
-}
-.legal-seccion p {
-    color: var(--texto-principal);
-    font-size: 0.9rem;
-    line-height: 1.7;
-    margin: 0 0 10px;
-}
-.legal-seccion p:last-child { margin-bottom: 0; }
-.legal-seccion ul {
-    list-style: disc;
-    padding-left: 20px;
-    margin: 10px 0;
-    color: var(--texto-principal);
-    font-size: 0.9rem;
-    line-height: 1.7;
-}
-.legal-seccion ul li { margin-bottom: 6px; }
-.legal-contacto-dmca {
-    background: linear-gradient(135deg, rgba(0, 229, 255, 0.08) 0%, rgba(168, 85, 247, 0.08) 100%);
-    border: 1px solid rgba(168, 85, 247, 0.25);
-    border-radius: 12px;
-    padding: 24px;
-    margin-top: 32px;
-    text-align: center;
-}
-.legal-contacto-dmca h3 {
-    font-family: var(--fuente-display);
-    color: var(--texto-brillante);
-    margin: 0 0 8px;
-}
-.legal-contacto-dmca a {
-    color: var(--acento);
-    font-weight: 600;
-}
-.legal-contacto-dmca a:hover { text-decoration: underline; }
-
-/* ==========================================================================
-   10. RESPONSIVIDAD
+   10. MEDIA QUERIES / RESPONSIVIDAD
    ========================================================================== */
 @media (max-width: 1100px) {
     .grid-videojuegos,
@@ -1560,43 +1349,71 @@ html {
 }
 
 @media (max-width: 900px) {
+    html, body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
     .contenedor-principal { flex-direction: column; }
     .detalle-juego { flex-direction: column; }
     .detalle-sidebar { width: 100%; min-width: unset; }
     .sidebar-top { width: 100%; }
+
     .sidebar-ads {
-        position: static;
-        flex-direction: row;
-        flex-wrap: wrap;
-        top: auto;
+        display: grid !important;
+        grid-template-columns: repeat(1, 1fr) !important;
+        gap: 12px !important;
+        width: 100% !important;
+        margin-top: 20px !important;
     }
+
+    .sidebar-ads .ocultar-en-movil { display: none !important; }
+
+    .sidebar-ads > div:nth-child(3),
+    .sidebar-ads .ad-sidebar-tall:nth-child(3) {
+        grid-column: span 2 !important;
+        width: 100% !important;
+        min-height: 180px !important;
+    }
+
     .ad-sidebar-small,
     .ad-sidebar-rect,
     .ad-sidebar-tall {
-        flex: 1 1 220px;
-        min-height: 160px;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 140px !important;
     }
+
     .footer-contenido {
         grid-template-columns: 1fr;
         gap: 28px;
     }
+
+    footer, .footer {
+        margin-bottom: 0 !important;
+        padding-bottom: 20px !important;
+        margin-top: auto;
+    }
+
     .detalle-cabecera-titulo {
         flex-direction: column;
         align-items: flex-start;
     }
-    .btn-descargar-principal {
-        align-self: flex-start;
-    }
+
+    .btn-descargar-principal { align-self: flex-start; }
+
+    .nav-menu-toggle { display: flex; }
 }
 
 @media (max-width: 768px) {
     .btn-descargar-principal {
-        width: 100%;             /* Fuerza al botón a expandirse a todo el ancho */
-        justify-content: center; /* Centra el contenido (texto + icono) horizontalmente en su interior */
-        box-sizing: border-box;  /* Asegura que el padding no rompa el ancho total del botón */
+        width: 100%;
+        justify-content: center;
+        box-sizing: border-box;
     }
-
-    .nav-menu-toggle { display: flex; }
 
     .nav-links {
         position: absolute;
@@ -1634,373 +1451,83 @@ html {
     }
     .submenu-toggle { padding: 14px 12px; pointer-events: auto; }
 
-    .submenu {
-        position: static;
-        flex-basis: 100%;
-        width: 100%;
-        margin-top: 0;
-        border: none;
-        border-radius: 0;
-        box-shadow: none;
-        background-color: var(--panel-alto);
-        padding: 0;
-        transform: none;
-    }
-
-    .nav-item-dropdown.abierto .submenu {
-        max-height: 320px;
-        padding: 4px 0;
-    }
-
-    .submenu li a { padding: 10px 24px 10px 36px; }
-
     .ad-sticky-mobile { display: block; }
     body { padding-bottom: 60px; }
 
-    .footer {
-        left: 0;
-        transform: none;
-        width: 100%;
-    }
+    .footer { left: 0; transform: none; width: 100%; }
     .footer-barra-inferior {
         flex-direction: column;
         gap: 10px;
         text-align: center;
     }
-
-    /* Nos aseguramos de que el contenedor principal limpie paddings laterales extra */
-    .contenedor-principal {
-        padding: 16px 12px;
-        flex-direction: column;
-        align-items: center; /* Centra el contenido secundario si lo hubiera */
-    }
-
-    /* Forzamos a la grid a ocupar todo el ancho disponible y centrar su única columna */
-    .grid-videojuegos,
-    .grid-listado,
-    .grid-relacionados {
-        grid-template-columns: minmax(0, 420px);
-        justify-content: center;
-        width: 100%;
-        margin: 0 auto;
-    }
-
-    .carrusel-slide img { fill: none; 
-    align-items: center;}
 }
-
-@media (max-width: 480px) {
-    .grid-videojuegos,
-    .grid-listado,
-    .grid-relacionados {
-        grid-template-columns: minmax(0, 1fr);
-        justify-content: center;
-    }
-    .tarjeta-juego { width: 100%; max-width: 100%; }
-    .tarjeta-imagen img { height: 180px; }
-}
-
-
-
-/* 1. Aumenta la separación entre las tarjetas */
-.grid-relacionados {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px; /* Aumenta el gap para dar más aire entre ellas */
-    width: 100%;
-}
-
-/* 2. Añade espacio alrededor de toda la sección */
-.te-podria-interesar {
-    padding: 20px 20px; /* Más espacio arriba/abajo y a los lados */
-}
-
-
-.pagination-ui {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    margin-top: 40px;
-}
-
-.nav-btn, .page-number {
-    padding: 10px 18px;
-    background: #0e2731;
-    border: 1px solid #254852;
-    color: #fff;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.page-number.active {
-    background: #00e5ff;
-    color: #0e2731;
-    border-color: #00e5ff;
-    box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
-}
-
-.nav-btn:hover, .page-number:hover {
-    border-color: #00e5ff;
-    color: #00e5ff;
-}
-
-
-/* Contenedor del anuncio reducido al mínimo */
-  .ad-native-compact {
-    margin: 1rem auto;
-    max-width: 600px;      /* Reducimos el ancho a la mitad (ideal para una sola línea) */
-    max-height: 110px;     /* Forzamos una altura súper baja */
-    padding: 0 0.5rem;
-    overflow: hidden;      /* Corta cualquier exceso vertical */
-    text-align: center;
-  }
-
-  /* Reducir el tamaño de las imágenes y textos que inyecte Adsterra */
-  .ad-native-compact #container-decd1f4598bf4831bd5806c2f6da54ca img {
-    max-height: 60px !important; 
-    object-fit: cover;
-    border-radius: 4px;
-  }
-
-  .ad-native-compact #container-decd1f4598bf4831bd5806c2f6da54ca text,
-  .ad-native-compact #container-decd1f4598bf4831bd5806c2f6da54ca a {
-    font-size: 0.75rem !important; /* Texto bien pequeño */
-  }
-
-/* Contenedor de la barra social */
-.nav-socials {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-right: 12px;
-  padding-right: 12px;
-  border-right: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-/* Enlaces e Iconos */
-.nav-socials a {
-  color: var(--footer-texto-tenue);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: color 0.2s ease, transform 0.2s ease;
-}
-
-/* Efecto hover */
-.nav-socials a:hover {
-  color: var(--footer-acento);
-  transform: translateY(-1px); /* Pequeña elevación */
-}
-
-/* Control para pantallas muy pequeñas */
-@media (max-width: 480px) {
-  .nav-socials {
-    gap: 10px;
-    margin-right: 8px;
-    padding-right: 8px;
-  }
-}
-
-
-
-
-
 
 @media (max-width: 720px) {
-    /* Rompemos el encapsulado para que la web use el 100% real de la pantalla del teléfono */
+    h1, .seccion-recientes, .encabezado-listado, .detalle-carrusel {
+        margin-top: 60px;
+    }
+
     .sitio-encapsulado {
         width: 100vw !important;
         max-width: 100vw !important;
         margin: 0 !important;
         padding: 0 !important;
-        overflow-x: hidden; /* Evita que los anuncios tiren scroll horizontal */
+        overflow-x: hidden;
     }
 
-    /* Forzamos a que el main use todo el espacio sin dejar parches a los lados */
-    .contenedor-principal, 
-    .detalle-juego {
+    .contenedor-principal, .detalle-juego {
         width: 100% !important;
         max-width: 100% !important;
         padding: 16px 12px !important;
         display: flex !important;
         flex-direction: column !important;
-        align-items: center !important; /* Centra todo el bloque de contenido */
+        align-items: center !important;
     }
 
-    /* Aseguramos que las secciones de juegos ocupen el ancho completo disponible */
-    .seccion-recientes, 
-    .detalle-contenido {
+    .seccion-recientes, .detalle-contenido {
         width: 100% !important;
         max-width: 100% !important;
     }
 
-    /* Centrado e inyección de ancho completo en los grids */
-    .grid-videojuegos,
-    .grid-listado,
-    .grid-relacionados {
+    .grid-videojuegos, .grid-listado, .grid-relacionados {
         display: grid !important;
-        grid-template-columns: minmax(0, 1fr) !important; /* Una sola columna limpia */
+        grid-template-columns: minmax(0, 1fr) !important;
         width: 100% !important;
-        max-width: 420px !important; /* Evita que en pantallas grandes de móvil la card sea gigante */
+        max-width: 420px !important;
         margin: 0 auto !important;
         gap: 20px !important;
     }
 
-    /* Ajuste para las cards y que no se desborden de su grid */
     .tarjeta-juego {
         width: 100% !important;
         max-width: 100% !important;
     }
-}
 
-
-
-
-@media (max-width: 720px) {
-    /* Forzamos a la tabla a no escupir contenido hacia afuera */
     table, .tabla-requisitos {
         display: block !important;
         width: 100% !important;
-        overflow-x: auto !important; /* Si no cabe, el usuario desliza la tablita, no la página */
+        overflow-x: auto !important;
         white-space: normal !important;
         word-wrap: break-word !important;
     }
 
-    /* Opcional: si quieres que las columnas se achiquen un poco para que quepan mejor */
     th, td {
         padding: 8px 6px !important;
-        font-size: 13px !important; /* Un pelín más pequeña la letra para optimizar espacio */
-    }
-}
-
-@media (max-width: 720px) {
-
-   /* 1. Permitimos que crezca dinámicamente en móvil para que quepan los elementos si se apilan o ensanchan */
-    .barra-busqueda-wrapper.abierta { 
-        max-height: 200px; /* Aumentamos el límite para que no se corte al bajar */
+        font-size: 13px !important;
     }
 
-    /* 2. Ajustamos los espacios internos del formulario en pantallas pequeñas */
-    .barra-busqueda-form {
-        padding: 12px 16px; /* Reducimos el padding lateral para ganar espacio */
-        gap: 8px;           /* Juntamos un pelín más los elementos */
-    }
-
-
-    /* Buscamos el contenedor donde metes los banners horizontales */
-    .ad-slot, 
-    .ad-banner-horizontal,
-    div[class*="ad-"] {
-        width: 100% !important;
-        max-width: 100% !important;
-        overflow: hidden !important;
-        display: flex !important;
-        justify-content: center !important;
-    }
-
-    /* Obligamos al iframe o imagen de 728px a encogerse al ancho de la pantalla */
-    .ad-slot iframe,
-    .ad-slot img,
-    ins.adsbygoogle {
-        max-width: 100% !important;
-        height: auto !important; /* Evita que se estiren feo si se reduce el ancho */
-        object-fit: contain !important;
-    }
-}
-
-
-@media (max-width: 900px) {
-
-    /* --- FIX SPACE AT THE BOTTOM --- */
-    html, body {
-        margin: 0;
-        padding: 0;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-    }
-
-  .nav-item-dropdown .submenu {
-    position: static;
-    transform: none;
-    box-shadow: none;
-    border: none;
-    background-color: transparent;
-    padding: 0 0 0 1.5rem; /* Margen interno izquierdo para escalonarlo */
-
-    /* En móviles es mejor una sola columna vertical que use el scroll natural del menú */
-    display: none; 
-    grid-template-columns: 1fr; 
-    gap: 0;
-    opacity: 1;
-    visibility: visible;
-  }
-
-  /* Si tu JS añade la clase 'abierto' en móvil */
-  .nav-item-dropdown.abierto .submenu {
-    display: block;
-  }
-
-    /* Si usas una etiqueta <footer> nativa o clase .footer */
-    footer, .footer {
-        margin-bottom: 0 !important;
-        padding-bottom: 20px !important; /* Ajusta el espacio interno inferior a tu gusto */
-        margin-top: auto; /* Empuja el footer hacia abajo si hay poco contenido */
-    }
-
-    /* --- ADS ALIGNMENT (2 small next to each other, 3rd below full width) --- */
-    .sidebar-ads {
-        display: grid !important;
-        grid-template-columns: repeat(1, 1fr) !important; /* Creamos 2 columnas iguales */
-        gap: 12px !important;
-        width: 100% !important;
-        margin-top: 20px !important;
-    }
-
-    /* Forzamos a que el TERCER anuncio ocupe las dos columnas de la cuadrícula */
-    .sidebar-ads > div:nth-child(3),
-    .sidebar-ads .ad-sidebar-tall:nth-child(3) {
-        grid-column: span 2 !important; /* Se estira a lo ancho ocupando toda la fila */
-        width: 100% !important;
-    }
-
-    /* Ajuste de alturas para que los 2 de arriba no se rompan */
-    .ad-sidebar-small,
-    .ad-sidebar-rect,
-    .ad-sidebar-tall {
-        width: 100% !important;
-        height: auto !important;
-        min-height: 140px !important; /* Altura ideal para los dos pequeños de arriba */
-    }
-
-    /* El tercero puede ser un poco más alto si es el formato nativo original */
-    .sidebar-ads > div:nth-child(3) {
-        min-height: 180px !important; 
-    }
-}
-
-
-
-@media (max-width: 720px) {
     .barra-busqueda-wrapper {
         position: fixed;
         left: 0;
         right: 0;
-        /* Pon aquí exactamente el mismo alto que tenga tu navbar en móvil (ej: 60px) */
         top: 60px; 
         width: 100%;
         z-index: 9999;
         background-color: var(--footer-bg);
     }
 
-    .barra-busqueda-wrapper.abierta { 
-        max-height: 140px; /* Suficiente espacio para la fila o columna */
-    }
+    .barra-busqueda-wrapper.abierta { max-height: 140px; }
 
-    /* Si ves que el input y el botón se siguen apretando mucho de lado, 
-       rómpelos en columna aquí mismo: */
     .barra-busqueda-form {
         flex-direction: column;
         align-items: stretch;
@@ -2008,197 +1535,75 @@ html {
         gap: 8px;
     }
 
-    .barra-busqueda-input,
-    .barra-busqueda-submit {
+    .barra-busqueda-input, .barra-busqueda-submit {
         width: 100%;
         box-sizing: border-box;
     }
-}
 
-
-
-@media (max-width: 720px) {
-    /* 1. Pasamos el formulario a columna ocupando el ancho disponible con márgenes limpios */
     .buscar-input-grande {
         flex-direction: column;
         align-items: stretch; 
         gap: 12px;
-
-        /* Dejamos un margen orgánico arriba, abajo y a los lados */
         margin: 18px auto; 
-
-        /* En vez de 100%, calculamos el ancho restándole el espacio de los lados (ej: 36px totales) */
         width: calc(100% - 36px); 
-
-        /* Opcional: si no quieres que en tablets o pantallas intermedias se vea gigante */
         max-width: 480px; 
     }
 
-    /* 2. El input se adapta al ancho de su nuevo contenedor padre */
-    .buscar-input-grande input {
+    .buscar-input-grande input, .buscar-input-grande button {
         width: 100%;
         box-sizing: border-box;
     }
 
-    /* 3. El botón se adapta y mantiene su texto perfectamente centrado */
     .buscar-input-grande button {
-        width: 100%;
-        box-sizing: border-box;
-
         display: flex; 
         justify-content: center;
         align-items: center;
-
         line-height: 1; 
         padding: 14px 20px; 
     }
-}
 
+    .nav-item-dropdown .submenu {
+        position: static;
+        transform: none;
+        box-shadow: none;
+        border: none;
+        background-color: transparent;
+        padding: 0 0 0 1.5rem;
+        display: none; 
+        grid-template-columns: 1fr; 
+        gap: 0;
+        opacity: 1;
+        visibility: visible;
+    }
 
+    .nav-item-dropdown.abierto .submenu { display: block; }
 
+    .ad-slot, .ad-banner-horizontal, div[class*="ad-"] {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+        display: flex !important;
+        justify-content: center !important;
+    }
 
-/* ==========================================================================
-   Solución para el Submenú Desplegable de Categorías
-   ========================================================================== */
-
-/* 1. Contenedor del Submenú (Desktop) */
-.nav-item-dropdown .submenu {
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%); /* Centra el menú respecto al botón */
-  background-color: #1e1e1e;   /* Cambia por tu variable de fondo, ej: var(--fondo-tarjeta) */
-  border: 1px solid #333;       /* Cambia por tu variable de borde */
-  border-radius: 8px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-  padding: 1.25rem;
-  margin: 0;
-  list-style: none;
-  z-index: 100;
-
-  /* Configuración del Grid para múltiples columnas */
-  display: grid;
-  grid-template-columns: repeat(2, minmax(160px, 1fr)); /* Crea 2 columnas anchas */
-  gap: 0.25rem 1.5rem;                                 /* Espacio entre filas y columnas */
-
-  /* Control de visibilidad inicial (ajústalo según tu lógica actual de hover/clases) */
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.2s ease, visibility 0.2s ease;
-}
-
-/* Muestra el menú al hacer hover o cuando tiene la clase de abierto */
-.nav-item-dropdown:hover .submenu,
-.nav-item-dropdown.abierto .submenu {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* 2. Estilos para los enlaces internos del submenú */
-.nav-item-dropdown .submenu li a {
-  display: block;
-  padding: 0.5rem 0.75rem;
-  color: #e0e0e0;
-  text-decoration: none;
-  font-size: 0.95rem;
-  border-radius: 4px;
-  white-space: nowrap; /* Evita que géneros largos como "Supervivencia / Exploración" se partan en dos líneas */
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-/* Efecto Hover en las opciones */
-.nav-item-dropdown .submenu li a:hover {
-  background-color: rgba(255, 255, 255, 0.08); /* Fondo sutil al pasar el mouse */
-  color: #00acc1;                              /* Cambia por tu color de acento principal */
-}
-
-/* ==========================================================================
-   Adaptación para Dispositivos Móviles (Media Query)
-   ========================================================================== */
-@media (max-width: 768px) {
-   h1{
-      margin-top: 60px;   
-   }
-
-   .seccion-recientes{
-      margin-top: 60px; 
-   }
-
-   .encabezado-listado{
-      margin-top: 60px; 
-   }
-   
-   .detalle-carrusel{
-      margin-top: 60px;
-   }
-
-   
-  .nav-item-dropdown .submenu {
-    position: static;
-    transform: none;
-    box-shadow: none;
-    border: none;
-    background-color: transparent;
-    padding: 0 0 0 1.5rem; /* Margen interno izquierdo para escalonarlo */
-
-    /* En móviles es mejor una sola columna vertical que use el scroll natural del menú */
-    display: none; 
-    grid-template-columns: 1fr; 
-    gap: 0;
-    opacity: 1;
-    visibility: visible;
-  }
-
-
-  /* Si tu JS añade la clase 'abierto' en móvil */
-  .nav-item-dropdown.abierto .submenu {
-    display: block;
-  }
-}
-
-
-   @media (max-width: 900px) {
-   .nav-menu-toggle { display: flex; }
-    .sidebar-ads .ocultar-en-movil {
-        display: none !important;
+    .ad-slot iframe, .ad-slot img, ins.adsbygoogle {
+        max-width: 100% !important;
+        height: auto !important;
+        object-fit: contain !important;
     }
 }
 
+@media (max-width: 480px) {
+    .grid-videojuegos, .grid-listado, .grid-relacionados {
+        grid-template-columns: minmax(0, 1fr);
+        justify-content: center;
+    }
+    .tarjeta-juego { width: 100%; max-width: 100%; }
+    .tarjeta-imagen img { height: 180px; }
 
-.sidebar-ads-fija{
-   margin: auto;
-}
-
-
-/* Selecciona la imagen del logo en el Navbar */
-.navbar .logo-img, 
-header img {
-  /* Aumenta el brillo y el contraste */
-  filter: brightness(1.8) contrast(1.2) drop-shadow(0px 0px 8px rgba(0, 217, 255, 0.6));
-  transition: transform 0.2s ease, filter 0.2s ease;
-}
-
-/* Efecto hover interactivo al pasar el mouse */
-.navbar .logo-img:hover,
-header img:hover {
-  filter: brightness(2.2) drop-shadow(0px 0px 12px rgba(0, 217, 255, 0.9));
-  transform: scale(1.03);
-}
-
-
-.navbar .logo-img {
-  /* Genera un borde/sombra blanca limpia alrededor de todo el pixel art */
-  filter: drop-shadow(1px 1px 0px #ffffff) 
-          drop-shadow(-1px -1px 0px #ffffff) 
-          drop-shadow(1px -1px 0px #ffffff) 
-          drop-shadow(-1px 1px 0px #ffffff);
-}
-
-
-.logo-container {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(4px);
-  padding: 6px 12px;
-  border-radius: 8px;
-  border: 1px solid rgba(0, 217, 255, 0.2);
+    .nav-socials {
+        gap: 10px;
+        margin-right: 8px;
+        padding-right: 8px;
+    }
 }
