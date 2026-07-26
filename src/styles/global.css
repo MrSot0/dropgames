@@ -2184,3 +2184,12 @@ header img:hover {
   filter: brightness(2.2) drop-shadow(0px 0px 12px rgba(0, 217, 255, 0.9));
   transform: scale(1.03);
 }
+
+
+.navbar .logo-img {
+  /* Genera un borde/sombra blanca limpia alrededor de todo el pixel art */
+  filter: drop-shadow(1px 1px 0px #ffffff) 
+          drop-shadow(-1px -1px 0px #ffffff) 
+          drop-shadow(1px -1px 0px #ffffff) 
+          drop-shadow(-1px 1px 0px #ffffff);
+}
