@@ -61,7 +61,7 @@ const gameSchema = {
   "@context": "https://schema.org",
   "@type": "VideoGame",
   "name": title,
-  "description": juego.data.descripcionCorta || `Descarga ${title} gratis para PC.`,
+  "description": `Descargar ${title} gratis para PC en español. Guía de instalación, requisitos y links de descarga seguros.`,
   "image": new URL(imagen, Astro.site || Astro.url.origin).toString(),
   "applicationCategory": "GameApplication",
   "operatingSystem": plataforma || "Windows",
