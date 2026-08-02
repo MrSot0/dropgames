@@ -1,12 +1,54 @@
 ---
 import '../styles/global.css';
 import Layout from '../layouts/Layout.astro';
+
+const title = "404 - Página no encontrada | DropGames";
+const description = "Lo sentimos, la página o el juego que buscas no existe o ha sido movido de dirección.";
 ---
 
-<Layout title="Página no encontrada | DropGames">
-  <div class="contenido-articulo" style="text-align:center;">
-    <h1>404</h1>
-    <p class="intro">La página que buscas no existe o fue movida.</p>
-    <p><a href="/">← Volver al inicio</a></p>
+<Layout title={title} description={description}>
+  <!-- Evita que los motores de búsqueda indexen la URL rota -->
+  <Fragment slot="head">
+    <meta name="robots" content="noindex, follow" />
+  </Fragment>
+
+  <div class="contenido-articulo" style="text-align: center; padding: 4rem 1rem;">
+    
+    <div class="error-badge" style="display: inline-block; padding: 0.25rem 0.75rem; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 20px; color: #ef4444; font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem;">
+      Error 404 · Game Over
+    </div>
+
+    <h1 style="font-size: 5rem; margin-bottom: 0.5rem; line-height: 1; background: linear-gradient(180deg, #fff, var(--texto-tenue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+      404
+    </h1>
+
+    <p class="intro" style="font-size: 1.25rem; margin-bottom: 1.5rem;">
+      ¡Uy! Te has salido del mapa. La página o el juego que buscas no existe o cambió de ruta.
+    </p>
+
+    <!-- Botones de Navegación de Rescate -->
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem;">
+      <a 
+        href="/" 
+        style="padding: 0.75rem 1.5rem; background: var(--acento); color: #fff; border-radius: 8px; font-weight: 600; text-decoration: none; transition: transform 0.2s ease, filter 0.2s ease;"
+      >
+        🏠 Volver al Inicio
+      </a>
+
+      <a 
+        href="/buscar" 
+        style="padding: 0.75rem 1.5rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--texto); border-radius: 8px; font-weight: 600; text-decoration: none; transition: background 0.2s ease;"
+      >
+        🔍 Explorar Catálogo
+      </a>
+
+      <a 
+        href="/pedidos" 
+        style="padding: 0.75rem 1.5rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--texto); border-radius: 8px; font-weight: 600; text-decoration: none; transition: background 0.2s ease;"
+      >
+        📩 Pedir un Juego
+      </a>
+    </div>
+
   </div>
 </Layout>
