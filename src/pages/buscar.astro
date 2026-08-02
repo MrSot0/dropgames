@@ -5,9 +5,9 @@ import Layout from '../layouts/Layout.astro';
 // Obtenemos todos los juegos de la colección
 const todos = await getCollection('juegos');
 
-// Formateamos el catálogo enviando explícitamente el .id como la propiedad que define la URL
+// Formateamos el catálogo enviando explícitamente el .id
 const catalogo = todos.map((j) => ({
-  id: j.id, // 🎯 Esto coincide perfectamente con params: { slug: juego.id } de tu archivo dinámico
+  id: j.id,
   title: j.data.title,
   categoria: j.data.categoria,
   plataforma: j.data.plataforma,
@@ -15,7 +15,7 @@ const catalogo = todos.map((j) => ({
   imagen: j.data.imagen,
 }));
 
-// 🌟 Diccionario extendido y actualizado para el catálogo
+// Diccionario extendido y actualizado para el catálogo
 const etiquetas: Record<string, string> = {
   accion: 'Acción',
   aventura: 'Aventura',
@@ -30,11 +30,20 @@ const etiquetas: Record<string, string> = {
   peleas: 'Peleas',
   plataformas: 'Plataformas',
   shooter: 'Shooter',
-  movil: 'Movil'
+  movil: 'Móvil'
 };
+
+// 🌟 Optimización de metadatos SEO
+const title = "Buscador de Videojuegos para PC | DropGames";
+const description = "Encuentra cualquier videojuego, género o plataforma en nuestro buscador rápido del catálogo DropGames.";
 ---
 
-<Layout title="Buscar | DropGames">
+<Layout title={title} description={description}>
+  <!-- Evita que Google indexe búsquedas internas duplicadas tipo /buscar?q=... -->
+  <Fragment slot="head">
+    <meta name="robots" content="noindex, follow" />
+  </Fragment>
+
   <div class="encabezado-listado">
     <h1>Buscar</h1>
     <p>Escribe el nombre de un juego, categoría o plataforma.</p>
@@ -80,8 +89,6 @@ const etiquetas: Record<string, string> = {
         contenedor.innerHTML = resultados
           .map(
             (j: any) => {
-              // 🌟 Fallback dinámico en JS: Si la categoría no está en las etiquetas,
-              // capitaliza la primera letra automáticamente (ej: "survival-horror" -> "Survival-horror")
               const textoCategoria = etiquetas[j.categoria] || (j.categoria.charAt(0).toUpperCase() + j.categoria.slice(1));
 
               return `
