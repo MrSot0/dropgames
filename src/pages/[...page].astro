@@ -17,9 +17,19 @@ export async function getStaticPaths({ paginate }) {
 
 const { page } = Astro.props;
 
+// 🌟 Optimización SEO Dinámica
+const esPaginaSecundaria = page.currentPage > 1;
+
+const title = esPaginaSecundaria
+  ? `DropGames - Catálogo de Juegos para PC (Página ${page.currentPage})`
+  : "DropGames | Descarga Videojuegos para PC Gratis, Emuladores y Programas";
+
+const description = esPaginaSecundaria
+  ? `Explora la página ${page.currentPage} de nuestro catálogo de juegos gratis para PC. Novedades, requisitos del sistema y enlaces directos.`
+  : "Descarga juegos para PC gratis: acción, aventura, RPG, deportes y multijugador. Emuladores, programas necesarios y tutoriales actualizados en DropGames.";
 ---
 
-<Layout title="DropGames | Inicio">
+<Layout title={title} description={description}>
   <main class="contenedor-principal">
     
     <section class="seccion-recientes">
@@ -39,14 +49,12 @@ const { page } = Astro.props;
       </nav>
     </section>
 
-  <!-- Sidebar con el Top 5 -->
-<aside class="sidebar-top">
-
-  <div class="sidebar-ads sidebar-ads-fija">
-    <Anuncio type="banner-300" />
-    <Anuncio type="banner-160-600" ocultarMovil />
-  </div>
-
+    <!-- Sidebar con Anuncios -->
+    <aside class="sidebar-top">
+      <div class="sidebar-ads sidebar-ads-fija">
+        <Anuncio type="banner-300" />
+        <Anuncio type="banner-160-600" ocultarMovil />
+      </div>
     </aside>
 
   </main>
