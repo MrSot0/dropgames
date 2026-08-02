@@ -20,7 +20,7 @@ const categoriasBase = [
   { slug: 'peleas', nombre: 'Peleas' },
   { slug: 'plataformas', nombre: 'Plataformas' },
   { slug: 'shooter', nombre: 'Shooter' },
-  { slug: 'movil', nombre: 'Movil' }
+  { slug: 'movil', nombre: 'Móvil' }
 ];
 
 // 2. Mapeamos la lista base calculando los totales de juegos
@@ -29,14 +29,17 @@ let categorias = categoriasBase.map((c) => ({
   total: todos.filter((j) => j.data.categoria === c.slug).length,
 }));
 
-// 3. 🌟 Magia Dinámica: Buscamos si hay categorías nuevas en los Markdowns 
-// que no hayamos metido manualmente en la lista base
+// 3. 🌟 Magia Dinámica: Buscamos si hay categorías nuevas en los Markdowns
 todos.forEach((juego) => {
   const slugJuego = juego.data.categoria;
   
-  // Si no existe en nuestra lista actual, la creamos al vuelo
-  if (!categorias.some((c) => c.slug === slugJuego)) {
-    const nombreFormateado = slugJuego.charAt(0).toUpperCase() + slugJuego.slice(1);
+  if (slugJuego && !categorias.some((c) => c.slug === slugJuego)) {
+    // Convierte slugs como "survival-horror" a "Survival Horror"
+    const nombreFormateado = slugJuego
+      .split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+
     const totalJuegos = todos.filter((j) => j.data.categoria === slugJuego).length;
     
     categorias.push({
@@ -47,21 +50,25 @@ todos.forEach((juego) => {
   }
 });
 
-// 4. Opcional: Filtramos para no mostrar categorías que tengan 0 juegos si prefieres un diseño más limpio
+// 4. Filtramos las categorías activas (con al menos 1 juego)
 const categoriasActivas = categorias.filter(c => c.total > 0);
+
+// Meta datos SEO
+const title = "Categorías y Géneros de Videojuegos para PC | DropGames";
+const description = "Explora nuestro catálogo completo de videojuegos para PC clasificados por género: acción, RPG, estrategia, terror, simulación, carreras y más.";
 ---
 
-<Layout title="Categorías de Videojuegos | DropGames">
+<Layout title={title} description={description}>
   <div class="encabezado-listado">
-    <h1>Categorías</h1>
+    <h1>Categorías de Videojuegos</h1>
     <p>Explora los videojuegos disponibles organizados por género.</p>
   </div>
 
   <div class="grid-tiles">
     {categoriasActivas.map((c) => (
-      <a class="tile-enlace" href={`/categorias/${c.slug}`}>
+      <a class="tile-enlace" href={`/categorias/${c.slug}/`}>
         <h3>{c.nombre}</h3>
-        <span>{c.total} juego{c.total === 1 ? '' : 's'} disponible{c.total === 1 ? '' : 's'}</span>
+        <span class="tile-count">{c.total} juego{c.total === 1 ? '' : 's'} disponible{c.total === 1 ? '' : 's'}</span>
       </a>
     ))}
   </div>
