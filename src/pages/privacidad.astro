@@ -1,17 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const title = "Política de Privacidad | DropGames";
+const description = "Conoce cómo recopilamos, usamos y protegemos tu información en DropGames, así como el uso de cookies y analíticas de navegación.";
+const emailContacto = "contact.dropgames@gmail.com";
 ---
 
-<Layout
-  title="Política de Privacidad | DropGames"
-  description="Política de privacidad de DropGames. Conoce cómo recopilamos, usamos y protegemos tu información personal."
->
+<Layout title={title} description={description}>
   <div class="pagina-legal">
 
     <div class="legal-hero">
       <span class="legal-badge">Legal</span>
       <h1>Política de Privacidad</h1>
-      <p>Última actualización: Julio 2026 · Vigente para dropgames.net y todos sus subdominios</p>
+      <p>Última actualización: Agosto 2026 · Vigente para dropgames.net y todos sus subdominios</p>
     </div>
 
     <div class="legal-seccion">
@@ -61,9 +62,9 @@ import Layout from '../layouts/Layout.astro';
       </p>
       <p>
         Para conocer más sobre cómo Google utiliza tus datos, visita:
-        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" style="color: var(--acento);">https://policies.google.com/privacy</a>.
+        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" style="color: var(--acento);">https://policies.google.com/privacy</a>.
         Puedes inhabilitar la publicidad personalizada en:
-        <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener" style="color: var(--acento);">www.google.com/settings/ads</a>.
+        <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" style="color: var(--acento);">www.google.com/settings/ads</a>.
       </p>
     </div>
 
@@ -130,7 +131,7 @@ import Layout from '../layouts/Layout.astro';
     <div class="legal-contacto-dmca">
       <h3>¿Preguntas sobre tu privacidad?</h3>
       <p>Puedes contactarnos en cualquier momento a través de nuestro correo de privacidad:</p>
-      <p><a href="mailto:contacto.dropgames@gmail.com">contacto.dropgames@gmail.com</a></p>
+      <p><a href={`mailto:${emailContacto}`}>{emailContacto}</a></p>
     </div>
 
   </div>
