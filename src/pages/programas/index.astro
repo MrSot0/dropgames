@@ -1,26 +1,47 @@
 ---
-import '../../styles/global.css';
-import Layout from '../../layouts/Layout.astro';
+import '../styles/global.css';
+import Layout from '../layouts/Layout.astro';
 
 const emuladores = [
-  { nombre: 'RPCS3', desc: 'Emulador de PlayStation 3 de código abierto.' },
-  { nombre: 'Yuzu / Ryujinx', desc: 'Emuladores de Nintendo Switch.' },
-  { nombre: 'PCSX2', desc: 'El emulador de PlayStation 2 más estable.' },
-  { nombre: 'Dolphin', desc: 'Emulador de GameCube y Wii.' },
+  { nombre: 'RPCS3', desc: 'Emulador de PlayStation 3 de código abierto para ejecutar juegos de PS3 en PC.', url: 'https://rpcs3.net/' },
+  { nombre: 'Ryujinx / Sucesores', desc: 'Emulador de Nintendo Switch enfocado en compatibilidad y rendimiento.', url: '#' },
+  { nombre: 'PCSX2', desc: 'El emulador de PlayStation 2 más estable y compatible para Windows.', url: 'https://pcsx2.net/' },
+  { nombre: 'Dolphin', desc: 'Emulador de alto rendimiento para juegos de Nintendo GameCube y Wii.', url: 'https://dolphin-emu.org/' },
 ];
 
 const software = [
-  { nombre: 'WinRAR', desc: 'Para extraer archivos .rar y .zip descargados.' },
-  { nombre: '7-Zip', desc: 'Alternativa gratuita y de código abierto para descomprimir.' },
-  { nombre: 'Daemon Tools Lite', desc: 'Monta archivos .iso como una unidad virtual.' },
-  { nombre: 'DirectX / Visual C++', desc: 'Librerías necesarias para que la mayoría de juegos funcionen.' },
+  { nombre: 'WinRAR', desc: 'Herramienta imprescindible para descompresión de archivos .rar y .zip.', url: 'https://www.winrar.es/' },
+  { nombre: '7-Zip', desc: 'Alternativa gratuita y de código abierto para comprimir y descomprimir.', url: 'https://www.7-zip.org/' },
+  { nombre: 'Daemon Tools Lite', desc: 'Monta imágenes de disco .iso como una unidad virtual de CD/DVD.', url: '#' },
+  { nombre: 'DirectX / Runtimes Visual C++', desc: 'Paquetes de librerías esenciales para evitar errores de DLL al iniciar juegos.', url: '#' },
 ];
+
+const title = "Programas Necesarios y Emuladores para PC | DropGames";
+const description = "Descarga los programas esenciales para ejecutar tus juegos de PC: WinRAR, 7-Zip, DirectX, librerías Visual C++ y los mejores emuladores.";
 ---
 
-<Layout title="Programas Necesarios | yizugames" description="Emuladores y software necesario para instalar y ejecutar tus juegos descargados.">
+<Layout title={title} description={description}>
   <div class="contenido-articulo">
-    <h1>Programas Necesarios</h1>
-    <p class="intro">Todo lo que necesitas para instalar, descomprimir y ejecutar tus descargas sin problemas.</p>
+    <h1>Programas Necesarios y Emuladores</h1>
+    <p class="intro">Todo el software que necesitas para descompresión, librerías del sistema y emulación sin errores.</p>
+
+    <section id="software" style="margin-bottom: 2.5rem;">
+      <h2>Software General y Librerías</h2>
+      <div class="lista-programas">
+        {software.map((p) => (
+          <div class="programa-item">
+            <h4>{p.nombre}</h4>
+            <p>{p.desc}</p>
+
+            {p.url.startsWith('http') ? (
+              <a href={p.url} target="_blank" rel="noopener noreferrer">Ir al sitio oficial →</a>
+            ) : (
+              <a href={p.url}>Ver información →</a>
+            )}
+          </div>
+        ))}
+      </div>
+    </section>
 
     <section id="emuladores">
       <h2>Emuladores</h2>
@@ -29,20 +50,12 @@ const software = [
           <div class="programa-item">
             <h4>{p.nombre}</h4>
             <p>{p.desc}</p>
-            <a href="#">Ver descarga →</a>
-          </div>
-        ))}
-      </div>
-    </section>
-
-    <section id="software">
-      <h2>Software General</h2>
-      <div class="lista-programas">
-        {software.map((p) => (
-          <div class="programa-item">
-            <h4>{p.nombre}</h4>
-            <p>{p.desc}</p>
-            <a href="#">Ver descarga →</a>
+            
+            {p.url.startsWith('http') ? (
+              <a href={p.url} target="_blank" rel="noopener noreferrer">Ir al sitio oficial →</a>
+            ) : (
+              <a href={p.url}>Ver información →</a>
+            )}
           </div>
         ))}
       </div>
