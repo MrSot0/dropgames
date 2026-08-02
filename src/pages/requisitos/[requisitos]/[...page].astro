@@ -37,35 +37,60 @@ export async function getStaticPaths({ paginate }) {
 const { requisitos } = Astro.params;
 const { page } = Astro.props;
 
-// Cambiado a capitalize para que tenga sentido con lo que hace
-const capitalize = (str) => str ? str.charAt(0).toUpperCase() + str.slice(1) : '';
+// Diccionario de nombres optimizados para títulos e interfaz
+const diccionarioRequisitos: Record<string, string> = {
+  minimos: 'Mínimos (Bajos Recursos)',
+  medios: 'Medios',
+  altos: 'Altos'
+};
+
+const nombreRequisito = diccionarioRequisitos[requisitos] || (requisitos ? requisitos.charAt(0).toUpperCase() + requisitos.slice(1) : '');
+
+// Control de título dinámico según la página actual
+const esPaginaSecundaria = page.currentPage > 1;
+const title = `Juegos para PC de Requisitos ${nombreRequisito}${esPaginaSecundaria ? ` (Página ${page.currentPage})` : ''} | DropGames`;
+const description = `Explora nuestro catálogo de videojuegos para PC de requisitos ${nombreRequisito.toLowerCase()}. Descargas directas, rápidas y probadas.${esPaginaSecundaria ? ` Página ${page.currentPage} de ${page.lastPage}.` : ''}`;
 ---
 
-<Layout title={`Juegos para PC de requisitos ${capitalize(requisitos)} | DropGames`}>
+<Layout title={title} description={description} canonicalURL={page.url.current}>
+  <!-- Enlaces de Paginación para SEO -->
+  <Fragment slot="head">
+    {page.url.prev && <link rel="prev" href={page.url.prev} />}
+    {page.url.next && <link rel="next" href={page.url.next} />}
+  </Fragment>
+
   <main class="contenedor-principal">
     <section class="seccion-recientes">
-      <h2 class="titulo-seccion">Requisitos: {capitalize(requisitos)}</h2>
+      <h1 class="titulo-seccion">Juegos con Requisitos: {nombreRequisito}</h1>
       
       <div class="grid-videojuegos">
         {page.data.map((juego) => <GameCard juego={juego} />)}
       </div>
 
-      <!-- Navegación estandarizada que va a juego con el resto de la web -->
-      <nav class="pagination-ui">
-        {page.url.prev && <a href={page.url.prev} class="nav-btn">«</a>}
+      <!-- Navegación estandarizada -->
+      <nav class="pagination-ui" aria-label="Navegación de páginas">
+        {page.url.prev ? (
+          <a href={page.url.prev} class="nav-btn" aria-label="Página anterior">«</a>
+        ) : (
+          <span class="nav-btn disabled" aria-disabled="true">«</span>
+        )}
         
         <span class="page-numbers">{page.currentPage} de {page.lastPage}</span>
         
-        {page.url.next && <a href={page.url.next} class="nav-btn">»</a>}
+        {page.url.next ? (
+          <a href={page.url.next} class="nav-btn" aria-label="Página siguiente">»</a>
+        ) : (
+          <span class="nav-btn disabled" aria-disabled="true">»</span>
+        )}
       </nav>
     </section>
 
-   <!-- Sidebar Corregido -->
-  <aside class="sidebar-top">
-  <div class="sidebar-ads sidebar-ads-fija">
-    <Anuncio type="banner-300" />
-    <Anuncio type="banner-160-600" ocultarMovil />
-  </div>
-  </aside>
+    <!-- Sidebar -->
+    <aside class="sidebar-top">
+      <div class="sidebar-ads sidebar-ads-fija">
+        <Anuncio type="banner-300" />
+        <Anuncio type="banner-160-600" ocultarMovil />
+      </div>
+    </aside>
   </main>
 </Layout>
