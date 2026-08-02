@@ -12,22 +12,22 @@ interface Props {
 
 const {
   title,
-  description = 'Descarga videojuegos para PC gratis: acción, aventura, RPG, deportes y multijugador. Emuladores, programas necesarios y tutoriales. DropGames.',
+  description = 'Descarga videojuegos para PC gratis: acción, aventura, RPG, deportes y multijugador. Emuladores, programas necesarios y tutoriales en DropGames.',
   image = '/logo.webp',
   canonicalURL = new URL(Astro.url.pathname, Astro.site || Astro.url.origin)
 } = Astro.props;
 
 // Convierte la ruta de la imagen en URL absoluta para OG/Twitter
-const absoluteImageUrl = new URL(image, Astro.url.origin);
+const absoluteImageUrl = new URL(image, Astro.site || Astro.url.origin);
 
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "DropGames",
-  "url": Astro.url.origin,
+  "url": (Astro.site || Astro.url.origin).toString(),
   "potentialAction": {
     "@type": "SearchAction",
-    "target": `${Astro.url.origin}/buscar?q={search_term_string}`,
+    "target": `${(Astro.site || Astro.url.origin).toString().replace(/\/$/, '')}/buscar?q={search_term_string}`,
     "query-input": "required name=search_term_string"
   }
 };
@@ -39,9 +39,9 @@ const websiteSchema = {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <!-- Solo 2 Íconos Básicos -->
+  <!-- Íconos de Favicon -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-  <link rel="favicon" sizes="500x500" href="/favicon.webp" />
+  <link rel="icon" type="image/webp" sizes="500x500" href="/favicon.webp" />
 
   <!-- SEO Básico -->
   <title>{title}</title>
@@ -62,11 +62,14 @@ const websiteSchema = {
   <meta property="twitter:description" content={description} />
   <meta property="twitter:image" content={absoluteImageUrl} />
 
+  <!-- Optimización de Recurso Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
+  <!-- Inyección de fragmentos adicionales (Schemas dinámicos, meta tags extra) -->
   <slot name="head" />
 
+  <!-- Script Inline para evitar Flash de Tema Oscuro/Claro (FOUC) -->
   <script is:inline>
     (function () {
       try {
@@ -78,6 +81,7 @@ const websiteSchema = {
     })();
   </script>
 
+  <!-- Schema WebSite para Google -->
   <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
 </head>
 <body>
