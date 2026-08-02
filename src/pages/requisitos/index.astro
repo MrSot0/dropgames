@@ -6,27 +6,31 @@ import Layout from '../../layouts/Layout.astro';
 const todos = await getCollection('juegos');
 
 const niveles = [
-  { slug: 'altos', nombre: 'Requisitos Altos', desc: 'Para PCs con hardware potente y de última generación.' },
-  { slug: 'medios', nombre: 'Requisitos Medios', desc: 'Equipos con especificaciones estándar actuales.' },
-  { slug: 'minimos', nombre: 'Requisitos Mínimos', desc: 'Juegos ligeros, ideales para PCs modestas.' },
+  { slug: 'altos', nombre: 'Requisitos Altos', desc: 'Para PCs con hardware potente y tarjetas gráficas dedicadas de última generación.' },
+  { slug: 'medios', nombre: 'Requisitos Medios', desc: 'Equipos de gama media con especificaciones estándar actuales.' },
+  { slug: 'minimos', nombre: 'Requisitos Mínimos (PCs de Bajos Recursos)', desc: 'Juegos ligeros y muy optimizados, ideales para PCs modestas o laptops.' },
 ].map((n) => ({
   ...n,
   total: todos.filter((j) => j.data.nivelRequisitos === n.slug).length,
 }));
+
+// Meta datos SEO
+const title = "Juegos para PC según Requisitos de Sistema | DropGames";
+const description = "Filtra nuestro catálogo de videojuegos para PC según la potencia de tu equipo: requisitos mínimos (bajos recursos), medios o altos.";
 ---
 
-<Layout title="Requisitos de Sistema | yizugames">
+<Layout title={title} description={description}>
   <div class="encabezado-listado">
     <h1>Requisitos de Sistema</h1>
-    <p>Filtra los juegos según lo que tu PC pueda mover.</p>
+    <p>Encuentra los juegos ideales que se adaptan al rendimiento y potencia de tu PC.</p>
   </div>
 
   <div class="grid-tiles">
     {niveles.map((n) => (
-      <a class="tile-enlace" href={`/requisitos/${n.slug}`}>
+      <a class="tile-enlace" href={`/requisitos/${n.slug}/`}>
         <h3>{n.nombre}</h3>
-        <span>{n.desc}</span>
-        <span>{n.total} juego{n.total === 1 ? '' : 's'}</span>
+        <p class="tile-desc">{n.desc}</p>
+        <span class="tile-count">{n.total} juego{n.total === 1 ? '' : 's'} disponible{n.total === 1 ? '' : 's'}</span>
       </a>
     ))}
   </div>
