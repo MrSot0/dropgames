@@ -1,63 +1,71 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const title = "Solicitar Juegos y Reportar Enlaces Caídos | DropGames";
+const description = "¿Buscas un juego de PC que no está en nuestro catálogo o encontraste un enlace caído? Envíanos tu solicitud o reporte directamente.";
+const emailContacto = "contact.dropgames@gmail.com";
 ---
 
-<Layout title="Pedidos y Reportes | DropGames" description="Solicita un videojuego o reporta un enlace caído.">
+<Layout title={title} description={description}>
   <div class="contenido-articulo">
-    <h1>Pedidos</h1>
-    <p class="intro">¿Buscas un juego que no está en el catálogo, o un enlace dejó de funcionar? Cuéntanos aquí.</p>
+    <h1>Pedidos y Reportes</h1>
+    <p class="intro">¿Buscas un juego que no está en el catálogo o un enlace dejó de funcionar? Cuéntanos aquí.</p>
 
     <div class="aviso-pedido">
-      Este sitio es 100% estático (generado con Astro, sin base de datos), así que el formulario
-      abre tu cliente de correo con los datos ya redactados. Si prefieres, puedes escribir
-      directamente a <a href="mailto:contact.dropgames@gmail.com">contact.dropgames@gmail.com</a>.
+      Este sitio es 100% estático, por lo que este formulario abrirá tu cliente de correo preferido con la solicitud estructurada automáticamente. Si prefieres, puedes escribirnos directamente a 
+      <a href={`mailto:${emailContacto}`}>{emailContacto}</a>.
     </div>
 
     <form class="form-pedido" id="form-pedido">
       <div>
         <label for="tipo">Tipo de solicitud</label>
-        <select id="tipo" name="tipo">
+        <select id="tipo" name="tipo" required>
           <option value="Pedido de juego">Pedido de juego nuevo</option>
           <option value="Enlace caído">Reporte de enlace caído</option>
-          <option value="Otro">Otro</option>
+          <option value="Otro">Otro asunto</option>
         </select>
       </div>
 
       <div>
         <label for="titulo">Título del juego</label>
-        <input type="text" id="titulo" name="titulo" placeholder="Ej: Red Dead Redemption 2" required>
+        <input type="text" id="titulo" name="titulo" placeholder="Ej: Cyberpunk 2077" required />
       </div>
 
       <div>
         <label for="detalle">Detalles adicionales</label>
-        <textarea id="detalle" name="detalle" placeholder="Plataforma, enlace afectado, o cualquier detalle útil..."></textarea>
+        <textarea id="detalle" name="detalle" rows="4" placeholder="Plataforma, enlace afectado o cualquier detalle útil..."></textarea>
       </div>
 
       <div>
         <label for="correo">Tu correo (opcional, para avisarte)</label>
-        <input type="email" id="correo" name="correo" placeholder="tucorreo@ejemplo.com">
+        <input type="email" id="correo" name="correo" placeholder="tucorreo@ejemplo.com" />
       </div>
 
-      <button type="submit">Enviar pedido</button>
+      <button type="submit" class="btn-enviar-pedido">Enviar solicitud</button>
     </form>
   </div>
 
-  <script>
+  <script is:inline define:vars={{ emailContacto }}>
     const form = document.getElementById('form-pedido');
+
     form?.addEventListener('submit', (e) => {
       e.preventDefault();
-      const data = new FormData(form as HTMLFormElement);
+      
+      const data = new FormData(form);
       const tipo = data.get('tipo');
       const titulo = data.get('titulo');
       const detalle = data.get('detalle');
       const correo = data.get('correo');
 
-      const asunto = encodeURIComponent(`${tipo}: ${titulo}`);
+      const asunto = encodeURIComponent(`[${tipo}] ${titulo}`);
       const cuerpo = encodeURIComponent(
-        `Tipo: ${tipo}\nTítulo: ${titulo}\nDetalles: ${detalle}\nCorreo de contacto: ${correo || 'no proporcionado'}`
+        `Tipo de solicitud: ${tipo}\n` +
+        `Juego / Asunto: ${titulo}\n` +
+        `Detalles: ${detalle || 'Sin detalles adicionales'}\n` +
+        `Correo de respuesta: ${correo || 'No proporcionado'}`
       );
 
-      window.location.href = `mailto:contacto.yizugames@gmail.com?subject=${asunto}&body=${cuerpo}`;
+      window.location.href = `mailto:${emailContacto}?subject=${asunto}&body=${cuerpo}`;
     });
   </script>
 </Layout>
