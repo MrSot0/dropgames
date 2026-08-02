@@ -2,43 +2,65 @@
 import '../styles/global.css';
 import Layout from '../layouts/Layout.astro';
 
+const title = "Ayuda, Tutoriales e Instalación de Juegos | DropGames";
+const description = "Aprende a instalar tus videojuegos para PC, saltar acortadores de acortadores y resolver errores comunes de WinRAR, DirectX y Visual C++.";
+
 const faqs = [
-  { p: '¿Los juegos tienen virus?', r: 'No. Todos los archivos son escaneados antes de subirse. Aun así, recomendamos siempre tener un antivirus activo.' },
-  { p: '¿Por qué mi antivirus marca el crack como amenaza?', r: 'Es un falso positivo común en herramientas de este tipo. Puedes agregar una excepción en tu antivirus si confías en la fuente.' },
-  { p: '¿Qué hago si un enlace no funciona?', r: 'Repórtalo en la sección de Pedidos y lo revisaremos lo antes posible.' },
-  { p: '¿Necesito estar registrado para descargar?', r: 'No, todas las descargas son libres y no requieren cuenta.' },
+  { p: '¿Los juegos tienen virus?', r: 'No. Todos los archivos son verificados antes de publicarse. Aun así, recomendamos mantener siempre tu antivirus activo.' },
+  { p: '¿Por qué mi antivirus marca el crack o ejecutable como amenaza?', r: 'Es un falso positivo habitual. Los antivirus suelen detectar los modificadores o parches como archivos no reconocidos. Puedes añadir una excepción en tu antivirus.' },
+  { p: '¿Qué hago si un enlace de descarga no funciona?', r: 'Puedes reportarlo en la sección de Pedidos y Reportes, y reordenaremos el servidor o subiremos un espejo lo antes posible.' },
+  { p: '¿Necesito registrarme para descargar juegos?', r: 'No, todas las descargas en DropGames son completamente libres y no requieren la creación de ninguna cuenta.' },
 ];
+
+// 🌟 Schema SEO FAQPage para Google Rich Snippets
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map((f) => ({
+    "@type": "Question",
+    "name": f.p,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": f.r
+    }
+  }))
+};
 ---
 
-<Layout title="Ayuda y Tutoriales | DropGames" description="Guías para instalar tus juegos, saltar la publicidad de los acortadores y preguntas frecuentes.">
+<Layout title={title} description={description}>
+  <!-- Inyección de Schema para Rich Snippets en Google Search -->
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  </Fragment>
+
   <div class="contenido-articulo">
     <h1>Ayuda / Tutoriales</h1>
-    <p class="intro">Guías rápidas para que tu descarga e instalación salgan sin problemas.</p>
+    <p class="intro">Guías rápidas para que tu descarga e instalación salgan sin ningún problema.</p>
 
-    <section id="programas-necesarios">
+    <section id="programas-necesarios" style="margin-bottom: 2rem;">
       <h2>Programas Necesarios</h2>
       <div class="pasos-tutorial">
-        <div class="paso-tutorial"><span class="numero"></span><p>Instala 7-Zip o WinRAR para poder extraer los archivos comprimidos.</p></div>
-        <div class="paso-tutorial"><span class="numero"></span><p>Verifica que tengas instalado DirectX y las librerías de Visual C++.</p></div>
-        <div class="paso-tutorial"><span class="numero"></span><p>Consulta la lista completa en la sección <a href="/programas">Programas</a>.</p></div>
+        <div class="paso-tutorial"><span class="numero"></span><p>Instala 7-Zip o WinRAR para poder extraer los archivos comprimidos sin errores de suma de verificación.</p></div>
+        <div class="paso-tutorial"><span class="numero"></span><p>Verifica que tengas actualizado DirectX y las librerías redistribuibles de Visual C++.</p></div>
+        <div class="paso-tutorial"><span class="numero"></span><p>Consulta la lista completa y enlaces directos en nuestra sección de <a href="/programas" style="color: var(--acento); font-weight: 600;">Programas</a>.</p></div>
       </div>
     </section>
 
-    <section id="saltar-publicidad">
+    <section id="saltar-publicidad" style="margin-bottom: 2rem;">
       <h2>Cómo Saltar la Publicidad</h2>
       <div class="pasos-tutorial">
         <div class="paso-tutorial"><span class="numero"></span><p>Al hacer clic en un enlace de descarga, espera a que cargue la página del acortador.</p></div>
-        <div class="paso-tutorial"><span class="numero"></span><p>Busca el botón "Saltar publicidad" o el contador que aparece, generalmente arriba a la derecha.</p></div>
-        <div class="paso-tutorial"><span class="numero"></span><p>Nunca descargues ni instales nada que el acortador te ofrezca fuera del enlace original.</p></div>
+        <div class="paso-tutorial"><span class="numero"></span><p>Busca el botón "Saltar publicidad" o el contador que aparece generalmente arriba a la derecha.</p></div>
+        <div class="paso-tutorial"><span class="numero"></span><p>Nunca descargues ejecutable alguno que el acortador intente ofrecerte fuera del servidor de destino final (MEGA, MediaFire, 1fichier, etc.).</p></div>
       </div>
     </section>
 
     <section id="preguntas-frecuentes">
       <h2>Preguntas Frecuentes</h2>
       {faqs.map((f) => (
-        <details class="faq-item">
-          <summary>{f.p}</summary>
-          <p>{f.r}</p>
+        <details class="faq-item" style="margin-bottom: 1rem; cursor: pointer;">
+          <summary style="font-weight: 600; padding: 0.5rem 0;">{f.p}</summary>
+          <p style="margin-top: 0.5rem; line-height: 1.6;">{f.r}</p>
         </details>
       ))}
     </section>
