@@ -120,6 +120,7 @@ html {
 /* ==========================================================================
    3. NAVBAR
    ========================================================================== */
+/* El contenedor fixed externo mantiene el fondo extendido al 100% */
 .navbar {
     position: fixed;
     top: 0;
@@ -131,12 +132,20 @@ html {
     border-bottom: 3px solid transparent;
     border-image: linear-gradient(90deg, var(--footer-acento), var(--footer-azul)) 1;
     color: var(--footer-texto);
+    height: 65px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35), 0 6px 24px rgba(0, 229, 255, 0.12);
+}
+
+/* El contenedor interno centra el contenido y ajusta el ancho máximo */
+.navbar-contenido {
+    max-width: 1400px; /* Misma anchura máxima que tus tarjetas/sitio-encapsulado */
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 20px;
-    height: 65px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35), 0 6px 24px rgba(0, 229, 255, 0.12);
+    padding: 0 24px;   /* Padding idéntico al contenedor de tus tarjetas */
 }
 
 .nav-logo {
