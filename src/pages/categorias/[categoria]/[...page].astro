@@ -7,12 +7,16 @@ import '../../../styles/global.css';
 
 export async function getStaticPaths({ paginate }) {
   const allGames = await getCollection('juegos');
-  const categorias = [...new Set(allGames.map(j => j.data.categoria))];
+  const categorias = [...new Set(allGames.map(j => j.data.categoria).filter(Boolean))];
 
   return categorias.flatMap((categoria) => {
-    const juegosFiltrados = allGames.filter(j => j.data.categoria === categoria);
+    const catString = String(categoria).toLowerCase().trim();
+    const juegosFiltrados = allGames.filter(j => String(j.data.categoria).toLowerCase().trim() === catString);
+
+    if (juegosFiltrados.length === 0) return [];
+
     return paginate(juegosFiltrados, { 
-      params: { categoria }, 
+      params: { categoria: catString }, 
       pageSize: 9 
     });
   });
@@ -20,33 +24,72 @@ export async function getStaticPaths({ paginate }) {
 
 const { categoria } = Astro.params;
 const { page } = Astro.props;
+
+// Diccionario de categorías con acentuación y formato correcto
+const diccionarioCategorias: Record<string, string> = {
+  accion: 'Acción',
+  aventura: 'Aventura',
+  rpg: 'RPG',
+  deportes: 'Deportes',
+  multijugador: 'Multijugador',
+  estrategia: 'Estrategia',
+  simulacion: 'Simulación',
+  carreras: 'Carreras',
+  terror: 'Terror',
+  indie: 'Indie',
+  peleas: 'Peleas',
+  plataformas: 'Plataformas',
+  shooter: 'Shooter',
+  movil: 'Móvil'
+};
+
+const nombreCategoria = diccionarioCategorias[categoria] || (categoria ? categoria.charAt(0).toUpperCase() + categoria.slice(1) : '');
+
+// Control SEO de paginación dinámica
+const esPaginaSecundaria = page.currentPage > 1;
+const title = `Juegos de ${nombreCategoria} para PC${esPaginaSecundaria ? ` (Página ${page.currentPage})` : ''} | DropGames`;
+const description = `Explora y descarga los mejores videojuegos para PC del género ${nombreCategoria.toLowerCase()}.${esPaginaSecundaria ? ` Página ${page.currentPage} de ${page.lastPage}.` : ''}`;
 ---
 
-<Layout title={`Juegos de ${categoria} | DropGames`}>
+<Layout title={title} description={description} canonicalURL={page.url.current}>
+  <!-- Enlaces de paginación para motores de búsqueda -->
+  <Fragment slot="head">
+    {page.url.prev && <link rel="prev" href={page.url.prev} />}
+    {page.url.next && <link rel="next" href={page.url.next} />}
+  </Fragment>
+
   <main class="contenedor-principal">
     <section class="seccion-recientes">
-      <h2 class="titulo-seccion" style="text-transform: capitalize;">Categoría: {categoria}</h2>
+      <h1 class="titulo-seccion">Categoría: {nombreCategoria}</h1>
       
       <div class="grid-videojuegos">
         {page.data.map((juego) => <GameCard juego={juego} />)}
       </div>
 
-      <!-- Navegación estandarizada con tu Index -->
-      <nav class="pagination-ui">
-        {page.url.prev && <a href={page.url.prev} class="nav-btn">«</a>}
+      <!-- Navegación estandarizada -->
+      <nav class="pagination-ui" aria-label="Navegación de páginas">
+        {page.url.prev ? (
+          <a href={page.url.prev} class="nav-btn" aria-label="Página anterior">«</a>
+        ) : (
+          <span class="nav-btn disabled" aria-disabled="true">«</span>
+        )}
         
         <span class="page-numbers">{page.currentPage} de {page.lastPage}</span>
         
-        {page.url.next && <a href={page.url.next} class="nav-btn">»</a>}
+        {page.url.next ? (
+          <a href={page.url.next} class="nav-btn" aria-label="Página siguiente">»</a>
+        ) : (
+          <span class="nav-btn disabled" aria-disabled="true">»</span>
+        )}
       </nav>
     </section>
 
-    <!-- Sidebar Corregido -->
-  <aside class="sidebar-top">
-  <div class="sidebar-ads sidebar-ads-fija">
-    <Anuncio type="banner-300" />
-    <Anuncio type="banner-160-600" ocultarMovil />
-  </div>
-  </aside>
+    <!-- Sidebar -->
+    <aside class="sidebar-top">
+      <div class="sidebar-ads sidebar-ads-fija">
+        <Anuncio type="banner-300" />
+        <Anuncio type="banner-160-600" ocultarMovil />
+      </div>
+    </aside>
   </main>
 </Layout>
