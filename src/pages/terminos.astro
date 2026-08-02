@@ -1,17 +1,19 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const title = "Términos de Uso y DMCA | DropGames";
+const description = "Consulta las condiciones de servicio, responsabilidades legales y la política de avisos DMCA para la retirada de contenidos en DropGames.";
+const emailContacto = "contact.dropgames@gmail.com";
+const emailDMCA = "dmca.dropgames@gmail.com";
 ---
 
-<Layout
-  title="Términos de Uso y DMCA | DropGames"
-  description="Términos de uso, condiciones de servicio y política DMCA de DropGames. Conoce las reglas de uso del sitio y cómo reportar contenido protegido por derechos de autor."
->
+<Layout title={title} description={description}>
   <div class="pagina-legal">
 
     <div class="legal-hero">
       <span class="legal-badge">Legal</span>
       <h1>Términos de Uso y DMCA</h1>
-      <p>Última actualización: Julio 2026 · Al usar DropGames aceptas estos términos en su totalidad</p>
+      <p>Última actualización: Agosto 2026 · Al usar DropGames aceptas estos términos en su totalidad</p>
     </div>
 
     <!-- ===== TÉRMINOS DE USO ===== -->
@@ -196,11 +198,12 @@ import Layout from '../layouts/Layout.astro';
 
     <div class="legal-contacto-dmca">
       <h3>📧 Enviar Notificación DMCA</h3>
-      <p>Dirije tu notificación al siguiente correo electrónico:</p>
+      <p>Dirige tu notificación al correo oficial designado:</p>
       <p>
-        <a href="mailto:dmca.dropgames@gmail.com">dmca.dropgames@gmail.com</a>
+        <a href={`mailto:${emailDMCA}`}>{emailDMCA}</a>
       </p>
       <p style="font-size: 0.82rem; color: var(--texto-tenue); margin-top: 12px;">
+        Para consultas generales o administrativas, escríbenos a <a href={`mailto:${emailContacto}`} style="color: var(--acento);">{emailContacto}</a>.
         Las notificaciones incompletas o presentadas de mala fe pueden dar lugar a responsabilidad legal por parte del reclamante.
       </p>
     </div>
