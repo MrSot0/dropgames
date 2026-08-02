@@ -1,4 +1,4 @@
-# 🎮 Portal de Juegos - Repositorio de Contenido y Catálogo Markdown
+# 🎮 Dropgames - Repositorio de Contenido y Catálogo Markdown
 
 Bienvenido al repositorio oficial de **DropGames**, un sistema de gestión y catálogo basado en archivos **Markdown con Frontmatter YAML** diseñado para estructurar información de videojuegos, requisitos de sistema, galerías multimedia y enlaces de descarga seguros a través de **Terabox**.
 
