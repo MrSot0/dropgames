@@ -13,9 +13,12 @@ interface Props {
 const {
   title,
   description = 'Descarga videojuegos para PC gratis: acción, aventura, RPG, deportes y multijugador. Emuladores, programas necesarios y tutoriales. DropGames.',
-  image = '/logo_2.webp',
+  image = '/logo.webp',
   canonicalURL = new URL(Astro.url.pathname, Astro.site || Astro.url.origin)
 } = Astro.props;
+
+// Convierte la ruta de la imagen en URL absoluta para OG/Twitter
+const absoluteImageUrl = new URL(image, Astro.url.origin);
 
 const websiteSchema = {
   "@context": "https://schema.org",
@@ -36,11 +39,9 @@ const websiteSchema = {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <!-- Favicons y Logo para Navegadores / Google Search Console -->
+  <!-- Solo 2 Íconos Básicos -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-  <link rel="icon" type="image/webp" sizes="16x16" href="/favicon-16x16.webp" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="favicon" sizes="500x500" href="/favicon.webp" />
 
   <!-- SEO Básico -->
   <title>{title}</title>
@@ -52,14 +53,14 @@ const websiteSchema = {
   <meta property="og:url" content={canonicalURL} />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
-  <meta property="og:image" content={new URL(image, Astro.url)} />
+  <meta property="og:image" content={absoluteImageUrl} />
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image" />
   <meta property="twitter:url" content={canonicalURL} />
   <meta property="twitter:title" content={title} />
   <meta property="twitter:description" content={description} />
-  <meta property="twitter:image" content={new URL(image, Astro.url)} />
+  <meta property="twitter:image" content={absoluteImageUrl} />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
