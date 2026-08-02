@@ -4,7 +4,6 @@ import { getCollection, render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import GameCard from '../../components/GameCard.astro';
 import Anuncio from '../../components/Anuncio.astro';
-// Eliminé las importaciones de Navbar y Footer de aquí porque ya se cargan desde Layout.astro
 
 export async function getStaticPaths() {
   const juegos = await getCollection('juegos');
@@ -36,7 +35,7 @@ const etiquetas: Record<string, string> = {
   peleas: 'Peleas',
   plataformas: 'Plataformas',
   shooter: 'Shooter',
-  movil: 'Movil'
+  movil: 'Móvil'
 };
 
 const categoriaFormateada = etiquetas[categoria] || (categoria.charAt(0).toUpperCase() + categoria.slice(1));
@@ -53,15 +52,15 @@ if (relacionados.length < 3) {
   relacionados.push(...extras);
 }
 
-// 🌟 Reducimos la cantidad real de anuncios del sidebar (de 10 a 4)
 const anunciosSidebar = 4;
+const anioActual = new Date().getFullYear();
 
-// 🌟 AQUÍ CREAMOS EL SCHEMA SEO PARA GOOGLE 🌟
+// 🌟 SCHEMA SEO PARA GOOGLE (VideoGame)
 const gameSchema = {
   "@context": "https://schema.org",
   "@type": "VideoGame",
   "name": title,
-  "description": `Descargar ${title} gratis para PC en español. Guía de instalación, requisitos y links de descarga seguros.`,
+  "description": `Descargar ${title} gratis para PC en español. Guía de instalación, requisitos del sistema y enlaces de descarga seguros.`,
   "image": new URL(imagen, Astro.site || Astro.url.origin).toString(),
   "applicationCategory": "GameApplication",
   "operatingSystem": plataforma || "Windows",
@@ -75,14 +74,13 @@ const gameSchema = {
 };
 ---
 
-<!-- 🌟 Pasamos image={imagen} al Layout para que funcione en Redes Sociales 🌟 -->
 <Layout 
-  title={`Descargar ${title} Gratis para PC Español (${new Date().getFullYear()}) | DropGames`} 
+  title={`Descargar ${title} Gratis para PC Español (${anioActual}) | DropGames`} 
   description={`Descarga ${title} full y en español para PC gratis. Incluye requisitos del sistema, guía de instalación paso a paso y enlaces seguros.`}
   image={imagen}
 >
 
-  <!-- 🌟 Inyectamos el Schema en el head del Layout 🌟 -->
+  <!-- Inyección de Schema JSON-LD -->
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(gameSchema)} />
   </Fragment>
@@ -91,11 +89,15 @@ const gameSchema = {
     <div class="detalle-contenido">
 
       <!-- ===== CARRUSEL DE IMÁGENES ===== -->
-      <div class="detalle-carrusel" id="carrusel-principal" role="region" aria-label="Galería de imágenes">
+      <div class="detalle-carrusel" id="carrusel-principal" role="region" aria-label={`Galería de capturas de ${title}`}>
         <div class="carrusel-pista">
           {slides.map((src, i) => (
             <div class="carrusel-slide">
-              <img src={src} alt={`${title} — captura ${i + 1}`} loading={i === 0 ? 'eager' : 'lazy'}>
+              <img 
+                src={src} 
+                alt={i === 0 ? `Portada de ${title} para PC` : `Captura de pantalla de gameplay de ${title} #${i}`} 
+                loading={i === 0 ? 'eager' : 'lazy'}
+              />
             </div>
           ))}
         </div>
@@ -119,10 +121,11 @@ const gameSchema = {
       <div class="detalle-cabecera-titulo">
         <h1 class="detalle-titulo">{title}</h1>
         
-         <a href="#bloque-descargas"
-         id="btn-descargar-principal"
-         class="btn-descargar-principal"
-         aria-label={`Descargar ${title}`}
+        <a 
+          href="#bloque-descargas"
+          id="btn-descargar-principal"
+          class="btn-descargar-principal"
+          aria-label={`Ir a los enlaces de descarga de ${title}`}
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           Descargar
@@ -157,42 +160,42 @@ const gameSchema = {
       <div class="guia-instalacion">
         <h2>
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          Guía de Instalación
+          Guía de Instalación Paso a Paso
         </h2>
         <ol class="pasos-tutorial">
           <li class="paso-tutorial">
             <span class="numero"></span>
             <div>
               <strong>Descarga el archivo</strong>
-              <p>Haz clic en uno de los botones de descarga que se encuentran abajo. Elige el servidor de tu preferencia (MEGA, Google Drive, etc.).</p>
+              <p>Haz clic en uno de los botones de descarga que se encuentran abajo. Elige el servidor de tu preferencia.</p>
             </div>
           </li>
           <li class="paso-tutorial">
             <span class="numero"></span>
             <div>
               <strong>Descomprime con WinRAR o 7-Zip</strong>
-              <p>Usa WinRAR o 7-Zip para extraer el archivo. Haz clic derecho sobre el archivo descargado → "Extraer aquí". Necesitarás todos los volúmenes si el juego está partido en partes.</p>
+              <p>Usa WinRAR o 7-Zip para extraer el archivo. Haz clic derecho sobre el archivo descargado → "Extraer aquí".</p>
             </div>
           </li>
           <li class="paso-tutorial">
             <span class="numero"></span>
             <div>
               <strong>Monta o instala la imagen ISO</strong>
-              <p>Si el archivo extraído es una imagen .ISO, móntala con WinCDEmu o Daemon Tools. Luego ejecuta el instalador dentro.</p>
+              <p>Si el archivo extraído es una imagen .ISO, móntala con WinCDEmu o Daemon Tools y ejecuta el instalador.</p>
             </div>
           </li>
           <li class="paso-tutorial">
             <span class="numero"></span>
             <div>
-              <strong>Aplica el crack o ejecuta directamente</strong>
-              <p>Copia los archivos de la carpeta "Crack" al directorio de instalación del juego (normalmente en C:\Archivos de programa). Reemplaza los existentes si se solicita.</p>
+              <strong>Aplica el contenido de la carpeta Crack (si aplica)</strong>
+              <p>Copia los archivos de la carpeta correspondiente al directorio de instalación del juego si el instalador no lo hace automáticamente.</p>
             </div>
           </li>
           <li class="paso-tutorial">
             <span class="numero"></span>
             <div>
-              <strong>¡Disfruta el juego!</strong>
-              <p>Ejecuta el juego como administrador si experimentas problemas al abrir. ¿Dudas? Visita nuestra sección de <a href="/ayuda" style="color: var(--acento); font-weight: 600;">Ayuda / Tutoriales</a>.</p>
+              <strong>¡A jugar!</strong>
+              <p>Ejecuta el juego como administrador. Si tienes inconvenientes, consulta nuestra sección de <a href="/ayuda" style="color: var(--acento); font-weight: 600;">Ayuda / Tutoriales</a>.</p>
             </div>
           </li>
         </ol>
@@ -202,7 +205,7 @@ const gameSchema = {
       <div class="bloque-descargas" id="bloque-descargas" style="margin-top: 2rem;">
         <h3>
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:6px;"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Enlaces de descarga
+          Enlaces de descarga seguros
         </h3>
         <div class="lista-descargas">
           {enlaces.length > 0 ? enlaces.map((enlace) => (
@@ -230,6 +233,7 @@ const gameSchema = {
               title={`Tráiler oficial de ${title}`}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
               allowfullscreen
+              loading="lazy"
             ></iframe>
           </div>
         </div>
@@ -299,7 +303,6 @@ const gameSchema = {
 
   /* ===== RESPONSIVE: TABLET ===== */
   @media (max-width: 900px) {
-    /* Solo 3 anuncios de sidebar visibles */
     .anuncio-sidebar-3 {
       display: none;
     }
@@ -307,19 +310,16 @@ const gameSchema = {
 
   /* ===== RESPONSIVE: MÓVIL ===== */
   @media (max-width: 1024px) {
-    /* Sidebar: solo 1 anuncio visible en móvil */
     .anuncio-sidebar-1,
     .anuncio-sidebar-2,
     .anuncio-sidebar-3 {
       display: none;
     }
 
-    /* Oculta el AD 2 intercalado en contenido para reducir saturación */
     .anuncio-oculto-movil {
       display: none;
     }
 
-    /* Banners 728 se ven en formato compacto */
     .anuncio-728 {
       max-width: 100%;
     }
@@ -348,6 +348,7 @@ const gameSchema = {
       indexActual = (indexActual - 1 + slides.length) % slides.length;
       actualizarCarrusel();
     });
+  }
 
   document.addEventListener('DOMContentLoaded', () => {
     const fixIframeHeight = () => {
@@ -356,9 +357,7 @@ const gameSchema = {
       });
     };
     fixIframeHeight();
-    // Por si el iframe se re-renderiza después de cargar el script
     setTimeout(fixIframeHeight, 1000);
     setTimeout(fixIframeHeight, 2000);
   });
-  }
 </script>
