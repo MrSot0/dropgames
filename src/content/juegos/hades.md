@@ -30,7 +30,7 @@ enlaces:
   - servidor: "TORRENT"
     url: "https://playpaste.net/?v=jPew"
     
-trailer: "ot7uXNQskhs"
+trailer: "91t0ha9x0AE"
 destacado: true
 ---
 
