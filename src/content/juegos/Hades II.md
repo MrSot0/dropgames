@@ -29,7 +29,7 @@ enlaces:
     url: "https://playpaste.net/?v=jPeQ"
   - servidor: "TORRENT"
     url: "https://playpaste.net/?v=jPeV"
-trailer: "ot7uXNQskhs"
+trailer: "oU8lJRcUeEMs"
 destacado: true
 ---
 
