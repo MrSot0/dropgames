@@ -27,6 +27,9 @@ requisitos:
 enlaces:
   - servidor: "anonfiles"
     url: "https://playpaste.net/?v=jPeP"
+  - servidor: "TORRENT"
+    url: "https://playpaste.net/?v=jPew"
+    
 trailer: "ot7uXNQskhs"
 destacado: true
 ---
