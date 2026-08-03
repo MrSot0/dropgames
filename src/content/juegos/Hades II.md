@@ -27,6 +27,8 @@ requisitos:
 enlaces:
   - servidor: "terabox - anonfiles"
     url: "https://playpaste.net/?v=jPeQ"
+  - servidor: "TORRENT"
+    url: "https://playpaste.net/?v=jPeV"
 trailer: "ot7uXNQskhs"
 destacado: true
 ---
