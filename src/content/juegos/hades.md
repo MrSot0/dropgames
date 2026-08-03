@@ -1,52 +1,50 @@
 ---
 title: "Hades"
-categoria: "roguelike"
+categoria: "Roguelike / Acción / RPG"
 plataforma: "PC"
 tamano: "15 GB"
-imagen: "/img/hades.webp"
+imagen: "https://i.ibb.co/d9H5QVm/HADES.avif"
 imagenes:
-  - "/img/hades-1.jpg"
-  - "/img/hades-2.jpg"
-  - "/img/hades-3.jpg"
-descripcionCorta: "Desafía al dios de los muertos y ábrete camino a espadazos para escapar del Inframundo en este adictivo roguelike de acción."
-fecha: 2026-07-11
-nivelRequisitos: "bajos"
+  - "https://i.ibb.co/4gRVngLR/HADES1.jpg"
+  - "https://i.ibb.co/n8C6QwQk/HADES2.jpg"
+  - "https://i.ibb.co/NkT0Rf1/HADES3.webp"
+descripcionCorta: "Desafía al dios del Inframundo y ábrete paso a través del Infierno en este galardonado roguelike de acción y mazmorras."
+fecha: 2026-08-03
+nivelRequisitos: "medios"
 requisitos:
   minimos:
-    so: "Windows 10 64-bit"
+    so: "Windows 7 SP1 64-bit"
     cpu: "Dual Core 2.4 GHz"
     ram: "4 GB"
-    gpu: "Intel HD 5000 / Soporte nativo para DirectX 10"
+    gpu: "1GB VRAM / DirectX 10+ support"
     almacenamiento: "15 GB disponibles"
   recomendados:
-    so: "Windows 11 64-bit"
-    cpu: "Dual Core 3.0 GHz"
+    so: "Windows 10 64-bit"
+    cpu: "Dual Core 3.0 GHz+"
     ram: "8 GB"
-    gpu: "NVIDIA GeForce GTX 760 / AMD Radeon HD 7870"
-    almacenamiento: "15 GB en HDD o SSD"
+    gpu: "2GB VRAM / DirectX 11+ support"
+    almacenamiento: "15 GB disponibles"
 enlaces:
-  - servidor: "MEGA"
-    url: "#"
-  - servidor: "Torrent"
-    url: "#"
-trailer: "91t0ha9f0jY"
+  - servidor: "anonfiles"
+    url: "https://playpaste.net/?v=jPeP"
+trailer: "ot7uXNQskhs"
 destacado: true
 ---
 
-**Hades** es un brillante e impecable juego de acción *roguelike* desarrollado por Supergiant Games. Encarnando a Zagreo, el rebelde e inmortal príncipe del Inframundo, tu objetivo será desafiar a tu estricto padre, Hades, e intentar escapar de sus dominios. En cada intento de fuga, recibirás el apoyo y las bendiciones de tus tíos y primos olímpicos en el Olimpo, lo que te otorgará poderes divinos destructivos en un bucle jugable adictivo y brillantemente narrado.
+**Hades** es un roguelike de acción en mazmorras desarrollado por Supergiant Games. Como Zagreo, el Príncipe del Inframundo, lucharás por escapar de los dominios de tu padre, contando con el apoyo de los olímpicos que te otorgan sus bendiciones divinas a lo largo de cada intento.
 
 ## Características Principales
 
-- **Combate Hack and Slash Vertiginoso:** Domina múltiples armas míticas (espadas, lanzas, arcos y escudos) combinando ataques rápidos, esquives e invocaciones.
-- **Bendiciones del Olimpo:** Mezcla y experimenta con poderes elementales de Zeus, Poseidón, Atenea o Afrodita para crear *builds* completamente rotas en cada partida.
-- **Narrativa Procedimental:** La historia avanza constantemente con miles de líneas de diálogo inéditas, haciendo que cada muerte sea parte valiosa de la progresión de los personajes.
+- **Poder Olímpico:** Recibe bendiciones combinables de Zeus, Atenea, Poseidón y otros dioses para personalizar tus habilidades en cada partida.
+- **Narrativa Evolutiva:** Cientos de eventos de historia y diálogos únicos que reaccionan a cada victoria o derrota.
+- **Arsenal Legendario:** Domina 6 armas infernales diferentes, cada una con aspectos y estilos de ataque únicos.
+- **Estilo Artístico Increíble:** Arte ilustrado a mano e inolvidable banda sonora original compuesta por Darren Korb.
 
 ## Contenido Incluido en la Descarga
 
-- **Juego Base:** Actualizado a la última versión comercial oficial con soporte de traducción al español corregido.
-- **Extras Digitales:** Banda sonora oficial completa compuesta por Darren Korb y un folleto digital interactivo con el arte del juego.
-- **Correcciones:** Crack pre-aplicado 100% estable.
+- **Juego Base:** Completamente actualizado a su versión de lanzamiento final v1.0+.
+- **Modo DRM-Free:** Sin necesidad de clientes o conexiones para jugar offline.
 
 ## Requisitos y Notas de Instalación
 
-El juego funciona de forma fluida en casi cualquier hardware moderno e integrado. Cuenta con **15 GB de espacio** en disco para el proceso de descompresión. Si experimentas parpadeos de pantalla, revisa la pestaña **Ayuda / Tutoriales**.
+Requiere **15 GB de espacio disponible**. Funciona de manera óptima tanto en teclado/ratón como en mando.
